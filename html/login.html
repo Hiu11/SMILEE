@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập - Smilee</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+</head>
+
+<body>
+  <div class="auth-container">
+    <div class="auth-info">
+      <img src="../pic/logo_smilee.png" alt="Logo Smilee" class="auth-logo" />
+      <h1>SMILEE</h1>
+      <h3>Trust Family</h3>
+      <p>
+        Chào mừng bạn đến với SMILEE – nơi bắt đầu nụ cười hoàn hảo.
+        Hãy đăng nhập hoặc đăng ký để trải nghiệm dịch vụ nha khoa hiện đại và tiện lợi.
+      </p>
+    </div>
+
+    <div class="auth-form">
+      <div class="form-box">
+        <h2>Đăng nhập</h2>
+        <form id="loginForm">
+          <label for="loginEmail">SĐT hoặc Email</label>
+          <input type="text" id="loginEmail" placeholder="Nhập SĐT hoặc Email" required />
+
+          <label for="loginPassword">Mật khẩu</label>
+          <input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required />
+
+          <div class="forgot">
+            <a href="../html/reset.html">Quên mật khẩu?</a>
+          </div>
+
+          <button type="submit" id="btnLogin">Đăng nhập</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tạo mật khẩu mới - Smilee</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+
+<body>
+  <div class="auth-container">
+
+    <div class="auth-info">
+      <img src="../pic/logo_smilee.png" alt="Logo Smilee" class="auth-logo">
+      <h1>SMILEE</h1>
+      <h3>Trust Family</h3>
+      <p>Vui lòng nhập mật khẩu mới để hoàn tất quá trình đặt lại mật khẩu.</p>
+    </div>
+
+  
+    <div class="auth-form">
+      <div class="form-box">
+        <h2>Đặt lại mật khẩu</h2>
+        <form id="newPassForm">
+          <label for="email">SĐT hoặc Email</label>
+          <input type="text" id="email" placeholder="Nhập SĐT hoặc Email" required>
+
+          <label for="newPass">Mật khẩu mới</label>
+          <input type="password" id="newPass" placeholder="Nhập mật khẩu mới" required>
+
+          <label for="confirmPass">Xác nhận mật khẩu mới</label>
+          <input type="password" id="confirmPass" placeholder="Xác nhận mật khẩu mới" required>
+
+          <button type="submit" id="btnSavePass">Xác nhận</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("newPassForm");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const newPass = document.getElementById("newPass").value.trim();
+      const confirmPass = document.getElementById("confirmPass").value.trim();
+
+      if (newPass.length < 6) {
+        showError("Mật khẩu phải có ít nhất 6 ký tự!");
+        return;
+      }
+
+      if (newPass !== confirmPass) {
+        showError("Mật khẩu xác nhận không khớp!");
+        return;
+      }
+
+      // Giả lập đổi mật khẩu thành công
+      alert("Đặt lại mật khẩu thành công! Hãy đăng nhập lại.");
+      window.location.href = "login.html";
+    });
+
+    function showError(message) {
+      const box = document.createElement("div");
+      box.textContent = message;
+      box.style.position = "fixed";
+      box.style.top = "20px";
+      box.style.left = "50%";
+      box.style.transform = "translateX(-50%)";
+      box.style.background = "#e6f0ff";
+      box.style.color = "#0f2340";
+      box.style.padding = "12px 20px";
+      box.style.borderRadius = "10px";
+      box.style.boxShadow = "0 3px 10px rgba(0,0,0,0.1)";
+      box.style.fontSize = "15px";
+      box.style.zIndex = "999";
+      document.body.appendChild(box);
+      setTimeout(() => box.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
