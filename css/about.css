@@ -1,0 +1,87 @@
+/* ===== CỐ ĐỊNH SIDEBAR ===== */
+.fixed-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+/* ===== MAIN OFFSET ===== */
+.main {
+  margin-left: 250px; /* chừa chỗ cho sidebar */
+  flex: 1;
+  overflow-y: hidden;
+  padding: 0;
+}
+
+/* ===== NAVBAR CỐ ĐỊNH ===== */
+.fixed-navbar {
+  position: fixed;
+  top: 20px;
+  left: 250px;
+  right: 0;
+  height: 80px;
+  z-index: 90;
+  background: #fff;
+}
+
+/* ===== NỘI DUNG CUỘN ===== */
+.content-area {
+  margin-top: 120px; /* cách navbar */
+  padding: 40px 70px;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+.about-img img {
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== KIẾN THỨC ===== */
+.knowledge-item {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.knowledge-item.reverse {
+  flex-direction: row-reverse;
+}
+.knowledge-item img {
+  width: 400px;
+  border-radius: 16px;
+}
+
+/* ===== NHA SĨ ===== */
+.dentist-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: #f9fbff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+}
+.dentist-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* ===== SCROLL MƯỢT ===== */
+html {
+  scroll-behavior: smooth;
+}

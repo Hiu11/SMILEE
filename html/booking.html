@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nha Khoa Smilee - Đặt lịch hẹn</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/booking.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar fixed-sidebar">
+            <div class="sidebar-logo">
+                <img src="../pic/logo_smilee.png" alt="Logo Smilee" />
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item"><a href="../html/home.html"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+                <li class="menu-item active"><a href="../html/booking.html"><i class="fa-regular fa-calendar"></i> Đặt
+                        lịch hẹn</a></li>
+                <li class="menu-item"><a href="../html/manage.html"><i class="fa-solid fa-list-check"></i> Quản lý lịch
+                        hẹn</a></li>
+                <li class="menu-item"><a href="../html/contact.html"><i class="fa-solid fa-phone"></i> Liên hệ</a></li>
+            </ul>
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="#" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân</a>
+                <a href="#" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                <div class="hotline">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <p>Emergency Hotline:</p>
+                        <strong>+91 - 999 999 9999</strong>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="navbar fixed-navbar">
+                <div class="nav-inner">
+                    <ul class="nav-menu">
+                        <li><a href="../html/about.html">Giới thiệu</a></li>
+
+                        <li class="nav-dropdown">
+                            <button class="dropdown-toggle">
+                                Dịch vụ <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="mega-menu">
+                                <div class="mega-col">
+                                    <h4>Thẩm mỹ răng</h4>
+                                    <ul>
+                                        <li><a href="#">Bọc răng sứ</a></li>
+                                        <li><a href="#">Tẩy trắng răng</a></li>
+                                        <li><a href="#">Dán sứ veneer</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h4>Chỉnh nha</h4>
+                                    <ul>
+                                        <li><a href="#">Niềng răng mắc cài</a></li>
+                                        <li><a href="#">Niềng trong suốt Invisalign</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h4>Cấy ghép implant</h4>
+                                    <ul>
+                                        <li><a href="#">Trồng răng Implant</a></li>
+                                        <li><a href="#">Phục hình cầu răng</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-col">
+                                    <h4>Chăm sóc răng</h4>
+                                    <ul>
+                                        <li><a href="#">Cạo vôi răng</a></li>
+                                        <li><a href="#">Hàn trám thẩm mỹ</a></li>
+                                        <li><a href="#">Khám tổng quát</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li><a href="../html/about.html#nha-si">Nha sĩ</a></li>
+                        <li><a href="../html/about.html#kien-thuc">Kiến thức</a></li>
+                    </ul>
+                </div>
+
+                <div class="user-info">
+                    <i class="fa-regular fa-bell"></i>
+                    <div class="user-box">
+                        <img src="../pic/banner_home.png" alt="User" />
+                        <div class="user-detail">
+                            <p class="user-name">Mai Linh</p>
+                            <span class="user-role">Khách hàng</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+S            <div class="content-area">
+                <section class="section booking-section">
+                    <h2><i class="fa-regular fa-calendar"></i> Đặt lịch hẹn</h2>
+
+                    <div class="booking-filter">
+                        <label for="dateSelect">Chọn ngày:</label>
+                        <select id="dateSelect">
+                            <option value="Hôm nay - 17/10/2025">Hôm nay - 17/10/2025</option>
+                            <option value="Thứ 7 - 18/10/2025">Thứ 7 - 18/10/2025</option>
+                            <option value="Thứ 2 - 20/10/2025">Thứ 2 - 20/10/2025</option>
+                            <option value="Thứ 3 - 21/10/2025">Thứ 3 - 21/10/2025</option>
+                        </select>
+
+                    </div>
+
+                    <div class="doctor-list">
+                       <div class="doctor-card">
+                            <img src="../pic/dentist1.png" alt="BS Thảo" />
+                            <div class="doctor-info">
+                                <h3>BS. Nguyễn Phương Thảo</h3>
+                                <div class="time-grid">
+                                    <button class="booked">09:30</button>
+                                    <button>10:00</button>
+                                    <button>10:30</button>
+                                    <button>11:00</button>
+                                    <button>11:30</button>
+                                    <button>12:30</button>
+                                    <button class="booked">13:00</button>
+                                    <button>13:30</button>
+                                    <button>14:00</button>
+                                    <button>14:30</button>
+                                    <button>15:00</button>
+                                    <button>15:30</button>
+                                    <button class="booked">16:00</button>
+                                    <button>16:30</button>
+                                    <button>17:00</button>
+                                    <button>17:30</button>
+                                    <button>18:00</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <img src="../pic/dentist2.png" alt="BS Vui" />
+                            <div class="doctor-info">
+                                <h3>BS. Trần Văn Vui</h3>
+                                <div class="time-grid">
+                                    <button>09:30</button>
+                                    <button>10:00</button>
+                                    <button class="booked">10:30</button>
+                                    <button>11:00</button>
+                                    <button>11:30</button>
+                                    <button class="booked">12:30</button>
+                                    <button>13:00</button>
+                                    <button>13:30</button>
+                                    <button>14:00</button>
+                                    <button>14:30</button>
+                                    <button class="booked">15:00</button>
+                                    <button>15:30</button>
+                                    <button>16:00</button>
+                                    <button class="booked">16:30</button>
+                                    <button>17:00</button>
+                                    <button>17:30</button>
+                                    <button>18:00</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <img src="../pic/dentist3.png" alt="BS Trân" />
+                            <div class="doctor-info">
+                                <h3>BS. Nguyễn Huỳnh Trân</h3>
+                                <div class="time-grid">
+                                    <button>09:30</button>
+                                    <button class="booked">10:00</button>
+                                    <button>10:30</button>
+                                    <button>11:00</button>
+                                    <button>11:30</button>
+                                    <button>12:30</button>
+                                    <button>13:00</button>
+                                    <button>13:30</button>
+                                    <button class="booked">14:00</button>
+                                    <button>14:30</button>
+                                    <button>15:00</button>
+                                    <button class="booked">15:30</button>
+                                    <button>16:00</button>
+                                    <button>16:30</button>
+                                    <button class="booked">17:00</button>
+                                    <button>17:30</button>
+                                    <button>18:00</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+  const path = window.location.pathname.split("/").pop();
+  document.querySelectorAll(".menu-item a").forEach(a => {
+    if (a.getAttribute("href").includes(path)) {
+      a.parentElement.classList.add("active");
+    }
+  });
+
+  document.querySelectorAll(".time-grid button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (btn.classList.contains("booked")) return; // Giờ đã đặt rồi thì không chọn được
+
+      const doctorName = btn.closest(".doctor-card").querySelector("h3").innerText;
+      const selectedTime = btn.innerText.trim();
+      const selectedDate = document.getElementById("dateSelect").value;
+
+      localStorage.setItem("selectedDoctor", doctorName);
+      localStorage.setItem("selectedTime", selectedTime);
+      localStorage.setItem("selectedDate", selectedDate);
+
+      window.location.href = "../html/confirm-booking.html";
+    });
+  });
+</script>
+
+
+</body>
+
+</html>

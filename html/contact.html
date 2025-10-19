@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nha Khoa Smilee - Liên hệ</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+  background: #f7faff;
+  font-family: 'Inter', sans-serif;
+}
+
+.layout {
+  display: flex;
+}
+
+.fixed-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.main {
+  margin-left: 250px;
+  flex: 1;
+  padding: 120px 60px 60px;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  max-width: 900px;
+  height: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #eee;
+  padding: 20px 30px;
+}
+
+.chat-header img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-header h3 {
+  margin: 0;
+  color: #1f4ba0;
+}
+
+.chat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 30px;
+  overflow-y: auto;
+  background: #fafcff;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 65%;
+  line-height: 1.5;
+  word-wrap: break-word;
+  font-size: 15px;
+}
+
+.message.user {
+  background: #1f4ba0;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.message.staff {
+  background: #eaf1ff;
+  color: #0f2340;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  padding: 20px 30px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.chat-input button {
+  background: #1f4ba0;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.chat-input button:hover {
+  background: #153371;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+    <aside class="sidebar fixed-sidebar">
+      <div class="sidebar-logo">
+        <img src="../pic/logo_smilee.png" alt="Logo Smilee" />
+      </div>
+      <ul class="sidebar-menu">
+        <li class="menu-item"><a href="../html/home.html"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+        <li class="menu-item"><a href="../html/booking.html"><i class="fa-regular fa-calendar"></i> Đặt lịch hẹn</a></li>
+        <li class="menu-item"><a href="../html/manage.html"><i class="fa-solid fa-list-check"></i> Quản lý lịch hẹn</a></li>
+        <li class="menu-item active"><a href="../html/contact.html"><i class="fa-solid fa-comments"></i> Liên hệ</a></li>
+      </ul>
+
+      <div class="sidebar-bottom">
+        <h4>Tài khoản</h4>
+        <a href="#" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân</a>
+        <a href="#" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+        <div class="hotline">
+          <i class="fa-solid fa-phone-volume"></i>
+          <div>
+            <p>Emergency Hotline:</p>
+            <strong>+91 - 999 999 9999</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <h2 style="color:#1f4ba0; margin-bottom:25px;">Liên hệ</h2>
+      <div class="chat-container">
+        <div class="chat-header">
+          <img src="../pic/dentist1.png" alt="Lễ tân">
+          <div>
+            <h3>Lễ tân Nguyễn Thảo</h3>
+            <p style="margin:0; color:#555;">#SMLEE-RECEPTION</p>
+          </div>
+        </div>
+
+        <div class="chat-box" id="chatBox">
+          <div class="message staff">Chào bạn 👋, tôi là Lễ tân Nguyễn Thảo — bạn cần Smilee hỗ trợ gì ạ?</div>
+        </div>
+
+        <div class="chat-input">
+          <input type="text" id="userInput" placeholder="Nhập tin nhắn..." />
+          <button id="sendBtn">Gửi</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+
+    const autoReplies = [
+      "Dạ, Smilee xin chào! Bạn cần tư vấn dịch vụ nào ạ?",
+      "Cảm ơn bạn đã quan tâm đến Nha khoa Smilee ❤️",
+      "Hiện tại bên mình có nhiều chương trình ưu đãi, bạn muốn đặt lịch khám chứ ạ?",
+      "Bác sĩ sẽ tư vấn trực tiếp nếu bạn đặt lịch trong hôm nay nhé!"
+    ];
+
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.textContent = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    sendBtn.addEventListener("click", () => {
+      const text = userInput.value.trim();
+      if (text === "") return;
+      addMessage(text, "user");
+      userInput.value = "";
+
+      setTimeout(() => {
+        const reply = autoReplies[Math.floor(Math.random() * autoReplies.length)];
+        addMessage(reply, "staff");
+      }, 800);
+    });
+
+    userInput.addEventListener("keypress", e => {
+      if (e.key === "Enter") sendBtn.click();
+    });
+  </script>
+</body>
+</html>

@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nha Khoa Smilee - Trang chủ</title>
   <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
   <div class="layout">
     <aside class="sidebar">
-      <div class="sidebar-logo">
+      <div classqs="sidebar-logo">
         <img src="../pic/logo_smilee.png" alt="Logo Smilee">
       </div>
 
       <ul class="sidebar-menu">
-        <li class="menu-item active"><i class="fa-solid fa-house"></i> Trang chủ</li>
-        <li class="menu-item"><i class="fa-regular fa-calendar"></i> Đặt lịch hẹn</li>
-        <li class="menu-item"><i class="fa-solid fa-list-check"></i> Quản lý lịch hẹn</li>
-        <li class="menu-item"><i class="fa-solid fa-phone"></i> Liên hệ</li>
+        <li class="menu-item active"><a href="../html/home.html"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+        <li class="menu-item"><a href="../html/booking.html"><i class="fa-regular fa-calendar"></i> Đặt lịch hẹn</a></li>
+        <li class="menu-item"><a href="../html/manage.html"><i class="fa-solid fa-list-check"></i> Quản lý lịch hẹn</a>
+        </li>
+        <li class="menu-item"><a href="../html/contact.html"><i class="fa-solid fa-phone"></i> Liên hệ</a></li>
       </ul>
 
       <div class="sidebar-bottom">
         <h4>Tài khoản</h4>
         <a href="#" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân</a>
-        <a href="../html/login.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+        <a href="../html/login.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng
+          xuất</a>
 
         <div class="hotline">
           <i class="fa-solid fa-phone-volume"></i>
           <div>
-            <p>Emergency Hotline:</p>
-            <strong>+81 - 999 999 9999</strong>
+            <p>Tổng đài</p>
+            <strong>028 9999 9999</strong>
           </div>
         </div>
       </div>
@@ -39,63 +43,63 @@
 
     <main class="main">
       <header class="navbar">
-  <nav class="nav-inner">
-    <ul class="nav-menu">
-      <li class="nav-item"><a href="#">Giới thiệu</a></li>
+        <nav class="nav-inner">
+          <ul class="nav-menu">
+            <li><a href="about.html" class="active">Giới thiệu</a></li>
 
-      <li class="nav-item nav-dropdown">
-        <button class="nav-link dropdown-toggle">Dịch vụ <i class="fa-solid fa-chevron-down"></i></button>
-        <div class="mega-menu">
-          <div class="mega-col">
-            <h4>Bọc răng sứ</h4>
-            <ul>
-              <li><a href="#">Dán sứ Veneer</a></li>
-              <li><a href="#">Inlay - Onlay</a></li>
-            </ul>
-          </div>
-          <div class="mega-col">
-            <h4>Trồng răng implant</h4>
-            <ul>
-              <li><a href="#">Cấy ghép implant</a></li>
-              <li><a href="#">Implant toàn hàm</a></li>
-              <li><a href="#">Implant All On 4</a></li>
-            </ul>
-          </div>
-          <div class="mega-col">
-            <h4>Niềng răng</h4>
-            <ul>
-              <li><a href="#">Niềng Invisalign</a></li>
-              <li><a href="#">Niềng mắc cài kim loại</a></li>
-              <li><a href="#">Niềng trẻ em</a></li>
-            </ul>
-          </div>
-          <div class="mega-col">
-            <h4>Dịch vụ khác</h4>
-            <ul>
-              <li><a href="#">Tẩy trắng răng</a></li>
-              <li><a href="#">Nhổ răng</a></li>
-              <li><a href="#">Trám răng</a></li>
-            </ul>
+            <li class="nav-item nav-dropdown">
+              <button class="nav-link dropdown-toggle">Dịch vụ <i class="fa-solid fa-chevron-down"></i></button>
+              <div class="mega-menu">
+                <div class="mega-col">
+                  <h4>Bọc răng sứ</h4>
+                  <ul>
+                    <li><a href="#">Dán sứ Veneer</a></li>
+                    <li><a href="#">Inlay - Onlay</a></li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <h4>Trồng răng implant</h4>
+                  <ul>
+                    <li><a href="#">Cấy ghép implant</a></li>
+                    <li><a href="#">Implant toàn hàm</a></li>
+                    <li><a href="#">Implant All On 4</a></li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <h4>Niềng răng</h4>
+                  <ul>
+                    <li><a href="#">Niềng Invisalign</a></li>
+                    <li><a href="#">Niềng mắc cài kim loại</a></li>
+                    <li><a href="#">Niềng trẻ em</a></li>
+                  </ul>
+                </div>
+                <div class="mega-col">
+                  <h4>Dịch vụ khác</h4>
+                  <ul>
+                    <li><a href="#">Tẩy trắng răng</a></li>
+                    <li><a href="#">Nhổ răng</a></li>
+                    <li><a href="#">Trám răng</a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item"><a href="#">Nha sĩ</a></li>
+            <li class="nav-item"><a href="#">Kiến thức</a></li>
+          </ul>
+        </nav>
+
+        <div class="user-info">
+          <i class="fa-regular fa-bell"></i>
+          <div class="user-box">
+            <img src="../pic/banner_home.png" alt="User Avatar" />
+            <div class="user-detail">
+              <p class="user-name">Mai Linh</p>
+              <span class="user-role">Khách hàng</span>
+            </div>
           </div>
         </div>
-      </li>
-
-      <li class="nav-item"><a href="#">Nha sĩ</a></li>
-      <li class="nav-item"><a href="#">Kiến thức</a></li>
-    </ul>
-  </nav>
-
-  <div class="user-info">
-    <i class="fa-regular fa-bell"></i>
-    <div class="user-box">
-      <img src="../pic/banner_home.png" alt="User Avatar" />
-      <div class="user-detail">
-        <p class="user-name">Mai Linh</p>
-        <span class="user-role">Khách hàng</span>
-      </div>
-    </div>
-  </div>
-</header>
+      </header>
 
 
       <section class="hero">
@@ -115,4 +119,5 @@
 
   <script src="../js/dropdown.js"></script>
 </body>
+
 </html>
