@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nha Khoa Smilee - Quản lý hóa đơn</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/invoice.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar fixed-sidebar">
+            <div class="sidebar-logo">
+                <img src="../pic/logo_smilee.png" alt="Logo Smilee">
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item"><a href="../html/reception-manage.html"><i class="fa-regular fa-calendar"></i>
+                        Quản lý lịch hẹn KH</a></li>
+                <li class="menu-item active"><a href="../html/reception-invoice.html"><i
+                            class="fa-solid fa-file-invoice"></i> Quản lý hóa đơn</a></li>
+                <li class="menu-item"><a href="../html/reception-support.html"><i class="fa-solid fa-comments"></i> Hỗ
+                        trợ</a></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="../html/reception-profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ
+                    sơ cá nhân</a>
+                <a href="../html/index.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất</a>
+
+                <div class="hotline">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <p>Emergency Hotline:</p>
+                        <strong>+91 - 999 999 9999</strong>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <h2 class="section-title">Quản lý hóa đơn</h2>
+
+            <div class="invoice-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm hóa đơn theo tên hoặc mã..." />
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+
+                <button class="add-btn" id="openAddPopup">
+                    <i class="fa-solid fa-plus"></i> Thêm hóa đơn
+                </button>
+
+            </div>
+
+            <div class="invoice-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên KH</th>
+                            <th>Mã hóa đơn</th>
+                            <th>Tổng tiền</th>
+                            <th>Số điện thoại</th>
+                            <th>Số hóa đơn</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>H.T.T.Tuyên</td>
+                            <td>#HD0331157</td>
+                            <td>46.000.000</td>
+                            <td>0919034559</td>
+                            <td>0000001</td>
+                            <td>Đã thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>H.T.T.Tuyên</td>
+                            <td>#HD0331158</td>
+                            <td>350.000</td>
+                            <td>0919034559</td>
+                            <td>0000002</td>
+                            <td>Chưa thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>Ngọc Thảo</td>
+                            <td>#HD0331159</td>
+                            <td>120.000.000</td>
+                            <td>0987654321</td>
+                            <td>0000003</td>
+                            <td>Đã thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>H.T.T.Tuyên</td>
+                            <td>#HD0331157</td>
+                            <td>46.000.000</td>
+                            <td>0919034559</td>
+                            <td>0000001</td>
+                            <td>Đã thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>H.T.T.Tuyên</td>
+                            <td>#HD0331158</td>
+                            <td>350.000</td>
+                            <td>0919034559</td>
+                            <td>0000002</td>
+                            <td>Chưa thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>Ngọc Thảo</td>
+                            <td>#HD0331159</td>
+                            <td>120.000.000</td>
+                            <td>0987654321</td>
+                            <td>0000003</td>
+                            <td>Đã thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>Ngọc Thảo</td>
+                            <td>#HD0331159</td>
+                            <td>120.000.000</td>
+                            <td>0987654321</td>
+                            <td>0000003</td>
+                            <td>Đã thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>H.T.T.Tuyên</td>
+                            <td>#HD0331157</td>
+                            <td>46.000.000</td>
+                            <td>0919034559</td>
+                            <td>0000001</td>
+                            <td>Đã thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>H.T.T.Tuyên</td>
+                            <td>#HD0331158</td>
+                            <td>350.000</td>
+                            <td>0919034559</td>
+                            <td>0000002</td>
+                            <td>Chưa thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                        <tr>
+                            <td>Ngọc Thảo</td>
+                            <td>#HD0331159</td>
+                            <td>120.000.000</td>
+                            <td>0987654321</td>
+                            <td>0000003</td>
+                            <td>Đã thanh toán</td>
+                            <td><a href="#" class="action-link">Ghi nhận</a></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </main>
+    </div>
+    <div id="phonePopup" class="popup hidden">
+        <div class="popup-box">
+            <h3>Nhập số điện thoại</h3>
+            <input type="text" id="phoneInput" placeholder="09xxxxxxxx">
+            <button id="confirmPhone">Xác nhận</button>
+        </div>
+    </div>
+    <script src="../js/reception-invoice.js"></script>
+</body>
+
+</html>

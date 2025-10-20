@@ -7,132 +7,9 @@
     <title>Nha Khoa Smilee - Quản lý lịch hẹn</title>
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/manage.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <style>
-.fixed-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px; 
-  height: 100vh;
-  background: #fff;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-  overflow-y: auto;
-  z-index: 999;
-}
 
-.main {
-  margin-left: 250px;
-  padding: 0;
-  min-height: 100vh;
-  background: #f7faff;
-  display: flex;
-  flex-direction: column;
-}
-
-.fixed-navbar {
-  position: fixed;
-  top: 0;
-  left: 250px; 
-  right: 0;
-  height: 80px;
-  background: #fff;
-  z-index: 998;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.appointment-container {
-  margin-top: 120px; 
-}
-
-body {
-  margin: 0;
-  overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
-}
-
-        .appointment-container {
-            margin: 120px auto;
-            width: 900px;
-            background: #fff;
-            border-radius: 20px;
-            padding: 40px 50px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05);
-        }
-
-        .appointment-container h2 {
-            color: #1f4ba0;
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 30px;
-        }
-
-        .appointment-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .appointment-card {
-            border: 1px solid #e0e6f5;
-            border-radius: 12px;
-            padding: 18px 22px;
-            background: #f9fbff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.25s;
-        }
-
-        .appointment-card:hover {
-            background: #f1f5ff;
-            transform: translateY(-2px);
-        }
-
-        .appointment-info {
-            line-height: 1.6;
-            color: #0f2340;
-        }
-
-        .appointment-info strong {
-            color: #1f4ba0;
-            font-size: 16px;
-        }
-
-        .cancel-btn {
-            background: #1f4ba0;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: 0.25s;
-            font-weight: 600;
-        }
-
-        .cancel-btn:hover {
-            background: #153371;
-        }
-
-        .empty-state {
-            text-align: center;
-            color: #888;
-            font-weight: 500;
-            padding: 30px 0;
-        }
-
-        .history-section {
-            margin-top: 60px;
-            border-top: 1px solid #ddd;
-            padding-top: 30px;
-        }
-
-        .history-section h3 {
-            color: #0f2340;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 
 <body>
@@ -152,8 +29,10 @@ body {
 
             <div class="sidebar-bottom">
                 <h4>Tài khoản</h4>
-                <a href="#" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân</a>
-                <a href="#" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                <a href="../html/profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá
+                    nhân</a>
+                <a href="../html/index.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất</a>
 
                 <div class="hotline">
                     <i class="fa-solid fa-phone-volume"></i>
@@ -242,67 +121,9 @@ body {
         </main>
     </div>
 
-    <script>
-  let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+    <script src="../js/manage.js">
 
-  const appointmentList = document.getElementById("appointmentList");
-  const emptyState = document.getElementById("emptyState");
-  const historyList = document.getElementById("historyList");
-
-  function renderAppointments() {
-    appointmentList.innerHTML = "";
-    historyList.innerHTML = "";
-
-    const newAppointments = appointments.filter(a => a.status === "new");
-    const cancelledAppointments = appointments.filter(a => a.status === "cancelled");
-
-    if (newAppointments.length > 0) {
-      newAppointments.forEach((app, index) => {
-        appointmentList.innerHTML += `
-          <div class="appointment-card">
-            <div class="appointment-info">
-              <strong>${app.time} - ${app.date}</strong><br>
-              Nha sĩ: ${app.doctor}<br>
-              KH: ${app.fullname}<br>
-              SĐT: ${app.phone}
-            </div>
-            <button class="cancel-btn" onclick="cancelAppointment(${index})">Huỷ</button>
-          </div>
-        `;
-      });
-      emptyState.style.display = "none";
-    } else {
-      emptyState.style.display = "block";
-    }
-
-    if (cancelledAppointments.length > 0) {
-      cancelledAppointments.forEach(app => {
-        historyList.innerHTML += `
-          <div class="appointment-card">
-            <div class="appointment-info">
-              <strong>${app.time} - ${app.date}</strong><br>
-              Nha sĩ: ${app.doctor}<br>
-              Trạng thái: <span style="color:red;">Đã huỷ</span>
-            </div>
-          </div>
-        `;
-      });
-    }
-  }
-
-  function cancelAppointment(index) {
-    const confirmCancel = confirm("Bạn có chắc muốn huỷ lịch hẹn này không?");
-    if (!confirmCancel) return;
-
-    appointments[index].status = "cancelled";
-
-    localStorage.setItem("appointments", JSON.stringify(appointments));
-
-    renderAppointments();
-  }
-
-  renderAppointments();
-</script>
+    </script>
 </body>
 
 </html>

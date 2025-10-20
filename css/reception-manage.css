@@ -1,0 +1,141 @@
+body {
+  background: #f7faff;
+  font-family: 'Inter', sans-serif;
+}
+
+.layout {
+  display: flex;
+}
+
+.fixed-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: #fff;
+  width: 250px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.main {
+  margin-left: 250px;
+  flex: 1;
+  padding: 40px 60px;
+}
+
+.main h1 {
+  text-align: center;
+  font-size: 38px;
+  color: #1f4ba0;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.schedule-wrapper {
+  display: flex;
+  gap: 30px;
+}
+
+.time-sidebar {
+  width: 280px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.time-sidebar h4 {
+  color: #1f4ba0;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.schedule-area {
+  flex: 1;
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.schedule-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 25px;
+}
+
+.add-btn {
+  background: #1f4ba0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-btn:hover {
+  background: #153371;
+}
+
+.schedule-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.time-column {
+  background: #f4f7ff;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+}
+
+.time-column h3 {
+  background: #1f4ba0;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.appointment {
+  background: #e9f0ff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.appointment.cancelled {
+  background: #ffd7d7;
+}
+
+.appointment.completed {
+  background: #d4edda;
+}
+
+.year-menu select,
+.month-menu select,
+.day-menu select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f4f7ff;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.year-menu select:hover,
+.month-menu select:hover,
+.day-menu select:hover {
+  background: #e0e8ff;
+}

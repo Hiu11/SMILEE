@@ -1,0 +1,281 @@
+.fixed-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+    z-index: 999;
+}
+
+body {
+  background: #f7faff;
+  font-family: 'Inter', sans-serif;
+  color: #0f2340;
+}
+
+.layout {
+  display: flex;
+}
+
+.main {
+  margin-left: 20px;
+  padding: 60px 60px 60px 300px;
+  flex: 1;
+}
+
+.section-title {
+  color: #1f4ba0;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.search-bar {
+  position: relative;
+  width: 340px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px 38px 10px 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+
+.search-bar i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+}
+
+.add-btn {
+  background: #1f4ba0;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background: #153371;
+}
+
+.invoice-table {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.invoice-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-table th, .invoice-table td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.invoice-table thead {
+  background: #eaf1ff;
+  color: #1f4ba0;
+  font-weight: 600;
+}
+
+.invoice-table tbody tr:hover {
+  background: #f9fbff;
+}
+
+.action-link {
+  color: #1f4ba0;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.action-link:hover {
+  text-decoration: underline;
+}
+
+.popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.popup.hidden { display: none; }
+
+.popup-box {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.popup-box.success {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f4ba0;
+}
+
+.popup-box input {
+  width: 260px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin: 12px 0;
+}
+
+.popup-box button {
+  background: #1f4ba0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.popup-box button:hover {
+  background: #153371;
+}
+
+/* form tạo hóa đơn */
+.invoice-form {
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  width: 90%;
+  max-width: 900px;
+}
+
+.form-row {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 25px;
+}
+
+.form-row div {
+  flex: 1;
+}
+
+.form-row label {
+  font-weight: 600;
+  color: #1f4ba0;
+}
+
+.form-row input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.treatment-table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+.treatment-table th, .treatment-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.save-btn {
+  margin-top: 25px;
+  background: #1f4ba0;
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #153371;
+}
+
+.payment-form {
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  width: 80%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.payment-form textarea {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  resize: none;
+}
+
+.upload-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.upload-area label {
+  cursor: pointer;
+  color: #1f4ba0;
+  font-weight: 500;
+}
+
+#confirmPayment {
+  align-self: flex-start;
+  background: #1f4ba0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#confirmPayment:hover {
+  background: #153371;
+}
+
+.highlight {
+  background: rgba(31, 75, 160, 0.06);
+  transition: background 0.3s ease;
+}
+
+.invoice-table tr td {
+  transition: color 0.3s ease, background 0.4s ease;
+}
+

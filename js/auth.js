@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const username = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value.trim();
 
-    // Tài khoản giả lập hợp lệ
     const validUser = "test@gmail.com";
     const validPass = "123456";
 

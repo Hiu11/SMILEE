@@ -1,0 +1,96 @@
+ .confirm-container {
+            margin: 150px auto 100px;
+            width: 600px;
+            background: #fff;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .confirm-container h2 {
+            text-align: center;
+            color: #1f4ba0;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 35px;
+        }
+
+        .confirm-form {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .confirm-form label {
+            display: block;
+            font-weight: 600;
+            color: #0f2340;
+            margin-bottom: 8px;
+        }
+
+        .confirm-form input {
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1.5px solid #3057a4;
+            font-size: 15px;
+            color: #111;
+            outline: none;
+            transition: 0.25s;
+            width: 100%;
+        }
+
+        .confirm-form input:focus {
+            border-color: #1f4ba0;
+            box-shadow: 0 0 6px rgba(31, 75, 160, 0.3);
+        }
+
+        .confirm-form button {
+            background: #1f4ba0;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(31, 75, 160, 0.2);
+        }
+
+        .confirm-form button:hover {
+            background: #153371;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(31, 75, 160, 0.25);
+        }
+
+        .success {
+            margin-top: 30px;
+            background: #f2f8ff;
+            padding: 18px 20px;
+            border-radius: 10px;
+            border: 1px solid #bfd9ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #0f2340;
+            gap: 8px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .success::before {
+            content: "✅";
+        }

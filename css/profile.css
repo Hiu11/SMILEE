@@ -1,0 +1,121 @@
+ body {
+     background: #f7faff;
+     font-family: 'Inter', sans-serif;
+     color: #0f2340;
+ }
+
+ .layout {
+     display: flex;
+ }
+
+ .fixed-sidebar {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 250px;
+     height: 100vh;
+     background: #fff;
+     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+     overflow-y: auto;
+     z-index: 100;
+ }
+
+ .main {
+     margin-left: 260px;
+     padding: 80px 60px;
+     width: calc(100% - 260px);
+ }
+
+ .profile-wrapper {
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+     gap: 40px;
+     margin-top: 40px;
+     flex-wrap: wrap;
+ }
+
+ .profile-card {
+     background: #fff;
+     border-radius: 16px;
+     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+     padding: 40px;
+     width: 420px;
+     text-align: center;
+ }
+
+ .profile-card img {
+     width: 120px;
+     height: 120px;
+     border-radius: 50%;
+     object-fit: cover;
+     margin-bottom: 15px;
+ }
+
+ .profile-card h2 {
+     color: #1f4ba0;
+     font-size: 22px;
+     margin-bottom: 5px;
+ }
+
+ .profile-card p {
+     color: #666;
+     margin: 3px 0;
+ }
+
+ .profile-details {
+     background: #fff;
+     border-radius: 16px;
+     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+     padding: 40px;
+     flex: 1;
+     min-width: 400px;
+ }
+
+ .details-grid {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 16px 30px;
+     margin-bottom: 30px;
+ }
+
+ .details-grid div {
+     display: flex;
+     justify-content: space-between;
+     border-bottom: 1px dashed #e1e6f5;
+     padding-bottom: 6px;
+ }
+
+ .details-grid span:first-child {
+     font-weight: 600;
+     color: #1f4ba0;
+ }
+
+ .details-grid span:last-child {
+     color: #0f2340;
+ }
+
+ .change-pass-btn {
+     display: block;
+     width: fit-content;
+     margin: 20px auto 0;
+     padding: 10px 20px;
+     background: #1f4ba0;
+     color: #fff;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     transition: 0.3s;
+     font-weight: 600;
+ }
+
+ .change-pass-btn:hover {
+     background: #153371;
+ }
+
+ h2.section-title {
+     color: #1f4ba0;
+     text-align: center;
+     margin-bottom: 20px;
+     font-size: 26px;
+ }

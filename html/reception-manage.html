@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lễ tân - Quản lý lịch hẹn</title>
+
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/reception-manage.css"> <!-- file mới -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar fixed-sidebar">
+            <div class="sidebar-logo">
+                <img src="../pic/logo_smilee.png" alt="Logo Smilee" />
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item active"><a href="../html/reception-manage.html"><i class="fa-regular fa-calendar"></i> Quản lý lịch hẹn KH</a></li>
+                <li class="menu-item"><a href="../html/reception-invoice.html"><i class="fa-solid fa-file-invoice"></i> Quản lý hóa đơn</a></li>
+                <li class="menu-item"><a href="../html/reception-support.html"><i class="fa-solid fa-comments"></i> Hỗ trợ</a></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="#" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân</a>
+                <a href="../html/index.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+
+                <div class="hotline">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <p>Emergency Hotline:</p>
+                        <strong>+91 - 999 999 9999</strong>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <h1>Lịch hẹn khách hàng</h1>
+
+            <div class="schedule-wrapper">
+                <aside class="time-sidebar">
+                    <div class="year-menu">
+                        <h4>Năm</h4>
+                        <select>
+                            <option>2023</option>
+                            <option>2024</option>
+                            <option selected>2025</option>
+                            <option>2026</option>
+                        </select>
+                    </div>
+
+                    <div class="month-menu">
+                        <h4>Tháng</h4>
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option selected>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    </div>
+
+                    <div class="day-menu">
+                        <h4>Ngày</h4>
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option selected>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>25</option>
+                            <option>26</option>
+                            <option>27</option>
+                            <option>28</option>
+                            <option>29</option>
+                            <option>30</option>
+                            <option>31</option>
+                        </select>
+                    </div>
+                </aside>
+
+                <section class="schedule-area">
+                    <div class="schedule-controls">
+                        <button class="add-btn"><i class="fa-solid fa-plus"></i> Thêm lịch hẹn</button>
+                    </div>
+
+                    <div class="schedule-container">
+                        <div class="time-column">
+                            <h3>09:30</h3>
+                            <div class="appointment completed">Trọng Hiếu<br><small>Hoàn thành</small></div>
+                            <div class="appointment">Mai Linh<br><small>Chưa đến</small></div>
+                        </div>
+
+                        <div class="time-column">
+                            <h3>10:00</h3>
+                            <div class="appointment">Quang<br><small>Chưa đến</small></div>
+                        </div>
+
+                        <div class="time-column">
+                            <h3>10:30</h3>
+                            <div class="appointment cancelled">Trọng Hiếu<br><small>Đã hủy</small></div>
+                        </div>
+
+                        <div class="time-column">
+                            <h3>11:00</h3>
+                            <div class="appointment">Thảo Lê<br><small>Chưa đến</small></div>
+                        </div>
+
+                        <div class="time-column">
+                            <h3>11:30</h3>
+                            <div class="appointment">Hoàng Nhật<br><small>Chưa đến</small></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/reception-manage.js"></script>
+</body>
+
+</html>

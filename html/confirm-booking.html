@@ -8,111 +8,12 @@
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/booking.css" />
+    <link rel="stylesheet" href="../css/confirm-booking.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <style>
-        .confirm-container {
-            margin: 150px auto 100px;
-            width: 600px;
-            background: #fff;
-            padding: 40px 50px;
-            border-radius: 20px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .confirm-container h2 {
-            text-align: center;
-            color: #1f4ba0;
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 35px;
-        }
-
-        .confirm-form {
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-        }
-
-        .confirm-form label {
-            display: block;
-            font-weight: 600;
-            color: #0f2340;
-            margin-bottom: 8px;
-        }
-
-        .confirm-form input {
-            padding: 12px 14px;
-            border-radius: 8px;
-            border: 1.5px solid #3057a4;
-            font-size: 15px;
-            color: #111;
-            outline: none;
-            transition: 0.25s;
-            width: 100%;
-        }
-
-        .confirm-form input:focus {
-            border-color: #1f4ba0;
-            box-shadow: 0 0 6px rgba(31, 75, 160, 0.3);
-        }
-
-        .confirm-form button {
-            background: #1f4ba0;
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 15px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 12px rgba(31, 75, 160, 0.2);
-        }
-
-        .confirm-form button:hover {
-            background: #153371;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(31, 75, 160, 0.25);
-        }
-
-        /* Thông báo thành công */
-        .success {
-            margin-top: 30px;
-            background: #f2f8ff;
-            padding: 18px 20px;
-            border-radius: 10px;
-            border: 1px solid #bfd9ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #0f2340;
-            gap: 8px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .success::before {
-            content: "✅";
-        }
-    </style>
 </head>
 
 <body>
     <div class="layout">
-        <!-- ===== SIDEBAR ===== -->
         <aside class="sidebar fixed-sidebar">
             <div class="sidebar-logo">
                 <img src="../pic/logo_smilee.png" alt="Logo Smilee" />
@@ -128,8 +29,10 @@
 
             <div class="sidebar-bottom">
                 <h4>Tài khoản</h4>
-                <a href="#" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân</a>
-                <a href="#" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                <a href="../html/profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá
+                    nhân</a>
+                <a href="../html/index.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất</a>
 
                 <div class="hotline">
                     <i class="fa-solid fa-phone-volume"></i>
@@ -141,7 +44,6 @@
             </div>
         </aside>
 
-        <!-- ===== MAIN ===== -->
         <main class="main">
             <header class="navbar fixed-navbar">
                 <div class="nav-inner">
@@ -233,59 +135,7 @@
         </main>
     </div>
 
-    <script>
-        const time = localStorage.getItem("selectedTime");
-        const date = localStorage.getItem("selectedDate");
-        const doctor = localStorage.getItem("selectedDoctor");
-
-        if (date && time) document.getElementById("timeInput").value = `${date}, ${time}`;
-        if (doctor) document.getElementById("doctorInput").value = doctor;
-
-        document.getElementById("confirmForm").addEventListener("submit", e => {
-            e.preventDefault();
-
-            const date = localStorage.getItem("selectedDate");
-            const time = localStorage.getItem("selectedTime");
-            const doctor = localStorage.getItem("selectedDoctor");
-            const fullname = document.getElementById("fullname").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-
-            // Lấy danh sách lịch cũ (nếu có)
-            let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
-
-            // Thêm lịch mới
-            const newAppointment = {
-                fullname,
-                phone,
-                date,
-                time,
-                doctor,
-                status: "new"
-            };
-            appointments.push(newAppointment);
-
-            // Lưu lại vào localStorage
-            localStorage.setItem("appointments", JSON.stringify(appointments));
-
-            // Hiện thông báo
-            document.getElementById("successMsg").style.display = "block";
-
-            // Xóa temp data
-            localStorage.removeItem("selectedDate");
-            localStorage.removeItem("selectedTime");
-            localStorage.removeItem("selectedDoctor");
-
-            // Sau 2s quay về trang quản lý lịch hẹn
-            setTimeout(() => {
-                window.location.href = "../html/manage.html";
-            }, 2000);
-        });
-
-    </script>
-
-
-
-
+    <script src="../js/confirm-booking.js"></script>
 
 </body>
 
