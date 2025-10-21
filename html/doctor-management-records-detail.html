@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phiếu điều trị - Chi tiết</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/doctor-management.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo"><img src="../pic/logo_smilee.png" alt="Logo Smilee"></div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-item">
+          <a href="./doctor-records.html"><i class="fa-regular fa-folder-open"></i> Hồ sơ bệnh án</a>
+        </li>
+        <li class="menu-item active">
+          <a href="./doctor-management-records.html#treat"><i class="fa-solid fa-tooth"></i> Quản lý chi tiết điều
+            trị</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-bottom">
+        <h4>Tài khoản</h4>
+        <a href="../html/doctor-profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ
+          bác sĩ</a>
+        <a href="../html/index.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i>
+          Đăng xuất</a>
+
+        <div class="hotline">
+          <i class="fa-solid fa-phone-volume"></i>
+          <div>
+            <p>Emergency Hotline:</p>
+            <strong>+91 - 999 999 9999</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <main class="main">
+      <h2 class="section-title">Phiếu điều trị</h2>
+
+      <div class="grid-3">
+        <div class="form-group"><label>Mã phiếu điều trị</label><input id="dPdtId" readonly></div>
+        <div class="form-group"><label>Mã khách hàng</label><input id="dCustId" readonly></div>
+        <div class="form-group"><label>Phiếu điều trị chính</label><input id="dParent" readonly></div>
+        <div class="form-group"><label>Họ và tên KH</label><input id="dName" readonly></div>
+        <div class="form-group"><label>SĐT</label><input id="dPhone" readonly></div>
+        <div class="form-group"><label>Địa chỉ</label><input id="dAddr" readonly></div>
+      </div>
+
+      <div class="form-group"><label>Loại điều trị</label><input id="dType" readonly></div>
+      <div class="form-group"><label>Ghi chú</label><textarea id="dNote" rows="3" readonly></textarea></div>
+
+      <div class="grid-2">
+        <div class="box">
+          <div class="box-title">Dịch vụ</div>
+          <table class="table small">
+            <thead>
+              <tr>
+                <th>Mã DV</th>
+                <th>Tên dịch vụ</th>
+                <th>Đơn giá</th>
+                <th>SL</th>
+              </tr>
+            </thead>
+            <tbody id="dSvcBody"></tbody>
+          </table>
+        </div>
+        <div class="box">
+          <div class="box-title">Vật tư</div>
+          <table class="table small">
+            <thead>
+              <tr>
+                <th>Mã VT</th>
+                <th>Tên vật tư</th>
+                <th>Đơn giá</th>
+                <th>SL</th>
+              </tr>
+            </thead>
+            <tbody id="dSupBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-secondary" onclick="location.href='./doctor-management-records.html'"><i
+            class="fa-solid fa-chevron-left"></i> Back</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/doctor-management.js"></script>
+  <script>
+    renderPdtDetail(); 
+  </script>
+</body>
+
+</html>
