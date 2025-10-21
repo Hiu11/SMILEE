@@ -5,15 +5,15 @@ const emptyState = document.getElementById("emptyState");
 const historyList = document.getElementById("historyList");
 
 function renderAppointments() {
-    appointmentList.innerHTML = "";
-    historyList.innerHTML = "";
+  appointmentList.innerHTML = "";
+  historyList.innerHTML = "";
 
-    const newAppointments = appointments.filter(a => a.status === "new");
-    const cancelledAppointments = appointments.filter(a => a.status === "cancelled");
+  const newAppointments = appointments.filter(a => a.status === "new");
+  const cancelledAppointments = appointments.filter(a => a.status === "cancelled");
 
-    if (newAppointments.length > 0) {
-        newAppointments.forEach((app, index) => {
-            appointmentList.innerHTML += `
+  if (newAppointments.length > 0) {
+    newAppointments.forEach((app, index) => {
+      appointmentList.innerHTML += `
           <div class="appointment-card">
             <div class="appointment-info">
               <strong>${app.time} - ${app.date}</strong><br>
@@ -24,15 +24,15 @@ function renderAppointments() {
             <button class="cancel-btn" onclick="cancelAppointment(${index})">Huỷ</button>
           </div>
         `;
-        });
-        emptyState.style.display = "none";
-    } else {
-        emptyState.style.display = "block";
-    }
+    });
+    emptyState.style.display = "none";
+  } else {
+    emptyState.style.display = "block";
+  }
 
-    if (cancelledAppointments.length > 0) {
-        cancelledAppointments.forEach(app => {
-            historyList.innerHTML += `
+  if (cancelledAppointments.length > 0) {
+    cancelledAppointments.forEach(app => {
+      historyList.innerHTML += `
           <div class="appointment-card">
             <div class="appointment-info">
               <strong>${app.time} - ${app.date}</strong><br>
@@ -41,19 +41,19 @@ function renderAppointments() {
             </div>
           </div>
         `;
-        });
-    }
+    });
+  }
 }
 
 function cancelAppointment(index) {
-    const confirmCancel = confirm("Bạn có chắc muốn huỷ lịch hẹn này không?");
-    if (!confirmCancel) return;
+  const confirmCancel = confirm("Bạn có chắc muốn huỷ lịch hẹn này không?");
+  if (!confirmCancel) return;
 
-    appointments[index].status = "cancelled";
+  appointments[index].status = "cancelled";
 
-    localStorage.setItem("appointments", JSON.stringify(appointments));
+  localStorage.setItem("appointments", JSON.stringify(appointments));
 
-    renderAppointments();
+  renderAppointments();
 }
 
 renderAppointments();

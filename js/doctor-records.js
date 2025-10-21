@@ -1,4 +1,3 @@
-/* ====== seed data lần đầu ====== */
 const LS_KEY = "doctor_records_v1";
 if (!localStorage.getItem(LS_KEY)) {
     const seed = [
@@ -28,14 +27,12 @@ if (!localStorage.getItem(LS_KEY)) {
     localStorage.setItem(LS_KEY, JSON.stringify(seed));
 }
 
-/* ====== helpers ====== */
 const $ = s => document.querySelector(s);
 const getAll = () => JSON.parse(localStorage.getItem(LS_KEY) || "[]");
 const saveAll = (arr) => localStorage.setItem(LS_KEY, JSON.stringify(arr));
 const setCurrentId = (id) => localStorage.setItem("current_hsba_id", id);
 const getCurrentId = () => localStorage.getItem("current_hsba_id");
 
-/* ====== PAGE: records list ====== */
 if (location.pathname.endsWith("doctor-records.html")) {
     const grid = $("#grid");
     const searchBox = $("#searchBox");
@@ -44,7 +41,6 @@ if (location.pathname.endsWith("doctor-records.html")) {
     $("#btnAdd2")?.addEventListener("click", toAdd);
 
     const render = (q = "") => {
-        // xoá các card cũ (giữ add-card ở index 0)
         grid.querySelectorAll(".card.card-link, .record-card").forEach(n => n.remove());
         const data = getAll().filter(r => {
             const x = (r.name + r.id + r.code + r.phone).toLowerCase();
@@ -75,7 +71,6 @@ if (location.pathname.endsWith("doctor-records.html")) {
     searchBox?.addEventListener("input", e => render(e.target.value));
 }
 
-/* ====== PAGE: detail ====== */
 if (location.pathname.endsWith("doctor-record-detail.html")) {
     const id = getCurrentId();
     const data = getAll();
@@ -120,13 +115,11 @@ if (location.pathname.endsWith("doctor-record-detail.html")) {
     });
 }
 
-/* ====== PAGE: edit ====== */
 if (location.pathname.endsWith("doctor-record-edit.html")) {
     const id = getCurrentId();
     const data = getAll();
     const rec = data.find(x => x.id === id) || data[0];
 
-    // fill
     $("#fHsba").value = rec.id;
     $("#fCust").value = rec.code;
     $("#fName").value = rec.name;
@@ -149,7 +142,6 @@ if (location.pathname.endsWith("doctor-record-edit.html")) {
     });
 }
 
-/* ====== PAGE: add ====== */
 if (location.pathname.endsWith("doctor-record-add.html")) {
     const genId = () => "HSBA" + String(Math.floor(100000 + Math.random() * 900000));
     $("#aHsba").value = genId();

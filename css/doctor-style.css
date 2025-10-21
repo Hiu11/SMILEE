@@ -1,41 +1,222 @@
-
-.toolbar{display:flex;justify-content:space-between;align-items:center;margin:16px 0 22px}
-.search{position:relative;max-width:420px;width:100%}
-.search input{width:100%;padding:12px 40px 12px 14px;border:1px solid #e5e7eb;border-radius:12px;background:#fff}
-.search i{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#9ca3af}
-.btn{background:#1f4ba0;color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;transition:.25s}
-.btn:hover{background:#153371}
-
-.records-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:stretch}
-.record-card,.add-card{height:260px;display:flex;flex-direction:column;justify-content:space-between;padding:20px;border-radius:14px;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.05);transition:transform .25s,box-shadow .25s;text-decoration: none;}
-.record-card:hover{transform:translateY(-5px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
-.record-card .hdr{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.record-card img.avatar{width:50px;height:50px;border-radius:50%;object-fit:cover}
-.kv{display:flex;justify-content:space-between;font-size:14px;margin:6px 0;color:#374151}
-.kv span:first-child{color:#6b7280}
-.add-card{border:2px dashed #c7d2fe;justify-content:center;text-align:center;color:#6b7280}
-.add-card:hover{border-color:#94a3f0;background:#f9faff}
-
-.detail-wrap{display:grid;grid-template-columns:340px 1fr;gap:24px}
-.profile-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
-.profile-card .center{text-align:center}
-.big-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:10px}
-.info-list{margin-top:10px}
-.info-row{display:flex;justify-content:space-between;border-bottom:1px dashed #e5e7eb;padding:8px 0;font-size:14px;color:#374151}
-.info-row span:first-child{color:#6b7280}
-.history{background:#fff;border-radius:16px;padding:22px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
-.history .item{background:#f9fbff;border-radius:12px;padding:14px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.history .meta{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px;font-size:14px}
-
-.form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.field{display:flex;flex-direction:column;gap:8px}
-.field label{font-weight:600;font-size:14px;color:#0f2340}
-.field input{padding:10px 12px;border:1px solid #ddd;border-radius:8px;background:#fff;font-size:14px}
-.actions{grid-column:1/-1;display:flex;gap:12px;margin-top:10px}
-
-@media (max-width:1000px){.records-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:760px){
-  .records-grid{grid-template-columns:1fr}
-  .detail-wrap{grid-template-columns:1fr}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0 22px
 }
 
+.search {
+  position: relative;
+  max-width: 420px;
+  width: 100%
+}
+
+.search input {
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff
+}
+
+.search i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af
+}
+
+.btn {
+  background: #1f4ba0;
+  color: #fff;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: .25s
+}
+
+.btn:hover {
+  background: #153371
+}
+
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: stretch
+}
+
+.record-card,
+.add-card {
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+  transition: transform .25s, box-shadow .25s;
+  text-decoration: none;
+}
+
+.record-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08)
+}
+
+.record-card .hdr {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px
+}
+
+.record-card img.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover
+}
+
+.kv {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 6px 0;
+  color: #374151
+}
+
+.kv span:first-child {
+  color: #6b7280
+}
+
+.add-card {
+  border: 2px dashed #c7d2fe;
+  justify-content: center;
+  text-align: center;
+  color: #6b7280
+}
+
+.add-card:hover {
+  border-color: #94a3f0;
+  background: #f9faff
+}
+
+.detail-wrap {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .05)
+}
+
+.profile-card .center {
+  text-align: center
+}
+
+.big-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px
+}
+
+.info-list {
+  margin-top: 10px
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e5e7eb;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #374151
+}
+
+.info-row span:first-child {
+  color: #6b7280
+}
+
+.history {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .05)
+}
+
+.history .item {
+  background: #f9fbff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+.history .meta {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 14px;
+  font-size: 14px
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+}
+
+.field label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #0f2340
+}
+
+.field input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px
+}
+
+.actions {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 12px;
+  margin-top: 10px
+}
+
+@media (max-width:1000px) {
+  .records-grid {
+    grid-template-columns: repeat(2, 1fr)
+  }
+}
+
+@media (max-width:760px) {
+  .records-grid {
+    grid-template-columns: 1fr
+  }
+
+  .detail-wrap {
+    grid-template-columns: 1fr
+  }
+}

@@ -268,7 +268,6 @@ body {
   color: #1f4ba0;
 }
 
-/* ===== DROPDOWN MENU ===== */
 .nav-item {
   position: relative;
 }
@@ -335,7 +334,6 @@ body {
   color: #1f4ba0;
 }
 
-/* ===== HERO SECTION (trang home) ===== */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -376,7 +374,6 @@ body {
   max-width: 100%;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .layout {
     flex-direction: column;

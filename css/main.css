@@ -76,7 +76,6 @@
   line-height: 1.6;
 }
 
-/* ===== FORM ===== */
 .form-group {
   margin-bottom: 18px;
 }
@@ -111,7 +110,6 @@ textarea {
   resize: vertical;
 }
 
-/* ===== INFO BOX (dùng cho About, Service, Dentist...) ===== */
 .info-box {
   display: flex;
   flex-wrap: wrap;
@@ -152,7 +150,6 @@ textarea {
   line-height: 1.6;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .section {
     padding: 30px;
