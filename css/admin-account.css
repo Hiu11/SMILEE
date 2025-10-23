@@ -1,0 +1,78 @@
+/* ==== FORM THÊM TÀI KHOẢN GỌN GÀNG ==== */
+.account-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 30px;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 30px 40px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.account-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-form label {
+  font-weight: 600;
+  color: #0f2340;
+  margin-bottom: 6px;
+}
+
+.account-form input {
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fbff;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.account-form input:focus {
+  border-color: #1f4ba0;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(31, 75, 160, 0.1);
+  outline: none;
+}
+
+.account-form input[readonly] {
+  background: #f3f6fc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.btn-save {
+  background: #1f4ba0;
+  color: #fff;
+  border: none;
+  padding: 10px 36px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn-save:hover {
+  background: #153371;
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .account-form {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+}
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo hóa đơn</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/invoice.css">
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar fixed-sidebar">
+            <div class="sidebar-logo">
+                <img src="../pic/logo_smilee.png" alt="Logo Smilee">
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item "><a href="./admin-reception-appointment.html"><i
+                            class="fa-regular fa-calendar"></i> Quản lý lịch hẹn KH</a></li>
+                <li class="menu-item active"><a href="./admin-reception-invoice.html"><i
+                            class="fa-solid fa-receipt"></i> Quản lý hóa đơn</a></li>
+                <li class="menu-item"><a href="./admin-reception-support.html"><i class="fa-solid fa-headset"></i> Hỗ
+                        trợ</a></li>
+                <li class="menu-item"><a href="./admin-system-account-management.html"><i
+                            class="fa-solid fa-user-gear"></i> Quản lý</a></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="../html/reception-profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ
+                    sơ cá nhân</a>
+                <a href="../html/index.html" class="account-link logout"><i
+                        class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+
+                <div class="hotline">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <p>Emergency Hotline:</p>
+                        <strong>+91 - 999 999 9999</strong>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <h2 class="section-title">Tạo hóa đơn</h2>
+
+            <div class="invoice-form">
+                <div class="form-row">
+                    <div>
+                        <label>Mã hóa đơn</label>
+                        <input type="text" value="#HD0333167" readonly>
+                    </div>
+                    <div>
+                        <label>Khách hàng</label>
+                        <input type="text" value="Trọng Hiếu" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>Số điện thoại</label>
+                        <input type="text" id="phoneDisplay" readonly>
+                    </div>
+                    <div>
+                        <label>Địa chỉ</label>
+                        <input type="text" placeholder="Nhập địa chỉ khách hàng...">
+                    </div>
+                </div>
+
+                <h3>Chi tiết điều trị chưa thanh toán</h3>
+                <table class="treatment-table">
+                    <thead>
+                        <tr>
+                            <th>Mã PDT</th>
+                            <th>Nha sĩ</th>
+                            <th>Ngày khám</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PDT123</td>
+                            <td>Nguyễn Huỳnh Trân</td>
+                            <td>17/10/2025</td>
+                        </tr>
+                        <tr>
+                            <td>PDT060</td>
+                            <td>Nguyễn Huỳnh Trân</td>
+                            <td>05/10/2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="save-btn" id="saveInvoice">Lưu hóa đơn</button>
+            </div>
+        </main>
+    </div>
+
+    <div id="successPopup" class="popup hidden">
+        <div class="popup-box success">
+            <p>Tạo hóa đơn thành công 🎉</p>
+        </div>
+    </div>
+
+    <script src="../js/reception-invoice-create.js">    </script>
+
+</body>
+
+</html>

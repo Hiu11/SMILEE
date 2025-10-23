@@ -22,7 +22,7 @@ resetForm.addEventListener('submit', function (e) {
     window.location.href = 'reset-otp.html';
 });
 
-function showError(message) {
+function showError(message) {   
     const box = document.createElement('div');
     box.textContent = message;
     box.style.position = 'fixed';

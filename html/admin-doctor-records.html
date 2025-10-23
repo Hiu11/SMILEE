@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Nha sĩ - Hồ sơ bệnh án</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/doctor-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><img src="../pic/logo_smilee.png" alt="Logo Smilee"></div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item active">
+                    <a href="./admin-doctor-records.html"><i class="fa-regular fa-folder-open"></i> Hồ sơ bệnh án</a>
+                </li>
+                <li class="menu-item">
+                    <a href="./admin-treatment-manage.html#treat"><i class="fa-solid fa-tooth"></i> Quản lý chi tiết điều trị</a>
+                </li>
+                <li class="menu-item"><a href="./admin-system-account-management.html"><i
+                            class="fa-solid fa-user-gear"></i> Quản lý</a></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="../html/admin-profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ bác sĩ</a>
+                <a href="../html/index.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+
+                <div class="hotline">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <p>Emergency Hotline:</p>
+                        <strong>+91 - 999 999 9999</strong>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+
+        <main class="main">
+            <h2 class="section-title">Hồ sơ bệnh án</h2>
+
+            <div class="toolbar">
+                <div class="search"><input id="searchBox" placeholder="Tìm theo tên, mã HSBA hoặc số điện thoại..."><i
+                        class="fa-solid fa-magnifying-glass"></i></div>
+                <button class="btn" id="btnAdd"><i class="fa-solid fa-plus"></i> Thêm hồ sơ</button>
+            </div>
+
+            <div id="grid" class="records-grid">
+                <div class="card add-card">
+                    <i class="fa-regular fa-rectangle-list" style="font-size:42px;color:#9aa7ff"></i>
+                    <div style="margin-top:6px;color:#6b7280">Tạo hồ sơ mới</div>
+                    <button class="btn" id="btnAdd2" style="margin-top:8px">Thêm hồ sơ</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/doctor-records.js"></script>
+</body>
+
+</html>

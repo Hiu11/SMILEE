@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Quản lý kho & vật tư</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-logo">
+                    <img src="../pic/logo_smilee.png" alt="Nha Khoa Smilee" />
+                </div>
+                <div class="sidebar-menu">
+                    <a href="./admin-system-account-management.html" class="menu-item">
+                        <i class="fa-solid fa-users-gear"></i> Quản lý tài khoản hệ thống
+                    </a>
+                    <a href="./admin-service-management.html" class="menu-item">
+                        <i class="fa-solid fa-tooth"></i> Quản lý dịch vụ
+                    </a>
+                    <a href="./admin-warehouse-management.html" class="menu-item active">
+                        <i class="fa-solid fa-boxes-stacked"></i> Quản lý kho & vật tư
+                    </a>
+                    <a href="./admin-reception-appointment.html" class="menu-item">
+                        <i class="fa-solid fa-bell-concierge"></i> Lễ tân
+                    </a>
+                    <a href="./admin-treatment-manage.html" class="menu-item">
+                        <i class="fa-solid fa-user-doctor"></i> Nha sĩ
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="./admin-profile.html" class="account-link">
+                    <i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân
+                </a>
+                <a href="../html/index.html" class="account-link logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                </a>
+                <div class="hotline">
+                    <i class="fa-solid fa-phone"></i>
+                    <p>Emergency Hotline:<br /><strong>+91 - 999 999 9999</strong></p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="admin-header">
+                <h2>Quản lý vật tư</h2>
+                <div class="right-tools">
+                    <div class="admin-search">
+                        <input id="search" type="text" placeholder="Tìm theo tên hoặc mã vật tư..." />
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <button id="add-btn" class="btn-add">+ Thêm vật tư</button>
+                    <div class="user-box">
+                        <img src="../pic/dentist1.png" alt="Mai Linh" />
+                        <div class="user-detail">
+                            <span class="user-name">Mai Linh</span>
+                            <span class="user-role">ADMIN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="section">
+                <table class="account-table">
+                    <thead>
+                        <tr>
+                            <th>Tên</th>
+                            <th>Mã vật tư</th>
+                            <th>SL còn lại</th>
+                            <th>Đơn vị tính</th>
+                            <th>Ngày nhập</th>
+                            <th>HSD</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="warehouse-list"></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/admin-warehouse-management.js"></script>
+</body>
+
+</html>

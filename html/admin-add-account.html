@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Thêm tài khoản</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/admin-account.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<style>
+    .layout {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 100;
+    }
+
+    .main {
+        margin-left: 250px;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 40px 70px;
+        scroll-behavior: smooth;
+        background: #f9fbff;
+    }
+
+    .admin-header,
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 101;
+        background: #fff;
+    }
+
+    .main::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .main::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+
+    .main::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 30px;
+        margin-top: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #0f2340;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 14px;
+        transition: 0.25s;
+    }
+
+    .form-group input:focus {
+        border-color: #1f4ba0;
+        box-shadow: 0 0 0 3px rgba(31, 75, 160, 0.1);
+        outline: none;
+    }
+
+    .form-actions {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .form-actions .btn-primary {
+        padding: 12px 40px;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+</style>
+
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-logo">
+                    <img src="../pic/logo_smilee.png" alt="Nha Khoa Smilee" />
+                </div>
+
+                <div class="sidebar-menu">
+                    <a href="./admin-system-account-management.html" class="menu-item active">
+                        <i class="fa-solid fa-users-gear"></i> Quản lý tài khoản hệ thống
+                    </a>
+                    <a href="./admin-service-management.html" class="menu-item">
+                        <i class="fa-solid fa-tooth"></i> Quản lý dịch vụ
+                    </a>
+                    <a href="./admin-warehouse-management.html" class="menu-item">
+                        <i class="fa-solid fa-boxes-stacked"></i> Quản lý kho & vật tư
+                    </a>
+                    <a href="./admin-reception-appointment.html" class="menu-item">
+                        <i class="fa-solid fa-bell-concierge"></i> Lễ tân
+                    </a>
+                    <a href="./admin-treatment-manage.html" class="menu-item">
+                        <i class="fa-solid fa-user-doctor"></i> Nha sĩ
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="./admin-profile.html" class="account-link">
+                    <i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân
+                </a>
+                <a href="../html/index.html" class="account-link logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                </a>
+
+                <div class="hotline">
+                    <i class="fa-solid fa-phone"></i>
+                    <p>
+                        Emergency Hotline:<br />
+                        <strong>+91 - 999 999 9999</strong>
+                    </p>
+                </div>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="admin-header">
+                <h2>Thêm tài khoản mới</h2>
+                <div class="user-box">
+                    <img src="../pic/dentist1.png" alt="Mai Linh" />
+                    <div class="user-detail">
+                        <span class="user-name">Mai Linh</span>
+                        <span class="user-role">ADMIN</span>
+                    </div>
+                </div>
+            </div>
+
+            <main>
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            <input id="name" type="text" placeholder="Nhập họ tên">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mã tài khoản</label>
+                            <input id="code" type="text" placeholder="#TKxxxxxx">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Vai trò</label>
+                            <input id="role" type="text" placeholder="Admin, Lễ tân, Nha sĩ...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mã tham chiếu vai trò</label>
+                            <input id="ref" type="text">
+                        </div>
+
+                        <div class="form-group">
+                            <label>SĐT</label>
+                            <input id="phone" type="text">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input id="password" type="password">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Kinh nghiệm (năm)</label>
+                            <input id="exp" type="number">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bằng cấp</label>
+                            <input id="degree" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Lưu</button>
+                    </div>
+                </form>
+
+
+
+
+            </main>
+    </div>
+    <script src="../js/admin-add-account.js"></script>
+
+</body>
+
+</html>

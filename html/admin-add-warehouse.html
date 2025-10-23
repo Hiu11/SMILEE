@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Thêm vật tư</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/admin-account.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-logo">
+                    <img src="../pic/logo_smilee.png" alt="Nha Khoa Smilee" />
+                </div>
+                <div class="sidebar-menu">
+                    <a href="./admin-warehouse-management.html" class="menu-item active">
+                        <i class="fa-solid fa-boxes-stacked"></i> Quản lý kho & vật tư
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="admin-header">
+                <h2>Thêm vật tư</h2>
+                <div class="user-box">
+                    <img src="../pic/dentist1.png" alt="Mai Linh" />
+                    <div class="user-detail">
+                        <span class="user-name">Mai Linh</span>
+                        <span class="user-role">ADMIN</span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="warehouse-form">
+                <div class="form-grid">
+                    <div class="form-group"><label>Tên vật tư</label><input id="name" type="text" /></div>
+                    <div class="form-group"><label>Mã vật tư</label><input id="code" type="text"
+                            placeholder="#VTxxxxx" /></div>
+                    <div class="form-group"><label>Số lượng</label><input id="quantity" type="number" /></div>
+                    <div class="form-group"><label>Đơn vị tính</label><input id="unit" type="text" /></div>
+                    <div class="form-group"><label>Ngày nhập</label><input id="dateIn" type="date" /></div>
+                    <div class="form-group"><label>HSD</label><input id="expiry" type="date" /></div>
+                    <div class="form-group"><label>Trạng thái</label><input id="status" type="text" /></div>
+                    <div class="form-group"><label>Nguồn gốc</label><input id="origin" type="text" /></div>
+                    <div class="form-group"><label>Lô sản xuất</label><input id="batch" type="text" /></div>
+                    <div class="form-group"><label>Giá nhập</label><input id="importPrice" type="number" /></div>
+                    <div class="form-group"><label>Đơn giá bán</label><input id="sellPrice" type="number" /></div>
+                    <div class="form-group" style="grid-column: 1 / -1;"><label>Mô tả</label><textarea id="desc"
+                            rows="3"></textarea></div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Lưu</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="../js/admin-add-warehouse.js"></script>
+</body>
+
+</html>

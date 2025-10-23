@@ -1,0 +1,80 @@
+/* ===== FIX SIDEBAR CHO LỄ TÂN ===== */
+.sidebar {
+  width: 260px;
+  background-color: #fff;
+  border-right: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px 0;
+}
+
+.sidebar-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0 15px;
+  margin: 0;
+}
+
+.menu-item {
+  margin-bottom: 10px;
+}
+
+.menu-item a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.menu-item a:hover {
+  background-color: #f3f6ff;
+  color: #2f5bff;
+}
+
+.menu-item.active a {
+  background-color: #e9f0ff;
+  color: #2f5bff;
+  font-weight: 600;
+}
+
+.sidebar-bottom {
+  padding: 0 15px;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+}
+
+.account-link {
+  display: block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #444;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.account-link:hover {
+  background-color: #f3f6ff;
+  color: #2f5bff;
+}
+
+.logout {
+  color: #e74c3c;
+}
+
+.logout:hover {
+  background-color: #fff3f3;
+}

@@ -155,3 +155,125 @@ textarea {
     padding: 30px;
   }
 }
+
+/* ===== ADMIN ACCOUNT MANAGEMENT FIX ===== */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  background: #fff;
+  padding: 22px 32px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.admin-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f2340;
+}
+
+.admin-header .right-tools {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Search box đẹp hơn */
+.admin-search {
+  position: relative;
+}
+
+.admin-search input {
+  padding: 10px 40px 10px 14px;
+  border: 1px solid #e3e8f0;
+  border-radius: 10px;
+  background: #f9fbff;
+  font-size: 14px;
+  width: 280px;
+  transition: 0.25s;
+}
+
+.admin-search input:focus {
+  border-color: #1f4ba0;
+  box-shadow: 0 0 0 3px rgba(31, 75, 160, 0.15);
+  background: #fff;
+}
+
+.admin-search i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 15px;
+}
+
+/* Button thêm tài khoản */
+.btn-add {
+  background: #1f4ba0;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-add:hover {
+  background: #153371;
+  transform: translateY(-2px);
+}
+
+/* Bảng tài khoản */
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.account-table th {
+  background: #eef4ff;
+  color: #1f4ba0;
+  font-weight: 600;
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 15px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.account-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #374151;
+}
+
+.account-table tr:hover {
+  background: #f9fbff;
+}
+
+.account-table a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.account-table a:first-child {
+  color: #1f4ba0;
+  margin-right: 8px;
+}
+
+.account-table a:last-child {
+  color: #d13333;
+}
+
+.account-table a:hover {
+  text-decoration: underline;
+}
+

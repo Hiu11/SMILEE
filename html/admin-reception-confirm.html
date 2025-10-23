@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lễ tân - Xác nhận lịch hẹn</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/confirm-booking.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<style>
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  border-right: 1px solid #e5e7eb;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 20px 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0 15px;
+  margin: 0;
+}
+
+.menu-item {
+  margin-bottom: 10px;
+}
+
+.menu-item a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.menu-item a:hover {
+  background-color: #f3f6ff;
+  color: #2f5bff;
+}
+
+.menu-item.active a {
+  background-color: #e9f0ff;
+  color: #2f5bff;
+  font-weight: 600;
+}
+
+.sidebar-bottom {
+  padding: 0 15px;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+}
+
+.account-link {
+  display: block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #444;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.account-link:hover {
+  background-color: #f3f6ff;
+  color: #2f5bff;
+}
+
+.logout {
+  color: #e74c3c;
+}
+
+.logout:hover {
+  background-color: #fff3f3;
+}
+
+.main {
+  margin-left: 250px;
+  padding: 30px;
+}
+</style>
+
+<body>
+  <div class="layout">
+    <aside class="sidebar fixed-sidebar">
+      <div class="sidebar-logo">
+        <img src="../pic/logo_smilee.png" alt="Logo Smilee">
+      </div>
+      <ul class="sidebar-menu">
+        <li class="menu-item active"><a href="./admin-reception-appointment.html"><i class="fa-regular fa-calendar"></i> Quản lý lịch hẹn KH</a></li>
+        <li class="menu-item"><a href="./admin-reception-invoice.html"><i class="fa-solid fa-receipt"></i> Quản lý hóa đơn</a></li>
+        <li class="menu-item"><a href="./admin-reception-support.html"><i class="fa-solid fa-headset"></i> Hỗ trợ</a></li>
+        <li class="menu-item"><a href="./admin-system-account-management.html"><i class="fa-solid fa-user-gear"></i> Quản lý</a></li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <header class="navbar fixed-navbar">
+        <h2>Xác nhận lịch hẹn khách hàng</h2>
+        <div class="user-box">
+          <img src="../pic/dentist1.png" alt="Mai Linh">
+          <div class="user-detail">
+            <span class="user-name">Mai Linh</span>
+            <span class="user-role">LỄ TÂN</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="confirm-container">
+                        <h2>Đặt lịch hẹn</h2>
+
+        <form class="confirm-form" id="confirmForm">
+          <div>
+            <label>Họ và tên</label>
+            <input type="text" id="fullname" placeholder="Nhập họ tên khách hàng" required>
+          </div>
+          <div>
+            <label>Số điện thoại</label>
+            <input type="text" id="phone" placeholder="Nhập số điện thoại" required>
+          </div>
+          <div>
+            <label>Thời gian</label>
+            <input type="text" id="timeInput" readonly>
+          </div>
+          <div>
+            <label>Nha sĩ</label>
+            <input type="text" id="doctorInput" readonly>
+          </div>
+          <button type="submit">Xác nhận</button>
+        </form>
+
+        <div class="success" id="successMsg" style="display:none;">
+          ✅ Đặt lịch thành công!
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/admin-reception-confirm.js"></script>
+</body>
+</html>

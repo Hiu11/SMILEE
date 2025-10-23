@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thêm phiếu điều trị</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/doctor-management.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="layout">
+        < class="sidebar">
+            <div class="sidebar-logo"><img src="../pic/logo_smilee.png" alt="Logo Smilee"></div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item ">
+                    <a href="./admin-doctor-records.html"><i class="fa-regular fa-folder-open"></i> Hồ sơ bệnh
+                        án</a>
+                </li>
+                <li class="menu-item active">
+                    <a href="./admin-treatment-manage.html#treat "><i class="fa-solid fa-tooth"></i> Quản lý chi
+                        tiết điều trị</a>
+                </li>
+                <li class="menu-item"><a href="./admin-system-account-management.html"><i
+                            class="fa-solid fa-user-gear"></i> Quản lý</a></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="../html/admin-profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ
+                    sơ bác sĩ</a>
+                <a href="../html/index.html" class="account-link logout"><i
+                        class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+
+                <div class="hotline">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <p>Emergency Hotline:</p>
+                        <strong>+91 - 999 999 9999</strong>
+                    </div>
+                </div>
+            </div>
+            </aside>
+
+            <main class="main">
+                <h2 class="section-title">Thêm phiếu điều trị</h2>
+
+                <form id="addForm" class="pdt-form">
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Mã phiếu điều trị</label>
+                            <input id="fPdtId" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label>Mã khách hàng</label>
+                            <input id="fCustId" placeholder="#KH09882" />
+                        </div>
+                        <div class="form-group">
+                            <label>Phiếu điều trị chính (tái khám)</label>
+                            <input id="fParentPdt" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Họ và tên KH</label>
+                            <input id="fCustName" placeholder="Tên khách hàng" />
+                        </div>
+                        <div class="form-group">
+                            <label>SĐT</label>
+                            <input id="fPhone" placeholder="09xxxxxxxx" />
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            <input id="fAddress" placeholder="Số nhà, đường..." />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Loại điều trị</label>
+                        <input id="fType" placeholder="Niềng răng / Trám răng ..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <textarea id="fNote" rows="3" placeholder="Thêm ghi chú..."></textarea>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="box">
+                            <div class="box-title">Dịch vụ</div>
+                            <div class="search inline">
+                                <input id="svcSearch" placeholder="Tìm dịch vụ..."><i
+                                    class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <div id="svcList" class="item-list"></div>
+                        </div>
+
+                        <div class="box">
+                            <div class="box-title">Vật tư</div>
+                            <div class="search inline">
+                                <input id="supSearch" placeholder="Tìm vật tư..."><i
+                                    class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <div id="supList" class="item-list"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="history.back()"><i
+                                class="fa-solid fa-chevron-left"></i> Back</button>
+                        <button type="submit" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+                    </div>
+                </form>
+            </main>
+    </div>
+
+    <script src="../js/doctor-management.js"></script>
+    <script>
+        initCatalogSeed();
+        setNewPdtId('fPdtId');
+
+        renderCatalog('service', document.getElementById('svcList'));
+        renderCatalog('supply', document.getElementById('supList'));
+
+        document.getElementById('svcSearch').oninput = e => renderCatalog('service', document.getElementById('svcList'), e.target.value);
+        document.getElementById('supSearch').oninput = e => renderCatalog('supply', document.getElementById('supList'), e.target.value);
+
+        document.getElementById('addForm').addEventListener('submit', handleCreatePdt);
+    </script>
+</body>
+
+</html>

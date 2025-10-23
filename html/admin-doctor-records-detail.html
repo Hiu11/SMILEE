@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Chi tiết hồ sơ</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/doctor-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><img src="../pic/logo_smilee.png" alt="Logo Smilee"></div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item active">
+                    <a href="./doctor-records.html"><i class="fa-regular fa-folder-open"></i> Hồ sơ bệnh án</a>
+                </li>
+                <li class="menu-item">
+                    <a href="./doctor-management-records.html#treat"><i class="fa-solid fa-tooth"></i> Quản lý chi tiết điều trị</a>
+                </li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <h4>Tài khoản</h4>
+                <a href="../html/doctor-profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ bác sĩ</a>
+                <a href="../html/index.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
+
+                <div class="hotline">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <p>Emergency Hotline:</p>
+                        <strong>+91 - 999 999 9999</strong>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+
+        <main class="main">
+            <h2 class="section-title">Hồ sơ bệnh án</h2>
+
+            <div class="detail-wrap">
+                <div class="card profile-card">
+                    <div class="center">
+                        <img id="detailAvatar" class="big-avatar" src="../pic/dentist1.png" alt="">
+                        <h3 id="detailName" style="margin:10px 0 4px;color:#1f4ba0">—</h3>
+                        <div id="detailCode" style="font-size:13px;color:#6b7280">#HSBA</div>
+                    </div>
+                    <div class="info-list" id="infoList"></div>
+                    <div class="center" style="margin-top:12px">
+                        <button class="btn" id="btnEdit">Cập nhật</button>
+                    </div>
+                </div>
+
+                <div class="card history">
+                    <h3 style="margin:4px 0 14px;color:#1f4ba0">Lịch sử điều trị</h3>
+                    <div id="historyList"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/doctor-records.js"></script>
+</body>
+
+</html>

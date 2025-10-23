@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const accounts = [
       { email: "doctor@gmail.com", password: "doctor123", role: "doctor" },
       { email: "user@gmail.com", password: "user123", role: "user" },
-      { email: "staff@gmail.com", password: "staff123", role: "staff" }
+      { email: "staff@gmail.com", password: "staff123", role: "staff" },
+      { email: "admin@gmail.com", password: "admin123", role: "admin" }
     ];
 
     const user = accounts.find(
@@ -34,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
           break;
         case "staff":
           window.location.href = "reception-manage.html";
+          break;
+        case "admin":
+          window.location.href = "admin-system-account-management.html";
           break;
       }
     } else {

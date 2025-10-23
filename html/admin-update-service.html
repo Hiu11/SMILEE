@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - sửa dịch vụ</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/admin-account.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-logo">
+          <img src="../pic/logo_smilee.png" alt="Nha Khoa Smilee" />
+        </div>
+        <div class="sidebar-menu">
+          <a href="./admin-system-account-management.html" class="menu-item">
+            <i class="fa-solid fa-users-gear"></i> Quản lý tài khoản hệ thống
+          </a>
+          <a href="./admin-service-management.html" class="menu-item active">
+            <i class="fa-solid fa-tooth"></i> Quản lý dịch vụ
+          </a>
+          <a href="./admin-warehouse-management.html" class="menu-item">
+            <i class="fa-solid fa-boxes-stacked"></i> Quản lý kho & vật tư
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="admin-header">
+        <h2>Thêm dịch vụ</h2>
+        <div class="user-box">
+          <img src="../pic/dentist1.png" alt="Mai Linh" />
+          <div class="user-detail">
+            <span class="user-name">Mai Linh</span>
+            <span class="user-role">ADMIN</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="service-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Tên dịch vụ</label>
+            <input id="name" type="text" placeholder="Nhập tên dịch vụ">
+          </div>
+          <div class="form-group">
+            <label>Mã dịch vụ</label>
+            <input id="code" type="text" placeholder="#DVxxxxxx">
+          </div>
+          <div class="form-group">
+            <label>Đơn giá</label>
+            <input id="price" type="number" placeholder="VD: 250000">
+          </div>
+          <div class="form-group">
+            <label>Mã danh mục DV</label>
+            <input id="catCode" type="text">
+          </div>
+          <div class="form-group">
+            <label>Tên danh mục DV</label>
+            <input id="catName" type="text">
+          </div>
+          <div class="form-group">
+            <label>Đơn vị tính</label>
+            <input id="unit" type="text" placeholder="VD: Lần, Cái...">
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label>Mô tả</label>
+            <textarea id="desc" rows="4" placeholder="Nhập mô tả dịch vụ..."></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Lưu</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script src="../js/admin-update-service.js"></script>
+</body>
+</html>

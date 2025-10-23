@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lễ tân - Đặt lịch hẹn khách hàng</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/booking.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar fixed-sidebar">
+      <div class="sidebar-logo">
+        <img src="../pic/logo_smilee.png" alt="Logo Smilee">
+      </div>
+      <ul class="sidebar-menu">
+        <li class="menu-item active"><a href="./admin-reception-appointment.html"><i class="fa-regular fa-calendar"></i> Quản lý lịch hẹn KH</a></li>
+        <li class="menu-item"><a href="./admin-reception-invoice.html"><i class="fa-solid fa-receipt"></i> Quản lý hóa đơn</a></li>
+        <li class="menu-item"><a href="./admin-reception-support.html"><i class="fa-solid fa-headset"></i> Hỗ trợ</a></li>
+        <li class="menu-item"><a href="./admin-system-account-management.html"><i class="fa-solid fa-user-gear"></i> Quản lý</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <h4>Tài khoản</h4>
+        <a href="./admin-profile.html" class="account-link"><i class="fa-regular fa-id-card"></i> Hồ sơ cá nhân</a>
+        <a href="../html/index.html" class="account-link logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="navbar fixed-navbar">
+        <h2>Đặt lịch hẹn cho khách hàng</h2>
+        <div class="user-box">
+          <img src="../pic/dentist1.png" alt="Mai Linh">
+          <div class="user-detail">
+            <span class="user-name">Mai Linh</span>
+            <span class="user-role">LỄ TÂN</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-area">
+        <section class="section booking-section">
+          <div class="booking-filter">
+            <label for="dateSelect">Chọn ngày:</label>
+            <select id="dateSelect">
+              <option value="Hôm nay - 21/10/2025">Hôm nay - 21/10/2025</option>
+              <option value="Thứ 4 - 22/10/2025">Thứ 4 - 22/10/2025</option>
+              <option value="Thứ 5 - 23/10/2025">Thứ 5 - 23/10/2025</option>
+            </select>
+          </div>
+
+          <div class="doctor-list">
+            <div class="doctor-card">
+              <img src="../pic/dentist1.png" alt="BS Thảo">
+              <div class="doctor-info">
+                <h3>BS. Nguyễn Phương Thảo</h3>
+                <div class="time-grid">
+                  <button class="booked">09:00</button>
+                  <button>09:30</button>
+                  <button>10:00</button>
+                  <button>10:30</button>
+                  <button class="booked">11:00</button>
+                  <button>11:30</button>
+                  <button>13:00</button>
+                  <button class="booked">14:00</button>
+                  <button>15:00</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="doctor-card">
+              <img src="../pic/dentist2.png" alt="BS Vui">
+              <div class="doctor-info">
+                <h3>BS. Trần Văn Vui</h3>
+                <div class="time-grid">
+                  <button>09:00</button>
+                  <button>09:30</button>
+                  <button>10:00</button>
+                  <button class="booked">10:30</button>
+                  <button>11:00</button>
+                  <button>13:00</button>
+                  <button class="booked">14:00</button>
+                  <button>15:00</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/admin-reception-appointment.js"></script>
+</body>
+</html>
