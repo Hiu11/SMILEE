@@ -3,7 +3,6 @@
 
 ## README.md — NHA KHOA SMILEE MANAGEMENT SYSTEM
 
-```markdown
 # NHA KHOA SMILEE MANAGEMENT SYSTEM
 
 Hệ thống **Nha Khoa Smilee** là nền tảng quản lý tổng thể dành cho phòng khám nha khoa, hỗ trợ 4 nhóm người dùng chính:
@@ -15,7 +14,6 @@ Dự án được phát triển bằng **HTML, CSS, JavaScript (LocalStorage)** 
 
 ## Cấu trúc thư mục
 
-```
 
 SMILEE/
 │
@@ -118,8 +116,6 @@ SMILEE/
 │   └── ...
 │
 └── README.md
-
-```
 
 ---
 
