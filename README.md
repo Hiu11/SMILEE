@@ -14,7 +14,7 @@ Dự án được phát triển bằng **HTML, CSS, JavaScript (LocalStorage)** 
 
 ## Cấu trúc thư mục
 
-
+```
 SMILEE/
 │
 ├── css/                           # Style của toàn hệ thống
@@ -116,6 +116,7 @@ SMILEE/
 │   └── ...
 │
 └── README.md
+```
 
 ---
 
