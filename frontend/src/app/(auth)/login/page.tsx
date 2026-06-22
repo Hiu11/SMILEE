@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { API_BASE_URL } from "@/lib/api";
+import { saveSession } from "@/lib/auth";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,7 +22,7 @@ export default function LoginPage() {
     const password = formData.get('password') as string;
 
     try {
-      const response = await fetch('http://localhost:4000/auth/login', {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,10 +37,7 @@ export default function LoginPage() {
 
       const data = await response.json();
       
-      // Save full name and role
-      if (data.user?.fullName) {
-        localStorage.setItem('currentUser', data.user.fullName);
-      }
+      saveSession({ token: data.access_token, user: data.user });
       
       if (data.user?.role === 'ADMIN') {
         alert('Đăng nhập thành công! Đang chuyển hướng vào Admin...');
@@ -93,7 +92,7 @@ export default function LoginPage() {
             <Label htmlFor="password" className="text-slate-700 dark:text-slate-300 font-bold">
               Mật khẩu
             </Label>
-            <Link href="#" className="text-sm text-blue-600 dark:text-cyan-400 font-bold hover:underline">
+            <Link href="/reset" className="text-sm text-blue-600 dark:text-cyan-400 font-bold hover:underline">
               Quên mật khẩu?
             </Link>
           </div>

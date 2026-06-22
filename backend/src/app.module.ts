@@ -5,12 +5,14 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { ClinicModule } from './clinic/clinic.module';
 
 @Module({
   imports: [
     PrismaModule,
     UsersModule,
     AuthModule,
+    ClinicModule,
     MailerModule.forRoot({
       transport: {
         host: 'smtp.gmail.com',

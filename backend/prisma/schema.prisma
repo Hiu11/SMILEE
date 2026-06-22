@@ -155,3 +155,16 @@ model WarehouseItem {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  fullName  String
+  email     String?
+  phone     String?
+  subject   String?
+  message   String
+  status    String   @default("NEW")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

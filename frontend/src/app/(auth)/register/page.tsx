@@ -7,6 +7,7 @@ import { Eye, EyeOff, Lock, Mail, User, Phone, ArrowRight, ShieldCheck } from "l
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { API_BASE_URL } from "@/lib/api";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +27,7 @@ export default function RegisterPage() {
     try {
       const role = email === 'cinesky.cinema11@gmail.com' ? 'ADMIN' : 'CUSTOMER';
 
-      const response = await fetch('http://localhost:4000/auth/register', {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,10 +44,6 @@ export default function RegisterPage() {
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.message || 'Đăng ký thất bại');
-      }
-
-      if (fullname) {
-        localStorage.setItem('currentUser', fullname);
       }
 
       setRegisteredEmail(email);
@@ -66,7 +63,7 @@ export default function RegisterPage() {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:4000/auth/verify-otp', {
+      const response = await fetch(`${API_BASE_URL}/auth/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,13 +79,8 @@ export default function RegisterPage() {
         throw new Error(error.message || 'Xác thực OTP thất bại');
       }
 
-      if (registeredEmail === 'cinesky.cinema11@gmail.com') {
-        alert('Xác thực OTP thành công! Đã cấp quyền ADMIN cho tài khoản này.');
-        router.push('/admin');
-      } else {
-        alert('Xác thực OTP thành công! Đang chuyển hướng...');
-        router.push('/login');
-      }
+      alert('Xác thực OTP thành công! Vui lòng đăng nhập để tiếp tục.');
+      router.push('/login');
 
     } catch (err: unknown) {
       if (err instanceof Error) {

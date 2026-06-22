@@ -12,7 +12,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 py-20 sm:p-6 lg:p-8 relative">
       
       {/* Back to Home Button */}
       <Link href="/" className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors font-semibold group z-20">
@@ -20,7 +20,7 @@ export default function AuthLayout({
         Về trang chủ
       </Link>
 
-      <div className="w-full max-w-5xl bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+      <div className="w-full max-w-5xl bg-white dark:bg-slate-900 rounded-3xl lg:rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row">
         
         {/* Left Side: Information & Branding */}
         <div className="relative hidden lg:flex flex-col justify-center items-center w-1/2 p-12 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800">
@@ -57,7 +57,7 @@ export default function AuthLayout({
         </div>
 
         {/* Right Side: Form Content */}
-        <div className="flex flex-col justify-center items-center w-full lg:w-1/2 p-8 sm:p-12 lg:p-16 bg-white dark:bg-slate-900">
+        <div className="flex flex-col justify-center items-center w-full lg:w-1/2 p-6 sm:p-10 lg:p-16 bg-white dark:bg-slate-900">
           <div className="w-full max-w-md">
             {/* Mobile Logo (Visible only on small screens) */}
             <div className="lg:hidden mb-10 flex justify-center">
