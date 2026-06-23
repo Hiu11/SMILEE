@@ -1,26 +1,66 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { AppointmentStatus, InvoiceStatus, Prisma, Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
+import type {
+  CreateAppointmentDto,
+  CreateInvoiceDto,
+  CreateRecordDto,
+  UpdateAppointmentDto,
+} from './dto/clinic.dto';
+
+function requiredString(value: unknown, field: string) {
+  if (typeof value !== 'string' || !value.trim()) {
+    throw new BadRequestException(`${field} is required`);
+  }
+  return value.trim();
+}
+
+function optionalString(value: unknown, field: string) {
+  if (value === undefined || value === null || value === '') return undefined;
+  if (typeof value !== 'string') {
+    throw new BadRequestException(`${field} must be a string`);
+  }
+  return value.trim();
+}
+
+function validDate(value: unknown, field: string) {
+  const date = new Date(requiredString(value, field));
+  if (Number.isNaN(date.getTime())) {
+    throw new BadRequestException(`${field} is invalid`);
+  }
+  return date;
+}
 
 @Injectable()
 export class ClinicService {
   constructor(private prisma: PrismaService) {}
 
   async dashboard() {
-    const [patients, appointments, revenue, doctors, upcoming] = await Promise.all([
-      this.prisma.user.count({ where: { role: Role.CUSTOMER } }),
-      this.prisma.appointment.count(),
-      this.prisma.invoice.aggregate({ _sum: { totalAmount: true } }),
-      this.prisma.user.count({ where: { role: Role.DOCTOR } }),
-      this.prisma.appointment.findMany({
-        take: 5,
-        orderBy: { date: 'asc' },
-        include: { customer: true, doctor: true, services: { include: { service: true } } },
-      }),
-    ]);
+    const [patients, appointments, revenue, doctors, upcoming] =
+      await Promise.all([
+        this.prisma.user.count({ where: { role: Role.CUSTOMER } }),
+        this.prisma.appointment.count(),
+        this.prisma.invoice.aggregate({ _sum: { totalAmount: true } }),
+        this.prisma.user.count({ where: { role: Role.DOCTOR } }),
+        this.prisma.appointment.findMany({
+          take: 5,
+          orderBy: { date: 'asc' },
+          include: {
+            customer: true,
+            doctor: true,
+            services: { include: { service: true } },
+          },
+        }),
+      ]);
 
-    return { patients, appointments, revenue: revenue._sum.totalAmount ?? 0, doctors, upcoming };
+    return {
+      patients,
+      appointments,
+      revenue: revenue._sum.totalAmount ?? 0,
+      doctors,
+      upcoming,
+    };
   }
 
   listUsers(role?: Role) {
@@ -103,7 +143,9 @@ export class ClinicService {
   }
 
   listWarehouse() {
-    return this.prisma.warehouseItem.findMany({ orderBy: { createdAt: 'desc' } });
+    return this.prisma.warehouseItem.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   createWarehouseItem(data: Prisma.WarehouseItemCreateInput) {
@@ -121,40 +163,78 @@ export class ClinicService {
   listAppointments() {
     return this.prisma.appointment.findMany({
       orderBy: { date: 'asc' },
-      include: { customer: true, doctor: true, services: { include: { service: true } }, invoice: true, record: true },
+      include: {
+        customer: true,
+        doctor: true,
+        services: { include: { service: true } },
+        invoice: true,
+        record: true,
+      },
     });
   }
 
-  createAppointment(body: Record<string, unknown>) {
-    const serviceIds = Array.isArray(body.serviceIds) ? (body.serviceIds as string[]) : [];
+  createAppointment(body: CreateAppointmentDto) {
+    const serviceIds = Array.isArray(body.serviceIds)
+      ? body.serviceIds.map((value) => requiredString(value, 'serviceIds'))
+      : [];
+    const status = body.status ?? AppointmentStatus.PENDING;
+    if (!Object.values(AppointmentStatus).includes(status)) {
+      throw new BadRequestException('status is invalid');
+    }
 
     return this.prisma.appointment.create({
       data: {
-        date: new Date(String(body.date)),
-        notes: body.notes ? String(body.notes) : undefined,
-        status: (body.status as AppointmentStatus) ?? AppointmentStatus.PENDING,
-        customer: { connect: { id: String(body.customerId) } },
-        doctor: body.doctorId ? { connect: { id: String(body.doctorId) } } : undefined,
+        date: validDate(body.date, 'date'),
+        notes: optionalString(body.notes, 'notes'),
+        status,
+        customer: {
+          connect: { id: requiredString(body.customerId, 'customerId') },
+        },
+        doctor: body.doctorId
+          ? { connect: { id: requiredString(body.doctorId, 'doctorId') } }
+          : undefined,
         services: {
           create: serviceIds.map((serviceId) => ({
             service: { connect: { id: serviceId } },
           })),
         },
       },
-      include: { customer: true, doctor: true, services: { include: { service: true } } },
+      include: {
+        customer: true,
+        doctor: true,
+        services: { include: { service: true } },
+      },
     });
   }
 
-  updateAppointment(id: string, body: Record<string, unknown>) {
+  updateAppointment(id: string, body: UpdateAppointmentDto) {
+    const status = body.status;
+    if (
+      status !== undefined &&
+      !Object.values(AppointmentStatus).includes(status)
+    ) {
+      throw new BadRequestException('status is invalid');
+    }
+
     return this.prisma.appointment.update({
       where: { id },
       data: {
-        date: body.date ? new Date(String(body.date)) : undefined,
-        notes: body.notes === undefined ? undefined : String(body.notes),
-        status: body.status as AppointmentStatus | undefined,
-        doctor: body.doctorId ? { connect: { id: String(body.doctorId) } } : undefined,
+        date:
+          body.date === undefined ? undefined : validDate(body.date, 'date'),
+        notes: optionalString(body.notes, 'notes'),
+        status,
+        doctor:
+          body.doctorId === null || body.doctorId === ''
+            ? { disconnect: true }
+            : body.doctorId
+              ? { connect: { id: requiredString(body.doctorId, 'doctorId') } }
+              : undefined,
       },
-      include: { customer: true, doctor: true, services: { include: { service: true } } },
+      include: {
+        customer: true,
+        doctor: true,
+        services: { include: { service: true } },
+      },
     });
   }
 
@@ -169,7 +249,7 @@ export class ClinicService {
     });
   }
 
-  createRecord(body: Record<string, string>) {
+  createRecord(body: CreateRecordDto) {
     return this.prisma.record.create({
       data: {
         diagnosis: body.diagnosis,
@@ -188,14 +268,31 @@ export class ClinicService {
     });
   }
 
-  createInvoice(body: Record<string, unknown>) {
+  createInvoice(body: CreateInvoiceDto) {
+    const totalAmount = Number(body.totalAmount);
+    const status = body.status ?? InvoiceStatus.UNPAID;
+    if (!Number.isFinite(totalAmount) || totalAmount < 0) {
+      throw new BadRequestException('totalAmount must be a positive number');
+    }
+    if (!Object.values(InvoiceStatus).includes(status)) {
+      throw new BadRequestException('status is invalid');
+    }
+
     return this.prisma.invoice.create({
       data: {
-        totalAmount: Number(body.totalAmount),
-        status: (body.status as InvoiceStatus) ?? InvoiceStatus.UNPAID,
-        paymentMethod: body.paymentMethod ? String(body.paymentMethod) : undefined,
-        customer: { connect: { id: String(body.customerId) } },
-        appointment: body.appointmentId ? { connect: { id: String(body.appointmentId) } } : undefined,
+        totalAmount,
+        status,
+        paymentMethod: optionalString(body.paymentMethod, 'paymentMethod'),
+        customer: {
+          connect: { id: requiredString(body.customerId, 'customerId') },
+        },
+        appointment: body.appointmentId
+          ? {
+              connect: {
+                id: requiredString(body.appointmentId, 'appointmentId'),
+              },
+            }
+          : undefined,
       },
     });
   }
@@ -205,7 +302,9 @@ export class ClinicService {
   }
 
   listMessages() {
-    return this.prisma.contactMessage.findMany({ orderBy: { createdAt: 'desc' } });
+    return this.prisma.contactMessage.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   createMessage(data: Prisma.ContactMessageCreateInput) {

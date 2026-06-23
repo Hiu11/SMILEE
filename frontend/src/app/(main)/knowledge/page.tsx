@@ -42,7 +42,7 @@ export default function KnowledgePage() {
           {articles.map((article) => (
             <StaggerItem key={article.title} whileHover={{ y: -10, scale: 1.015 }}>
               <article className="group overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm transition-shadow hover:shadow-xl hover:shadow-blue-950/10 dark:border-slate-800 dark:bg-slate-900">
-                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-800">
+                <div className="relative aspect-4/3 overflow-hidden bg-slate-100 dark:bg-slate-800">
                   <Image src={article.image} alt={article.title} fill className="object-cover transition duration-700 group-hover:scale-110" />
                 </div>
                 <div className="p-5">

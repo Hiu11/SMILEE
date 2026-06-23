@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { clearSession } from "@/lib/auth";
 
-const sidebarLinks = [
+export const sidebarLinks = [
   { name: "Tổng quan", href: "/admin", icon: LayoutDashboard },
   { name: "Lịch hẹn", href: "/admin/appointments", icon: CalendarDays },
   { name: "Bệnh nhân", href: "/admin/patients", icon: Users },

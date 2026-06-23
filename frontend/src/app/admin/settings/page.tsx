@@ -1,11 +1,12 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import { Bell, Building2, CheckCircle2, Clock, Database, Mail, RotateCcw, Save, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
 
 type Settings = {
   clinicName: string;
@@ -40,15 +41,23 @@ const defaultSettings: Settings = {
 const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
 export default function SettingsPage() {
-  const [settings, setSettings] = useState<Settings>(defaultSettings);
-  const [notice, setNotice] = useState("");
+  const savedSettings = useLocalStorageValue(storageKey);
+  const initialSettings = useMemo(() => {
+    if (!savedSettings) return defaultSettings;
 
-  useEffect(() => {
-    const saved = localStorage.getItem(storageKey);
-    if (saved) {
-      setSettings({ ...defaultSettings, ...JSON.parse(saved) });
+    try {
+      return { ...defaultSettings, ...(JSON.parse(savedSettings) as Partial<Settings>) };
+    } catch {
+      return defaultSettings;
     }
-  }, []);
+  }, [savedSettings]);
+
+  return <SettingsForm key={savedSettings ?? "default"} initialSettings={initialSettings} />;
+}
+
+function SettingsForm({ initialSettings }: { initialSettings: Settings }) {
+  const [settings, setSettings] = useState<Settings>(initialSettings);
+  const [notice, setNotice] = useState("");
 
   const update = <K extends keyof Settings>(key: K, value: Settings[K]) => {
     setSettings((current) => ({ ...current, [key]: value }));

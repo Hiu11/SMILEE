@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:all": "npm --prefix .. run dev",
+    "dev:open": "npm --prefix .. run dev:open",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

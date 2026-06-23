@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Edit3, Plus, RefreshCw, Search, Trash2, X } from "lucide-react";
 import { apiDelete, apiGet, apiPatch, apiPost } from "@/lib/api";
@@ -62,6 +62,7 @@ export function AdminResourcePage<T extends { id?: string }>({
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [editing, setEditing] = useState<T | null>(null);
+  const fallbackRef = useRef(fallback);
 
   const load = async () => {
     setLoading(true);
@@ -70,8 +71,17 @@ export function AdminResourcePage<T extends { id?: string }>({
   };
 
   useEffect(() => {
-    load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    let active = true;
+
+    apiGet<T[]>(endpoint, fallbackRef.current).then((data) => {
+      if (!active) return;
+      setItems(data);
+      setLoading(false);
+    });
+
+    return () => {
+      active = false;
+    };
   }, [endpoint]);
 
   const filtered = useMemo(() => {

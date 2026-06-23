@@ -88,7 +88,7 @@ export default function AppointmentsPage() {
         </CardContent>
       </Card>
 
-      <div className="flex min-h-[500px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950 md:flex-row">
+      <div className="flex min-h-125 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950 md:flex-row">
         <aside className="w-full shrink-0 border-b border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50 md:w-56 md:border-b-0 md:border-r">
           <div className="mb-3 flex items-center gap-2 text-sm font-bold text-blue-600">
             <CalendarIcon className="h-5 w-5" />

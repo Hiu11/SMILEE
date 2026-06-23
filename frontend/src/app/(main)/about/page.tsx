@@ -4,8 +4,8 @@ import { Float, Reveal, Stagger, StaggerItem } from "@/components/motion/MotionP
 
 export default function AboutPage() {
   return (
-    <div className="bg-white pt-28 dark:bg-slate-950">
-      <section className="container mx-auto grid gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8">
+    <div className="bg-white pt-20 dark:bg-slate-950">
+      <section className="container mx-auto grid gap-12 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:px-8">
         <Reveal direction="left">
           <p className="text-sm font-extrabold uppercase tracking-wide text-blue-600 dark:text-cyan-400">Về SMILEE</p>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white md:text-5xl">
@@ -30,7 +30,7 @@ export default function AboutPage() {
           </Stagger>
         </Reveal>
 
-        <Reveal direction="right" className="relative min-h-[360px] overflow-hidden rounded-3xl bg-slate-100 shadow-2xl shadow-blue-950/10 dark:bg-slate-900">
+        <Reveal direction="right" className="relative min-h-90 overflow-hidden rounded-3xl bg-slate-100 shadow-2xl shadow-blue-950/10 dark:bg-slate-900">
           <Float className="absolute right-6 top-6 z-10 rounded-2xl border border-white/60 bg-white/90 p-3 text-blue-600 shadow-lg backdrop-blur dark:border-slate-700 dark:bg-slate-900/90">
             <ShieldCheck className="h-6 w-6" />
           </Float>
@@ -39,7 +39,7 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-slate-50 py-16 dark:bg-slate-900/50">
-        <Stagger className="container mx-auto grid gap-6 px-4 sm:px-6 md:grid-cols-3 lg:px-8">
+        <Stagger className="container mx-auto grid gap-6 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
           {[
             [ShieldCheck, "An toàn", "Quy trình vô trùng và kiểm soát chất lượng theo từng bước."],
             [Users, "Tận tâm", "Lễ tân, bác sĩ và quản trị cùng nhìn một nguồn dữ liệu thống nhất."],

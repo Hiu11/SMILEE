@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -16,6 +16,8 @@ import {
   UserCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AUTH_KEYS } from "@/lib/auth";
+import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
 
 const appointments = [
   { service: "Khám tổng quát", date: "22/06/2026", time: "09:00", doctor: "BS. Tuấn", status: "Đã xác nhận" },
@@ -28,16 +30,12 @@ const treatmentRecords = [
 ];
 
 export function ProfileDashboard() {
-  const [name, setName] = useState("Khách hàng SMILEE");
+  const name = useLocalStorageValue(AUTH_KEYS.name) ?? "Khách hàng SMILEE";
   const initials = useMemo(() => {
     const words = name.trim().split(/\s+/);
     if (words.length >= 2) return `${words[0][0]}${words[words.length - 1][0]}`.toUpperCase();
     return name.slice(0, 2).toUpperCase();
   }, [name]);
-
-  useEffect(() => {
-    setName(localStorage.getItem("currentUser") ?? "Khách hàng SMILEE");
-  }, []);
 
   return (
     <div className="min-h-screen bg-slate-50 pt-28 dark:bg-slate-950">

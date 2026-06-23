@@ -25,8 +25,6 @@ export default function RegisterPage() {
     const password = formData.get('password') as string;
 
     try {
-      const role = email === 'cinesky.cinema11@gmail.com' ? 'ADMIN' : 'CUSTOMER';
-
       const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
@@ -37,7 +35,6 @@ export default function RegisterPage() {
           password,
           fullName: fullname,
           phone,
-          role
         }),
       });
 

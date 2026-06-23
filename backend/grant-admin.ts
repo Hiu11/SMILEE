@@ -1,18 +1,22 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import 'dotenv/config';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient, Role } from '@prisma/client';
+import { Pool } from 'pg';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 
 async function main() {
-  const email = 'cinesky.cinema11@gmail.com';
-  
-  try {
-    const user = await prisma.user.update({
-      where: { email },
-      data: { role: 'ADMIN' }
-    });
-    console.log(`Successfully updated user ${user.email} to role: ${user.role}`);
-  } catch (error) {
-    console.error('Error updating user. They might not exist in the database yet:', error);
+  const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  if (!email) {
+    throw new Error('Set ADMIN_EMAIL in backend/.env before running this command.');
   }
+
+  const user = await prisma.user.update({
+    where: { email },
+    data: { role: Role.ADMIN },
+  });
+  console.log(`Updated ${user.email} to ${user.role}.`);
 }
 
 main()
@@ -22,4 +26,5 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
+    await pool.end();
   });

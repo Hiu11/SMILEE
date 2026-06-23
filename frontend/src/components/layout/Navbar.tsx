@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,6 +8,7 @@ import { CalendarDays, ChevronRight, LayoutDashboard, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { AUTH_KEYS } from "@/lib/auth";
+import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
 
 const navLinks = [
   { name: "Giới thiệu", href: "/about" },
@@ -20,13 +20,8 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
-  const [currentUser, setCurrentUser] = useState<string | null>(null);
-  const [currentRole, setCurrentRole] = useState<string | null>(null);
-
-  useEffect(() => {
-    setCurrentUser(localStorage.getItem("currentUser"));
-    setCurrentRole(localStorage.getItem(AUTH_KEYS.role));
-  }, []);
+  const currentUser = useLocalStorageValue(AUTH_KEYS.name);
+  const currentRole = useLocalStorageValue(AUTH_KEYS.role);
 
   return (
     <motion.header

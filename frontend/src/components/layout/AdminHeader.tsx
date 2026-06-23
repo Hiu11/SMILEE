@@ -1,20 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Bell, ExternalLink, Home, Search } from "lucide-react";
+import { Bell, ExternalLink, LogOut, Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { AUTH_KEYS, clearSession } from "@/lib/auth";
+import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
+import { sidebarLinks } from "@/components/layout/AdminSidebar";
 
 export function AdminHeader() {
-  const [userName, setUserName] = useState("Quản trị viên");
-
-  useEffect(() => {
-    const savedName = localStorage.getItem("currentUser");
-    if (savedName) {
-      setUserName(savedName);
-    }
-  }, []);
+  const pathname = usePathname();
+  const userName = useLocalStorageValue(AUTH_KEYS.name) ?? "Quản trị viên";
 
   const getInitials = (name: string) => {
     const words = name.trim().split(/\s+/);
@@ -32,11 +30,46 @@ export function AdminHeader() {
       className="sticky top-0 z-40 flex h-20 items-center justify-between border-b border-slate-200 bg-white px-4 dark:border-slate-800 dark:bg-slate-950 sm:px-8"
     >
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" className="md:hidden" aria-label="Tổng quan" title="Tổng quan" asChild>
-          <Link href="/admin">
-            <Home className="h-5 w-5" />
-          </Link>
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="md:hidden" aria-label="Mở menu quản trị" title="Menu quản trị">
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[300px] overflow-y-auto bg-white px-4 dark:bg-slate-950">
+            <SheetTitle className="pt-2 text-left text-lg font-extrabold">Quản trị SMILEE</SheetTitle>
+            <nav className="mt-6 space-y-1">
+              {sidebarLinks.map((link) => {
+                const active = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${
+                      active
+                        ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-cyan-400"
+                        : "text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-900"
+                    }`}
+                  >
+                    <link.icon className="h-5 w-5" />
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
+            <button
+              type="button"
+              onClick={() => {
+                clearSession();
+                window.location.href = "/";
+              }}
+              className="mt-6 flex w-full items-center gap-3 rounded-xl px-4 py-3 font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+            >
+              <LogOut className="h-5 w-5" />
+              Đăng xuất
+            </button>
+          </SheetContent>
+        </Sheet>
         <motion.div whileHover={{ scale: 1.02 }} className="relative hidden w-72 sm:block">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input

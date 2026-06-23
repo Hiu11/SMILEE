@@ -1,4 +1,10 @@
-import { CanActivate, ExecutionContext, ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Role } from '@prisma/client';
 
@@ -43,13 +49,16 @@ export class AdminGuard implements CanActivate {
         throw error;
       }
 
-      throw new UnauthorizedException('Phiên đăng nhập không hợp lệ hoặc đã hết hạn');
+      throw new UnauthorizedException(
+        'Phiên đăng nhập không hợp lệ hoặc đã hết hạn',
+      );
     }
   }
 
   private isPublicClinicRoute(method: string, path: string, role?: string) {
     if (method === 'GET' && path === '/services') return true;
-    if (method === 'GET' && path === '/users' && role === Role.DOCTOR) return true;
+    if (method === 'GET' && path === '/users' && role === Role.DOCTOR)
+      return true;
     if (method === 'POST' && path === '/messages') return true;
     return false;
   }

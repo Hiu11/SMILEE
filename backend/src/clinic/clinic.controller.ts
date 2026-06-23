@@ -1,7 +1,33 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
-import { Prisma, Role } from '@prisma/client';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { AdminGuard } from '../auth/admin.guard';
 import { ClinicService } from './clinic.service';
+import {
+  CreateAppointmentDto,
+  CreateInvoiceDto,
+  CreateMessageDto,
+  CreateRecordDto,
+  CreateServiceDto,
+  CreateUserDto,
+  CreateWarehouseItemDto,
+  ListUsersQueryDto,
+  UpdateAppointmentDto,
+  UpdateInvoiceDto,
+  UpdateMessageDto,
+  UpdateServiceDto,
+  UpdateUserDto,
+  UpdateWarehouseItemDto,
+} from './dto/clinic.dto';
 
 @Controller()
 @UseGuards(AdminGuard)
@@ -14,22 +40,25 @@ export class ClinicController {
   }
 
   @Get('users')
-  users(@Query('role') role?: Role) {
-    return this.clinic.listUsers(role);
+  users(@Query() query: ListUsersQueryDto) {
+    return this.clinic.listUsers(query.role);
   }
 
   @Post('users')
-  createUser(@Body() body: Prisma.UserCreateInput) {
+  createUser(@Body() body: CreateUserDto) {
     return this.clinic.createUser(body);
   }
 
   @Patch('users/:id')
-  updateUser(@Param('id') id: string, @Body() body: Prisma.UserUpdateInput) {
+  updateUser(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() body: UpdateUserDto,
+  ) {
     return this.clinic.updateUser(id, body);
   }
 
   @Delete('users/:id')
-  removeUser(@Param('id') id: string) {
+  removeUser(@Param('id', ParseUUIDPipe) id: string) {
     return this.clinic.removeUser(id);
   }
 
@@ -39,17 +68,20 @@ export class ClinicController {
   }
 
   @Post('services')
-  createService(@Body() body: Prisma.ServiceCreateInput) {
+  createService(@Body() body: CreateServiceDto) {
     return this.clinic.createService(body);
   }
 
   @Patch('services/:id')
-  updateService(@Param('id') id: string, @Body() body: Prisma.ServiceUpdateInput) {
+  updateService(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() body: UpdateServiceDto,
+  ) {
     return this.clinic.updateService(id, body);
   }
 
   @Delete('services/:id')
-  removeService(@Param('id') id: string) {
+  removeService(@Param('id', ParseUUIDPipe) id: string) {
     return this.clinic.removeService(id);
   }
 
@@ -59,17 +91,20 @@ export class ClinicController {
   }
 
   @Post('warehouse')
-  createWarehouse(@Body() body: Prisma.WarehouseItemCreateInput) {
+  createWarehouse(@Body() body: CreateWarehouseItemDto) {
     return this.clinic.createWarehouseItem(body);
   }
 
   @Patch('warehouse/:id')
-  updateWarehouse(@Param('id') id: string, @Body() body: Prisma.WarehouseItemUpdateInput) {
+  updateWarehouse(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() body: UpdateWarehouseItemDto,
+  ) {
     return this.clinic.updateWarehouseItem(id, body);
   }
 
   @Delete('warehouse/:id')
-  removeWarehouse(@Param('id') id: string) {
+  removeWarehouse(@Param('id', ParseUUIDPipe) id: string) {
     return this.clinic.removeWarehouseItem(id);
   }
 
@@ -79,17 +114,20 @@ export class ClinicController {
   }
 
   @Post('appointments')
-  createAppointment(@Body() body: Record<string, unknown>) {
+  createAppointment(@Body() body: CreateAppointmentDto) {
     return this.clinic.createAppointment(body);
   }
 
   @Patch('appointments/:id')
-  updateAppointment(@Param('id') id: string, @Body() body: Record<string, unknown>) {
+  updateAppointment(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() body: UpdateAppointmentDto,
+  ) {
     return this.clinic.updateAppointment(id, body);
   }
 
   @Delete('appointments/:id')
-  removeAppointment(@Param('id') id: string) {
+  removeAppointment(@Param('id', ParseUUIDPipe) id: string) {
     return this.clinic.removeAppointment(id);
   }
 
@@ -99,7 +137,7 @@ export class ClinicController {
   }
 
   @Post('records')
-  createRecord(@Body() body: Record<string, string>) {
+  createRecord(@Body() body: CreateRecordDto) {
     return this.clinic.createRecord(body);
   }
 
@@ -109,12 +147,15 @@ export class ClinicController {
   }
 
   @Post('invoices')
-  createInvoice(@Body() body: Record<string, unknown>) {
+  createInvoice(@Body() body: CreateInvoiceDto) {
     return this.clinic.createInvoice(body);
   }
 
   @Patch('invoices/:id')
-  updateInvoice(@Param('id') id: string, @Body() body: Prisma.InvoiceUpdateInput) {
+  updateInvoice(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() body: UpdateInvoiceDto,
+  ) {
     return this.clinic.updateInvoice(id, body);
   }
 
@@ -124,12 +165,15 @@ export class ClinicController {
   }
 
   @Post('messages')
-  createMessage(@Body() body: Prisma.ContactMessageCreateInput) {
+  createMessage(@Body() body: CreateMessageDto) {
     return this.clinic.createMessage(body);
   }
 
   @Patch('messages/:id')
-  updateMessage(@Param('id') id: string, @Body() body: Prisma.ContactMessageUpdateInput) {
+  updateMessage(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() body: UpdateMessageDto,
+  ) {
     return this.clinic.updateMessage(id, body);
   }
 }

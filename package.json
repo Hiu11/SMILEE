@@ -1,0 +1,15 @@
+{
+  "name": "smilee-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --kill-others --names BE,FE --prefix-colors yellow,cyan \"npm --prefix backend run start:dev\" \"npm --prefix frontend run dev\"",
+    "dev:open": "concurrently --kill-others-on-fail --names APP,BROWSER --prefix-colors cyan,magenta \"npm run dev\" \"wait-on http://localhost:3000 && open-cli http://localhost:3000\"",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "test": "npm --prefix backend test -- --runInBand && npm --prefix backend run test:e2e -- --runInBand"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "open-cli": "^8.0.0",
+    "wait-on": "^9.0.3"
+  }
+}

@@ -1,13 +1,13 @@
 import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Prisma } from '@prisma/client';
+import { LoginDto, RegisterDto, VerifyOtpDto } from './dto/auth.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('login')
-  async login(@Body() body: Record<string, string>) {
+  async login(@Body() body: LoginDto) {
     const user = await this.authService.validateUser(body.email, body.password);
     if (!user) {
       throw new UnauthorizedException('Email hoặc mật khẩu không đúng');
@@ -16,12 +16,12 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() body: Prisma.UserCreateInput) {
+  async register(@Body() body: RegisterDto) {
     return this.authService.register(body);
   }
 
   @Post('verify-otp')
-  async verifyOtp(@Body() body: Record<string, string>) {
+  async verifyOtp(@Body() body: VerifyOtpDto) {
     return this.authService.verifyOtp(body.email, body.otp);
   }
 }

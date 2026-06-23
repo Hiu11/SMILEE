@@ -51,9 +51,9 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.65, delay: 0.15 }}
-            className="relative flex min-h-[420px] items-center justify-center lg:min-h-[600px]"
+            className="relative flex min-h-105 items-center justify-center lg:min-h-150"
           >
-            <div className="relative flex aspect-square w-full max-w-xl items-center justify-center lg:aspect-auto lg:h-[600px]">
+            <div className="relative flex aspect-square w-full max-w-xl items-center justify-center lg:aspect-auto lg:h-150">
               <motion.div
                 animate={{ y: [0, -8, 0], rotate: [0, -0.35, 0.35, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -139,7 +139,7 @@ export default function Home() {
 
       <section className="bg-slate-50 py-20 dark:bg-slate-900/50">
         <div className="container mx-auto grid gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div className="relative min-h-[360px] overflow-hidden rounded-3xl bg-slate-200 dark:bg-slate-800">
+          <div className="relative min-h-90 overflow-hidden rounded-3xl bg-slate-200 dark:bg-slate-800">
             <Image src="/pic/article_about.png" alt="SMILEE clinic" fill className="object-cover" />
           </div>
           <div className="self-center">
