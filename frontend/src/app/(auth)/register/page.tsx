@@ -1,125 +1,137 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Lock, Mail, User, Phone, ArrowRight, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, User, Phone, ArrowRight, ShieldCheck, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { API_BASE_URL } from "@/lib/api";
+import { apiPost } from "@/lib/api";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
-  const [otp, setOtp] = useState("");
   const [registeredEmail, setRegisteredEmail] = useState("");
+  const [formData, setFormData] = useState<Record<string, string>>({});
+  
+  const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  
   const router = useRouter();
 
-  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const fullname = formData.get('fullname') as string;
-    const phone = formData.get('phone') as string;
-    const password = formData.get('password') as string;
+    setError("");
+    setMessage("");
+    setLoading(true);
+
+    const form = new FormData(e.currentTarget);
+    const email = String(form.get("email")).trim().toLowerCase();
+    const password = String(form.get("password"));
+    const fullName = String(form.get("fullName"));
+    const phone = String(form.get("phone")).trim();
+
+    // Save for resend
+    setFormData({ email, password, fullName, phone });
 
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          fullName: fullname,
-          phone,
-        }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Đăng ký thất bại');
-      }
-
+      await apiPost("/auth/register", { email, password, fullName, phone });
       setRegisteredEmail(email);
       setShowOtp(true);
-      alert('Đăng ký thành công! Vui lòng kiểm tra email để nhận mã OTP.');
-
+      setMessage("Đăng ký thành công! Vui lòng kiểm tra email để nhận mã OTP.");
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        alert(err.message);
-      } else {
-        alert('Đã xảy ra lỗi không xác định');
-      }
+      setError(err instanceof Error ? err.message : "Đăng ký thất bại");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleVerifyOtp = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleVerifyOtp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+    setError("");
+    setMessage("");
+    setLoading(true);
+
+    const form = new FormData(e.currentTarget);
+    const otp = String(form.get("otp")).trim();
+
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/verify-otp`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: registeredEmail,
-          otp,
-        }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Xác thực OTP thất bại');
-      }
-
-      alert('Xác thực OTP thành công! Vui lòng đăng nhập để tiếp tục.');
-      router.push('/login');
-
+      await apiPost("/auth/verify-otp", { email: registeredEmail, otp });
+      setMessage("Xác thực OTP thành công! Đang chuyển đến đăng nhập...");
+      setTimeout(() => router.push("/login"), 1500);
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        alert(err.message);
-      } else {
-        alert('Đã xảy ra lỗi không xác định');
-      }
+      setError(err instanceof Error ? err.message : "Xác thực OTP thất bại");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    setError("");
+    setMessage("");
+    setResending(true);
+    try {
+      // Re-trigger register endpoint with same details to update OTP
+      await apiPost("/auth/register", formData);
+      setMessage("Đã gửi lại mã OTP. Vui lòng kiểm tra hộp thư.");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Gửi lại OTP thất bại");
+    } finally {
+      setResending(false);
     }
   };
 
   if (showOtp) {
     return (
-      <div className="flex flex-col items-center justify-center space-y-6 max-w-md mx-auto mt-20">
-        <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+      <div className="flex flex-col items-center justify-center space-y-6 max-w-md mx-auto mt-10 lg:mt-20">
+        <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mb-2">
           <ShieldCheck className="w-8 h-8 text-blue-600 dark:text-cyan-400" />
         </div>
         <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2 text-center">
           Xác thực Email
         </h1>
         <p className="text-slate-500 font-medium text-center">
-          Chúng tôi đã gửi một mã OTP gồm 6 số đến email <strong>{registeredEmail}</strong>. Vui lòng kiểm tra hộp thư (và mục Spam).
+          Chúng tôi đã gửi một mã OTP gồm 6 số đến email <strong className="text-blue-600">{registeredEmail}</strong>. Vui lòng kiểm tra hộp thư (và mục Spam).
         </p>
         <form className="w-full space-y-6" onSubmit={handleVerifyOtp}>
           <div className="space-y-2">
             <Label htmlFor="otp" className="text-slate-700 dark:text-slate-300 font-bold">Mã OTP</Label>
             <Input 
               id="otp"
+              name="otp"
               type="text"
+              inputMode="numeric"
               maxLength={6}
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              placeholder="Nhập 6 số OTP"
-              className="text-center text-2xl tracking-widest h-14 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-bold"
+              placeholder="000000"
+              className="text-center text-2xl tracking-[0.35em] h-14 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-black"
               required
             />
           </div>
+
+          {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600 dark:bg-red-950/40 dark:text-red-400">{error}</p>}
+          {message && <p className="rounded-xl bg-green-50 px-4 py-3 text-sm font-bold text-green-700 dark:bg-green-950/40 dark:text-green-400">{message}</p>}
+
           <Button 
             type="submit" 
-            className="w-full h-14 text-lg font-bold rounded-xl bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-1 group"
+            disabled={loading}
+            className="w-full h-14 text-lg font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all"
           >
-            Xác nhận
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            {loading ? "Đang xác nhận..." : "Xác nhận"}
+            {!loading && <ArrowRight className="ml-2 w-5 h-5" />}
+          </Button>
+
+          <Button
+            type="button"
+            variant="ghost"
+            disabled={resending}
+            onClick={handleResendOtp}
+            className="h-11 w-full rounded-xl"
+          >
+            <RefreshCw className={`mr-2 h-4 w-4 ${resending ? "animate-spin" : ""}`} />
+            {resending ? "Đang gửi lại..." : "Gửi lại mã"}
           </Button>
         </form>
       </div>
@@ -142,14 +154,14 @@ export default function RegisterPage() {
 
       <form className="space-y-6" onSubmit={handleRegister}>
         <div className="space-y-2">
-          <Label htmlFor="fullname" className="text-slate-700 dark:text-slate-300 font-bold">
+          <Label htmlFor="fullName" className="text-slate-700 dark:text-slate-300 font-bold">
             Họ và tên
           </Label>
           <div className="relative">
             <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
             <Input 
-              id="fullname" 
-              name="fullname"
+              id="fullName" 
+              name="fullName"
               type="text" 
               placeholder="Nhập họ và tên của bạn" 
               className="pl-10 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-medium"
@@ -217,12 +229,15 @@ export default function RegisterPage() {
           </div>
         </div>
 
+        {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600 dark:bg-red-950/40 dark:text-red-400">{error}</p>}
+
         <Button 
           type="submit" 
-          className="w-full h-14 text-lg font-bold rounded-xl bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-1 group"
+          disabled={loading}
+          className="w-full h-14 text-lg font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all"
         >
-          Đăng ký
-          <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          {loading ? "Đang xử lý..." : "Đăng ký"}
+          {!loading && <ArrowRight className="ml-2 w-5 h-5" />}
         </Button>
       </form>
     </>

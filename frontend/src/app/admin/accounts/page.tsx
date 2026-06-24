@@ -24,10 +24,7 @@ export default function AccountsPage() {
         "Mật khẩu nhập ở đây sẽ được backend mã hóa trước khi lưu.",
         "Dùng tìm kiếm để lọc theo email, tên, số điện thoại hoặc vai trò.",
       ]}
-      fallback={[
-        { id: "mock-1", fullName: "Nguyễn Tuấn", email: "doctor@smilee.vn", phone: "0901234567", role: "DOCTOR", isVerified: true },
-        { id: "mock-2", fullName: "Mai Linh", email: "customer@smilee.vn", phone: "0912345678", role: "CUSTOMER", isVerified: true },
-      ]}
+      fallback={[]}
       fields={[
         { name: "fullName", label: "Họ tên", required: true },
         { name: "email", label: "Email", type: "email", required: true },

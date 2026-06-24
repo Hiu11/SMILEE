@@ -8,11 +8,20 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { AUTH_KEYS, clearSession } from "@/lib/auth";
 import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
-import { sidebarLinks } from "@/components/layout/AdminSidebar";
+import { getSidebarLinks } from "@/components/layout/AdminSidebar";
+
+const roleLabel: Record<string, string> = {
+  ADMIN: "Quản trị viên",
+  RECEPTIONIST: "Lễ tân",
+  DOCTOR: "Bác sĩ",
+  CUSTOMER: "Khách hàng",
+};
 
 export function AdminHeader() {
   const pathname = usePathname();
-  const userName = useLocalStorageValue(AUTH_KEYS.name) ?? "Quản trị viên";
+  const userName = useLocalStorageValue(AUTH_KEYS.name) ?? "Nhân sự SMILEE";
+  const role = useLocalStorageValue(AUTH_KEYS.role);
+  const links = getSidebarLinks(role);
 
   const getInitials = (name: string) => {
     const words = name.trim().split(/\s+/);
@@ -37,9 +46,9 @@ export function AdminHeader() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] overflow-y-auto bg-white px-4 dark:bg-slate-950">
-            <SheetTitle className="pt-2 text-left text-lg font-extrabold">Quản trị SMILEE</SheetTitle>
+            <SheetTitle className="pt-2 text-left text-lg font-extrabold">SMILEE Workspace</SheetTitle>
             <nav className="mt-6 space-y-1">
-              {sidebarLinks.map((link) => {
+              {links.map((link) => {
                 const active = pathname === link.href;
                 return (
                   <Link
@@ -88,14 +97,14 @@ export function AdminHeader() {
           </Link>
         </Button>
         <motion.div whileHover={{ rotate: -8, scale: 1.08 }} whileTap={{ scale: 0.94 }}>
-        <Link href="/admin/support" className="relative block rounded-full p-2 text-slate-500 transition-colors hover:bg-slate-100 dark:hover:bg-slate-900" aria-label="Thông báo" title="Thông báo">
-          <Bell className="h-5 w-5" />
-          <motion.span
-            className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full border-2 border-white bg-red-500 dark:border-slate-950"
-            animate={{ scale: [1, 1.55, 1], opacity: [1, 0.65, 1] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </Link>
+          <Link href="/admin/support" className="relative block rounded-full p-2 text-slate-500 transition-colors hover:bg-slate-100 dark:hover:bg-slate-900" aria-label="Thông báo" title="Thông báo">
+            <Bell className="h-5 w-5" />
+            <motion.span
+              className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full border-2 border-white bg-red-500 dark:border-slate-950"
+              animate={{ scale: [1, 1.55, 1], opacity: [1, 0.65, 1] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </Link>
         </motion.div>
         <div className="mx-1 h-8 w-px bg-slate-200 dark:bg-slate-800 sm:mx-2" />
         <div className="flex items-center gap-3">
@@ -104,7 +113,7 @@ export function AdminHeader() {
           </motion.div>
           <div className="hidden text-sm sm:block">
             <p className="font-bold leading-none text-slate-900 dark:text-white">{userName}</p>
-            <p className="mt-1 text-xs text-slate-500">Quản trị viên</p>
+            <p className="mt-1 text-xs text-slate-500">{roleLabel[role ?? ""] ?? "Nhân sự"}</p>
           </div>
         </div>
       </div>

@@ -27,9 +27,7 @@ export default function RecordsPage() {
         "Chẩn đoán nên ngắn gọn, kế hoạch điều trị cần ghi rõ bước tiếp theo.",
         "Ghi chú dùng cho dặn dò tái khám, thuốc hoặc lưu ý đặc biệt.",
       ]}
-      fallback={[
-        { id: "mock-1", diagnosis: "Viêm nướu nhẹ", treatmentPlan: "Lấy cao răng và tái khám sau 2 tuần", createdAt: new Date().toISOString(), patient: { fullName: "Nguyễn Trọng Hiếu" } },
-      ]}
+      fallback={[]}
       fields={[
         { name: "patientId", label: "ID bệnh nhân", required: true },
         { name: "appointmentId", label: "ID lịch hẹn", required: true },

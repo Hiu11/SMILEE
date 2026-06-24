@@ -17,6 +17,7 @@ import {
   CreateInvoiceDto,
   CreateMessageDto,
   CreateRecordDto,
+  CreatePublicBookingDto,
   CreateServiceDto,
   CreateUserDto,
   CreateWarehouseItemDto,
@@ -111,6 +112,11 @@ export class ClinicController {
   @Get('appointments')
   appointments() {
     return this.clinic.listAppointments();
+  }
+
+  @Post('bookings')
+  createPublicBooking(@Body() body: CreatePublicBookingDto) {
+    return this.clinic.createPublicBooking(body);
   }
 
   @Post('appointments')

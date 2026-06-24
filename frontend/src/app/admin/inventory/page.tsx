@@ -25,10 +25,7 @@ export default function InventoryPage() {
         "Kiểm tra các mặt hàng số lượng thấp trước khi đặt lịch điều trị lớn.",
         "Giá nhập giúp ước tính chi phí vận hành và tồn kho.",
       ]}
-      fallback={[
-        { id: "mock-1", name: "Găng tay y tế", category: "Dụng cụ", quantity: 120, unit: "Hộp", pricePerUnit: 85000 },
-        { id: "mock-2", name: "Thuốc tê Lidocaine", category: "Thuốc", quantity: 35, unit: "Ống", pricePerUnit: 45000 },
-      ]}
+      fallback={[]}
       fields={[
         { name: "name", label: "Tên vật tư", required: true },
         { name: "category", label: "Loại", required: true },

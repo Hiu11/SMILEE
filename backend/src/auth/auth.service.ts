@@ -74,11 +74,8 @@ export class AuthService {
     if (existingUser) {
       if (existingUser.isVerified) {
         throw new ConflictException('Email đã tồn tại');
-      } else {
-        throw new ConflictException(
-          'Email đã đăng ký nhưng chưa xác thực OTP. Vui lòng kiểm tra email hoặc đăng ký lại với email khác.',
-        );
       }
+      // If not verified, we can overwrite their info and send a new OTP
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -86,16 +83,27 @@ export class AuthService {
     const otpExpires = new Date();
     otpExpires.setMinutes(otpExpires.getMinutes() + 10); // Expires in 10 mins
 
-    const user = await this.usersService.create({
-      email,
-      fullName,
-      phone: data.phone?.trim() || null,
-      password: hashedPassword,
-      role: Role.CUSTOMER,
-      otp,
-      otpExpires,
-      isVerified: false,
-    });
+    let user;
+    if (existingUser) {
+      user = await this.usersService.update(existingUser.id, {
+        fullName,
+        phone: data.phone?.trim() || null,
+        password: hashedPassword,
+        otp,
+        otpExpires,
+      });
+    } else {
+      user = await this.usersService.create({
+        email,
+        fullName,
+        phone: data.phone?.trim() || null,
+        password: hashedPassword,
+        role: Role.CUSTOMER,
+        otp,
+        otpExpires,
+        isVerified: false,
+      });
+    }
 
     // Send OTP via Email
     await this.mailerService.sendMail({
@@ -105,7 +113,7 @@ export class AuthService {
         <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
           <h2>Chào mừng bạn đến với Smilee Dental</h2>
           <p>Mã xác thực (OTP) của bạn là:</p>
-          <h1 style="color: #0284c7; letter-spacing: 2px;">${otp}</h1>
+          <h1 style="color: #0284c7; letter-spacing: 4px; font-size: 36px;">${otp}</h1>
           <p>Mã này sẽ hết hạn trong vòng 10 phút. Vui lòng không chia sẻ mã này cho bất kỳ ai.</p>
         </div>
       `,
@@ -138,5 +146,63 @@ export class AuthService {
     });
 
     return { message: 'Xác thực tài khoản thành công' };
+  }
+
+  async forgotPassword(email: string): Promise<{ message: string }> {
+    const user = await this.usersService.findOne(email.trim().toLowerCase());
+    // Always return success to avoid email enumeration
+    if (!user) {
+      return {
+        message: 'Nếu email tồn tại, mã OTP sẽ được gửi trong vài giây.',
+      };
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpires = new Date();
+    otpExpires.setMinutes(otpExpires.getMinutes() + 10);
+
+    await this.usersService.update(user.id, { otp, otpExpires });
+
+    await this.mailerService.sendMail({
+      to: user.email,
+      subject: 'Khôi phục mật khẩu SMILEE Dental',
+      html: `
+        <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+          <h2>Khôi phục mật khẩu SMILEE Dental</h2>
+          <p>Mã OTP để đặt lại mật khẩu của bạn là:</p>
+          <h1 style="color: #0284c7; letter-spacing: 4px; font-size: 36px;">${otp}</h1>
+          <p>Mã này có hiệu lực trong <strong>10 phút</strong>.</p>
+          <p style="color: #ef4444;">Nếu bạn không yêu cầu đặt lại mật khẩu, hãy bỏ qua email này.</p>
+        </div>
+      `,
+    });
+
+    return {
+      message: 'Nếu email tồn tại, mã OTP sẽ được gửi trong vài giây.',
+    };
+  }
+
+  async resetPassword(
+    email: string,
+    otp: string,
+    newPassword: string,
+  ): Promise<{ message: string }> {
+    const user = await this.usersService.findOne(email.trim().toLowerCase());
+    if (!user) {
+      throw new UnauthorizedException('Email không tồn tại');
+    }
+
+    if (user.otp !== otp || !user.otpExpires || user.otpExpires < new Date()) {
+      throw new UnauthorizedException('Mã OTP không hợp lệ hoặc đã hết hạn');
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await this.usersService.update(user.id, {
+      password: hashedPassword,
+      otp: null,
+      otpExpires: null,
+    });
+
+    return { message: 'Đặt lại mật khẩu thành công. Vui lòng đăng nhập lại.' };
   }
 }

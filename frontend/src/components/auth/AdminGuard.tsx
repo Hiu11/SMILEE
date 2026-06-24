@@ -1,25 +1,49 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { ShieldAlert } from "lucide-react";
 import { API_BASE_URL } from "@/lib/api";
-import { getAccessToken, getSessionRole } from "@/lib/auth";
+import { AuthRole, getAccessToken, getSessionRole } from "@/lib/auth";
+import { getSidebarLinks } from "@/components/layout/AdminSidebar";
+
+const defaultRouteByRole: Record<AuthRole, string> = {
+  ADMIN: "/admin",
+  RECEPTIONIST: "/admin/appointments",
+  DOCTOR: "/admin/records",
+  CUSTOMER: "/",
+};
 
 export function AdminGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [allowed, setAllowed] = useState(false);
   const [checked, setChecked] = useState(false);
 
+  const role = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    return getSessionRole() as AuthRole | null;
+  }, []);
+
   useEffect(() => {
     const checkAccess = async () => {
-      const role = getSessionRole();
+      const currentRole = getSessionRole() as AuthRole | null;
       const token = getAccessToken();
 
-      if (role !== "ADMIN" || !token) {
+      if (!currentRole || !token) {
         setAllowed(false);
         setChecked(true);
-        router.replace(role ? "/" : "/login");
+        router.replace("/login");
+        return;
+      }
+
+      const allowedLinks = getSidebarLinks(currentRole);
+      const canOpenRoute = allowedLinks.some((link) => pathname === link.href);
+
+      if (!canOpenRoute) {
+        setAllowed(false);
+        setChecked(true);
+        router.replace(defaultRouteByRole[currentRole] ?? "/");
         return;
       }
 
@@ -43,7 +67,7 @@ export function AdminGuard({ children }: { children: React.ReactNode }) {
     };
 
     checkAccess();
-  }, [router]);
+  }, [pathname, router]);
 
   if (!checked || !allowed) {
     return (
@@ -52,9 +76,9 @@ export function AdminGuard({ children }: { children: React.ReactNode }) {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-red-100 text-red-600 dark:bg-red-950/40">
             <ShieldAlert className="h-6 w-6" />
           </div>
-          <h1 className="mt-4 text-xl font-extrabold text-slate-900 dark:text-white">Không có quyền quản trị</h1>
+          <h1 className="mt-4 text-xl font-extrabold text-slate-900 dark:text-white">Đang kiểm tra quyền truy cập</h1>
           <p className="mt-2 text-sm font-medium leading-6 text-slate-500">
-            Chỉ tài khoản ADMIN mới được truy cập khu vực quản trị.
+            SMILEE sẽ chuyển bạn đến khu vực phù hợp với vai trò {role ? role : "tài khoản"}.
           </p>
         </div>
       </div>

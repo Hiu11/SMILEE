@@ -39,8 +39,8 @@ export class AdminGuard implements CanActivate {
         secret: process.env.JWT_SECRET,
       });
 
-      if (payload.role !== Role.ADMIN) {
-        throw new ForbiddenException('Tài khoản không có quyền quản trị');
+      if (!payload.role || !this.canAccessStaffRoute(payload.role, method, path, request.query?.role)) {
+        throw new ForbiddenException('Tài khoản không có quyền truy cập chức năng này');
       }
 
       return true;
@@ -60,6 +60,42 @@ export class AdminGuard implements CanActivate {
     if (method === 'GET' && path === '/users' && role === Role.DOCTOR)
       return true;
     if (method === 'POST' && path === '/messages') return true;
+    if (method === 'POST' && path === '/bookings') return true;
+    return false;
+  }
+
+  private canAccessStaffRoute(
+    role: Role,
+    method: string,
+    path: string,
+    queryRole?: string,
+  ) {
+    if (role === Role.ADMIN) return true;
+
+    if (role === Role.RECEPTIONIST) {
+      if (path === '/dashboard') return method === 'GET';
+      if (path.startsWith('/appointments')) return true;
+      if (path.startsWith('/invoices')) return true;
+      if (path.startsWith('/messages')) return true;
+      if (path === '/services') return method === 'GET';
+      if (path === '/users') {
+        const allowedUserRoles: Role[] = [Role.CUSTOMER, Role.DOCTOR];
+        return method === 'GET' && allowedUserRoles.includes(queryRole as Role);
+      }
+      return false;
+    }
+
+    if (role === Role.DOCTOR) {
+      if (path === '/dashboard') return method === 'GET';
+      if (path === '/appointments') return method === 'GET';
+      if (path.startsWith('/records')) return true;
+      if (path === '/services') return method === 'GET';
+      if (path === '/users') {
+        return method === 'GET' && queryRole === Role.CUSTOMER;
+      }
+      return false;
+    }
+
     return false;
   }
 

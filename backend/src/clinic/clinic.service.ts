@@ -1,11 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { AppointmentStatus, InvoiceStatus, Prisma, Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { randomUUID } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import type {
   CreateAppointmentDto,
   CreateInvoiceDto,
   CreateRecordDto,
+  CreatePublicBookingDto,
   UpdateAppointmentDto,
 } from './dto/clinic.dto';
 
@@ -207,7 +209,44 @@ export class ClinicService {
     });
   }
 
-  updateAppointment(id: string, body: UpdateAppointmentDto) {
+  async createPublicBooking(body: CreatePublicBookingDto) {
+    const fullName = requiredString(body.fullName, 'fullName');
+    const phone = requiredString(body.phone, 'phone');
+    const email = this.normalizeBookingEmail(body.email, phone);
+    const serviceIds = Array.isArray(body.serviceIds)
+      ? body.serviceIds.map((value) => requiredString(value, 'serviceIds'))
+      : [];
+
+    const customer = await this.findOrCreateBookingCustomer({
+      email,
+      fullName,
+      phone,
+    });
+
+    return this.prisma.appointment.create({
+      data: {
+        date: validDate(body.date, 'date'),
+        notes: optionalString(body.notes, 'notes'),
+        status: AppointmentStatus.PENDING,
+        customer: { connect: { id: customer.id } },
+        doctor: body.doctorId
+          ? { connect: { id: requiredString(body.doctorId, 'doctorId') } }
+          : undefined,
+        services: {
+          create: serviceIds.map((serviceId) => ({
+            service: { connect: { id: serviceId } },
+          })),
+        },
+      },
+      include: {
+        customer: true,
+        doctor: true,
+        services: { include: { service: true } },
+      },
+    });
+  }
+
+  async updateAppointment(id: string, body: UpdateAppointmentDto) {
     const status = body.status;
     if (
       status !== undefined &&
@@ -216,7 +255,7 @@ export class ClinicService {
       throw new BadRequestException('status is invalid');
     }
 
-    return this.prisma.appointment.update({
+    const updated = await this.prisma.appointment.update({
       where: { id },
       data: {
         date:
@@ -234,8 +273,15 @@ export class ClinicService {
         customer: true,
         doctor: true,
         services: { include: { service: true } },
+        invoice: true,
       },
     });
+
+    if (updated.status === AppointmentStatus.COMPLETED && !updated.invoice) {
+      return this.createInvoiceForCompletedAppointment(updated.id);
+    }
+
+    return updated;
   }
 
   removeAppointment(id: string) {
@@ -313,5 +359,97 @@ export class ClinicService {
 
   updateMessage(id: string, data: Prisma.ContactMessageUpdateInput) {
     return this.prisma.contactMessage.update({ where: { id }, data });
+  }
+
+  private async createInvoiceForCompletedAppointment(appointmentId: string) {
+    const appointment = await this.prisma.appointment.findUnique({
+      where: { id: appointmentId },
+      include: {
+        customer: true,
+        doctor: true,
+        services: { include: { service: true } },
+        invoice: true,
+      },
+    });
+
+    if (!appointment) {
+      throw new BadRequestException('appointment not found');
+    }
+
+    if (appointment.invoice) {
+      return appointment;
+    }
+
+    const totalAmount = appointment.services.reduce(
+      (sum, item) => sum + item.quantity * item.service.price,
+      0,
+    );
+
+    await this.prisma.invoice.create({
+      data: {
+        totalAmount,
+        status: InvoiceStatus.UNPAID,
+        paymentMethod: 'PENDING',
+        customer: { connect: { id: appointment.customerId } },
+        appointment: { connect: { id: appointment.id } },
+      },
+    });
+
+    return this.prisma.appointment.findUniqueOrThrow({
+      where: { id: appointmentId },
+      include: {
+        customer: true,
+        doctor: true,
+        services: { include: { service: true } },
+        invoice: true,
+      },
+    });
+  }
+
+  private normalizeBookingEmail(email: string | undefined, phone: string) {
+    const normalizedEmail = email?.trim().toLowerCase();
+    if (normalizedEmail) return normalizedEmail;
+
+    const phoneKey = phone.replace(/\D/g, '');
+    if (phoneKey) return `guest-${phoneKey}@smilee.local`;
+
+    return `guest-${randomUUID()}@smilee.local`;
+  }
+
+  private async findOrCreateBookingCustomer(data: {
+    email: string;
+    fullName: string;
+    phone: string;
+  }) {
+    const existing = await this.prisma.user.findFirst({
+      where: {
+        role: Role.CUSTOMER,
+        OR: [{ email: data.email }, { phone: data.phone }],
+      },
+    });
+
+    if (existing) {
+      return this.prisma.user.update({
+        where: { id: existing.id },
+        data: {
+          fullName: data.fullName,
+          phone: data.phone,
+          email: existing.email,
+        },
+      });
+    }
+
+    const password = await bcrypt.hash(randomUUID(), 10);
+
+    return this.prisma.user.create({
+      data: {
+        email: data.email,
+        fullName: data.fullName,
+        phone: data.phone,
+        password,
+        role: Role.CUSTOMER,
+        isVerified: false,
+      },
+    });
   }
 }

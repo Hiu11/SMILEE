@@ -28,9 +28,7 @@ export default function SupportPage() {
         "Ưu tiên phản hồi các tin mới có số điện thoại trước.",
         "Có thể tạo thủ công yêu cầu hỗ trợ khi khách gọi trực tiếp.",
       ]}
-      fallback={[
-        { id: "mock-1", fullName: "Khách hàng mới", phone: "0900000000", subject: "Tư vấn niềng răng", message: "Tôi muốn đặt lịch tư vấn.", status: "NEW", createdAt: new Date().toISOString() },
-      ]}
+      fallback={[]}
       fields={[
         { name: "fullName", label: "Họ tên", required: true },
         { name: "email", label: "Email", type: "email" },

@@ -11,6 +11,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "SMILEE - Hệ Thống Nha Khoa Chuẩn Quốc Tế",
   description: "Giải pháp quản lý phòng khám và đặt lịch khám nha khoa hiện đại, chuyên nghiệp hàng đầu.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

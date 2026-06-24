@@ -24,10 +24,7 @@ export default function AdminServicesPage() {
         "Dịch vụ sau khi lưu sẽ hiển thị ở trang Dịch vụ bên ngoài.",
         "Dùng ô tìm kiếm để lọc nhanh theo tên hoặc mô tả.",
       ]}
-      fallback={[
-        { id: "mock-1", name: "Khám tổng quát", description: "Kiểm tra răng miệng định kỳ", price: 250000, duration: 30 },
-        { id: "mock-2", name: "Tẩy trắng răng", description: "Tẩy trắng bằng công nghệ laser", price: 1200000, duration: 45 },
-      ]}
+      fallback={[]}
       fields={[
         { name: "name", label: "Tên dịch vụ", required: true },
         { name: "description", label: "Mô tả", type: "textarea" },

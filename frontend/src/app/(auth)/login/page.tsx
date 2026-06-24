@@ -8,50 +8,42 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { API_BASE_URL } from "@/lib/api";
+import { apiPost } from "@/lib/api";
 import { saveSession } from "@/lib/auth";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
+    setMessage("");
+    setLoading(true);
+    
     const formData = new FormData(e.currentTarget);
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Đăng nhập thất bại');
-      }
-
-      const data = await response.json();
+      const data = await apiPost<{ access_token: string, user: { role: string } }>('/auth/login', { email, password });
       
       saveSession({ token: data.access_token, user: data.user });
       
       if (data.user?.role === 'ADMIN') {
-        alert('Đăng nhập thành công! Đang chuyển hướng vào Admin...');
-        router.push('/admin');
+        setMessage('Đăng nhập thành công! Đang chuyển hướng vào Admin...');
+        setTimeout(() => router.push('/admin'), 1000);
       } else {
-        alert('Đăng nhập thành công!');
-        router.push('/');
+        setMessage('Đăng nhập thành công! Đang chuyển hướng...');
+        setTimeout(() => router.push('/'), 1000);
       }
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        alert(err.message);
-      } else {
-        alert('Đã xảy ra lỗi không xác định');
-      }
+      setError(err instanceof Error ? err.message : "Đăng nhập thất bại");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -126,12 +118,16 @@ export default function LoginPage() {
           </label>
         </div>
 
+        {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600 dark:bg-red-950/40 dark:text-red-400">{error}</p>}
+        {message && <p className="rounded-xl bg-green-50 px-4 py-3 text-sm font-bold text-green-700 dark:bg-green-950/40 dark:text-green-400">{message}</p>}
+
         <Button 
           type="submit" 
+          disabled={loading}
           className="w-full h-14 text-lg font-bold rounded-xl bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-1 group"
         >
-          Đăng nhập
-          <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          {loading ? "Đang xử lý..." : "Đăng nhập"}
+          {!loading && <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
         </Button>
       </form>
     </>

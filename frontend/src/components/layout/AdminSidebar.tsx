@@ -1,5 +1,6 @@
 "use client";
 
+import type { ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,25 +19,39 @@ import {
   Syringe,
   Users,
 } from "lucide-react";
-import { clearSession } from "@/lib/auth";
+import { AUTH_KEYS, AuthRole, clearSession } from "@/lib/auth";
+import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
 
-export const sidebarLinks = [
-  { name: "Tổng quan", href: "/admin", icon: LayoutDashboard },
-  { name: "Lịch hẹn", href: "/admin/appointments", icon: CalendarDays },
-  { name: "Bệnh nhân", href: "/admin/patients", icon: Users },
-  { name: "Bác sĩ", href: "/admin/doctors", icon: Stethoscope },
-  { name: "Tài khoản", href: "/admin/accounts", icon: Users },
-  { name: "Dịch vụ", href: "/admin/services", icon: ClipboardList },
-  { name: "Hồ sơ bệnh án", href: "/admin/records", icon: FileText },
-  { name: "Điều trị", href: "/admin/treatments", icon: Syringe },
-  { name: "Hóa đơn", href: "/admin/invoices", icon: BadgeDollarSign },
-  { name: "Kho thuốc & vật tư", href: "/admin/inventory", icon: Package },
-  { name: "Hỗ trợ", href: "/admin/support", icon: LifeBuoy },
-  { name: "Cài đặt", href: "/admin/settings", icon: Settings },
+type SidebarLink = {
+  name: string;
+  href: string;
+  icon: ComponentType<{ className?: string }>;
+  roles: AuthRole[];
+};
+
+export const sidebarLinks: SidebarLink[] = [
+  { name: "Tổng quan", href: "/admin", icon: LayoutDashboard, roles: ["ADMIN", "RECEPTIONIST", "DOCTOR"] },
+  { name: "Lịch hẹn", href: "/admin/appointments", icon: CalendarDays, roles: ["ADMIN", "RECEPTIONIST", "DOCTOR"] },
+  { name: "Bệnh nhân", href: "/admin/patients", icon: Users, roles: ["ADMIN", "RECEPTIONIST", "DOCTOR"] },
+  { name: "Bác sĩ", href: "/admin/doctors", icon: Stethoscope, roles: ["ADMIN", "RECEPTIONIST"] },
+  { name: "Tài khoản", href: "/admin/accounts", icon: Users, roles: ["ADMIN"] },
+  { name: "Dịch vụ", href: "/admin/services", icon: ClipboardList, roles: ["ADMIN"] },
+  { name: "Hồ sơ bệnh án", href: "/admin/records", icon: FileText, roles: ["ADMIN", "DOCTOR"] },
+  { name: "Điều trị", href: "/admin/treatments", icon: Syringe, roles: ["ADMIN", "DOCTOR"] },
+  { name: "Hóa đơn", href: "/admin/invoices", icon: BadgeDollarSign, roles: ["ADMIN", "RECEPTIONIST"] },
+  { name: "Kho thuốc & vật tư", href: "/admin/inventory", icon: Package, roles: ["ADMIN"] },
+  { name: "Hỗ trợ", href: "/admin/support", icon: LifeBuoy, roles: ["ADMIN", "RECEPTIONIST"] },
+  { name: "Cài đặt", href: "/admin/settings", icon: Settings, roles: ["ADMIN"] },
 ];
+
+export function getSidebarLinks(role?: string | null) {
+  return sidebarLinks.filter((link) => link.roles.includes(role as AuthRole));
+}
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const role = useLocalStorageValue(AUTH_KEYS.role);
+  const links = getSidebarLinks(role);
 
   return (
     <aside className="hidden h-full w-64 shrink-0 flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 md:flex">
@@ -49,9 +64,9 @@ export function AdminSidebar() {
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-6">
-        <p className="mb-4 px-4 text-xs font-semibold uppercase tracking-wider text-slate-400">Quản lý chung</p>
+        <p className="mb-4 px-4 text-xs font-semibold uppercase tracking-wider text-slate-400">Khu vực làm việc</p>
         <nav className="space-y-1">
-          {sidebarLinks.map((link) => {
+          {links.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link key={link.href} href={link.href}>

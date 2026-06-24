@@ -99,6 +99,16 @@ export class CreateAppointmentDto {
   @IsOptional() @IsArray() @IsUUID('4', { each: true }) serviceIds?: string[];
 }
 
+export class CreatePublicBookingDto {
+  @IsString() @IsNotEmpty() fullName!: string;
+  @IsString() @IsNotEmpty() phone!: string;
+  @IsOptional() @IsEmail() email?: string;
+  @IsDateString() date!: string;
+  @IsOptional() @IsString() notes?: string;
+  @IsOptional() @IsUUID() doctorId?: string;
+  @IsOptional() @IsArray() @IsUUID('4', { each: true }) serviceIds?: string[];
+}
+
 export class UpdateAppointmentDto {
   @IsOptional() @IsDateString() date?: string;
   @IsOptional() @IsString() notes?: string;
