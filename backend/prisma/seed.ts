@@ -96,13 +96,16 @@ async function main() {
 
   let serviceCount = 0;
   for (const svc of services) {
-    const existing = await prisma.service.findFirst({ where: { name: svc.name } });
+    const existing = await prisma.service.findFirst({
+      where: { name: svc.name },
+    });
     if (!existing) {
       await prisma.service.create({ data: svc });
       serviceCount++;
     }
   }
-  if (serviceCount > 0) console.log(`✅ Đã thêm mới ${serviceCount} dịch vụ nha khoa`);
+  if (serviceCount > 0)
+    console.log(`✅ Đã thêm mới ${serviceCount} dịch vụ nha khoa`);
 
   console.log('🎉 Quá trình seed dữ liệu hoàn tất!');
 }

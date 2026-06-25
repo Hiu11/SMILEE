@@ -168,3 +168,17 @@ model ContactMessage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// 7. QUẢN LÝ ĐIỀU TRỊ (TREATMENT)
+model Treatment {
+  id          String    @id @default(uuid())
+  patientName String
+  doctorName  String
+  toothArea   String
+  procedure   String
+  status      String
+  nextVisit   DateTime?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

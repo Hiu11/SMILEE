@@ -9,7 +9,9 @@ const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 async function main() {
   const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   if (!email) {
-    throw new Error('Set ADMIN_EMAIL in backend/.env before running this command.');
+    throw new Error(
+      'Set ADMIN_EMAIL in backend/.env before running this command.',
+    );
   }
 
   const user = await prisma.user.update({
