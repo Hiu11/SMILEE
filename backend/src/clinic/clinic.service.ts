@@ -361,6 +361,24 @@ export class ClinicService {
     return this.prisma.contactMessage.update({ where: { id }, data });
   }
 
+  listTreatments() {
+    return this.prisma.treatment.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  createTreatment(data: Prisma.TreatmentCreateInput) {
+    return this.prisma.treatment.create({ data });
+  }
+
+  updateTreatment(id: string, data: Prisma.TreatmentUpdateInput) {
+    return this.prisma.treatment.update({ where: { id }, data });
+  }
+
+  removeTreatment(id: string) {
+    return this.prisma.treatment.delete({ where: { id } });
+  }
+
   private async createInvoiceForCompletedAppointment(appointmentId: string) {
     const appointment = await this.prisma.appointment.findUnique({
       where: { id: appointmentId },

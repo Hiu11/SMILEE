@@ -149,3 +149,21 @@ export class CreateMessageDto {
 export class UpdateMessageDto {
   @IsString() @IsNotEmpty() status!: string;
 }
+
+export class CreateTreatmentDto {
+  @IsString() @IsNotEmpty() patientName!: string;
+  @IsString() @IsNotEmpty() doctorName!: string;
+  @IsString() @IsNotEmpty() toothArea!: string;
+  @IsString() @IsNotEmpty() procedure!: string;
+  @IsString() @IsNotEmpty() status!: string;
+  @IsOptional() @IsDateString() nextVisit?: string;
+}
+
+export class UpdateTreatmentDto {
+  @IsOptional() @IsString() @IsNotEmpty() patientName?: string;
+  @IsOptional() @IsString() @IsNotEmpty() doctorName?: string;
+  @IsOptional() @IsString() @IsNotEmpty() toothArea?: string;
+  @IsOptional() @IsString() @IsNotEmpty() procedure?: string;
+  @IsOptional() @IsString() @IsNotEmpty() status?: string;
+  @IsOptional() @IsDateString() nextVisit?: string;
+}

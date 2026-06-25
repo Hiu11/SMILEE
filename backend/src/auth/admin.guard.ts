@@ -39,8 +39,18 @@ export class AdminGuard implements CanActivate {
         secret: process.env.JWT_SECRET,
       });
 
-      if (!payload.role || !this.canAccessStaffRoute(payload.role, method, path, request.query?.role)) {
-        throw new ForbiddenException('Tài khoản không có quyền truy cập chức năng này');
+      if (
+        !payload.role ||
+        !this.canAccessStaffRoute(
+          payload.role,
+          method,
+          path,
+          request.query?.role,
+        )
+      ) {
+        throw new ForbiddenException(
+          'Tài khoản không có quyền truy cập chức năng này',
+        );
       }
 
       return true;

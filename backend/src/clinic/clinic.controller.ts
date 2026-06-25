@@ -28,6 +28,8 @@ import {
   UpdateServiceDto,
   UpdateUserDto,
   UpdateWarehouseItemDto,
+  CreateTreatmentDto,
+  UpdateTreatmentDto,
 } from './dto/clinic.dto';
 
 @Controller()
@@ -181,5 +183,42 @@ export class ClinicController {
     @Body() body: UpdateMessageDto,
   ) {
     return this.clinic.updateMessage(id, body);
+  }
+
+  @Get('treatments')
+  treatments() {
+    return this.clinic.listTreatments();
+  }
+
+  @Post('treatments')
+  createTreatment(@Body() body: CreateTreatmentDto) {
+    return this.clinic.createTreatment({
+      patientName: body.patientName,
+      doctorName: body.doctorName,
+      toothArea: body.toothArea,
+      procedure: body.procedure,
+      status: body.status,
+      nextVisit: body.nextVisit ? new Date(body.nextVisit) : undefined,
+    });
+  }
+
+  @Patch('treatments/:id')
+  updateTreatment(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() body: UpdateTreatmentDto,
+  ) {
+    return this.clinic.updateTreatment(id, {
+      patientName: body.patientName,
+      doctorName: body.doctorName,
+      toothArea: body.toothArea,
+      procedure: body.procedure,
+      status: body.status,
+      nextVisit: body.nextVisit ? new Date(body.nextVisit) : undefined,
+    });
+  }
+
+  @Delete('treatments/:id')
+  removeTreatment(@Param('id', ParseUUIDPipe) id: string) {
+    return this.clinic.removeTreatment(id);
   }
 }
