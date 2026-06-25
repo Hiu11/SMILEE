@@ -90,8 +90,8 @@ export default function InvoicesPage() {
   };
 
   return (
-    <div className="space-y-6 pb-6">
-      <Reveal direction="scale" className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center rounded-3xl bg-linear-to-r from-slate-900 to-slate-800 p-6 sm:p-8 shadow-xl shadow-slate-900/10 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
+    <div className="space-y-4 md:space-y-5 lg:space-y-6 pb-6">
+      <Reveal direction="scale" className="flex flex-col justify-between gap-4 md:gap-5 sm:flex-row sm:items-center rounded-3xl bg-linear-to-r from-slate-900 to-slate-800 p-5 md:p-6 lg:p-8 shadow-xl shadow-slate-900/10 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/pic/pattern.png')] opacity-10 mix-blend-overlay pointer-events-none" />
         <div className="absolute right-0 top-0 h-full w-1/3 bg-linear-to-l from-violet-500/10 to-transparent pointer-events-none" />
         
@@ -100,11 +100,11 @@ export default function InvoicesPage() {
             <ReceiptText className="h-3.5 w-3.5" />
             Tài chính & Thu chi
           </div>
-          <h1 className="text-3xl font-black tracking-tight text-white md:text-4xl">Quản lý hóa đơn</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-white">Quản lý hóa đơn</h1>
           <p className="mt-2 text-sm font-medium text-slate-300 max-w-xl">Theo dõi công nợ, doanh thu và trạng thái thanh toán từ lịch hẹn đã hoàn thành.</p>
         </div>
         <div className="relative z-10 flex gap-3">
-          <Button onClick={loadInvoices} disabled={loading} variant="outline" className="h-12 rounded-xl bg-white/10 text-white hover:bg-white/20 border-white/20 backdrop-blur-sm transition-all shadow-sm font-bold px-5">
+          <Button onClick={loadInvoices} disabled={loading} variant="outline" className="h-10 md:h-11 lg:h-12 rounded-xl bg-white/10 text-white hover:bg-white/20 border-white/20 backdrop-blur-sm transition-all shadow-sm font-bold px-4 md:px-5">
             <RefreshCw className={`mr-2 h-4 w-4 ${loading ? "animate-spin" : ""}`} />
             Làm mới
           </Button>
@@ -114,32 +114,32 @@ export default function InvoicesPage() {
       <Reveal direction="up" delay={0.1}>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <Card className="rounded-3xl border-slate-200/60 shadow-sm backdrop-blur-md dark:border-slate-800/60 dark:bg-slate-900/80">
-            <CardContent className="p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-green-100 to-emerald-100 text-emerald-700 shadow-inner dark:from-green-900/40 dark:to-emerald-900/40 dark:text-emerald-400">
-                <BadgeDollarSign className="h-6 w-6" />
+            <CardContent className="p-5 md:p-6">
+              <div className="mb-3 md:mb-4 flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-linear-to-br from-green-100 to-emerald-100 text-emerald-700 shadow-inner dark:from-green-900/40 dark:to-emerald-900/40 dark:text-emerald-400">
+                <BadgeDollarSign className="h-5 w-5 md:h-6 md:w-6" />
               </div>
               <p className="text-xs font-extrabold uppercase tracking-widest text-slate-500">Đã thu</p>
-              <p className="mt-2 text-3xl font-black text-slate-900 dark:text-white">{formatCurrency(summary.revenue)}</p>
+              <p className="mt-2 text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{formatCurrency(summary.revenue)}</p>
               <p className="mt-1 text-sm font-semibold text-slate-500">{summary.paid} hóa đơn đã thanh toán</p>
             </CardContent>
           </Card>
           <Card className="rounded-3xl border-slate-200/60 shadow-sm backdrop-blur-md dark:border-slate-800/60 dark:bg-slate-900/80">
-            <CardContent className="p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-amber-100 to-orange-100 text-orange-700 shadow-inner dark:from-amber-900/40 dark:to-orange-900/40 dark:text-orange-400">
-                <ReceiptText className="h-6 w-6" />
+            <CardContent className="p-5 md:p-6">
+              <div className="mb-3 md:mb-4 flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-linear-to-br from-amber-100 to-orange-100 text-orange-700 shadow-inner dark:from-amber-900/40 dark:to-orange-900/40 dark:text-orange-400">
+                <ReceiptText className="h-5 w-5 md:h-6 md:w-6" />
               </div>
               <p className="text-xs font-extrabold uppercase tracking-widest text-slate-500">Công nợ</p>
-              <p className="mt-2 text-3xl font-black text-slate-900 dark:text-white">{formatCurrency(summary.debt)}</p>
+              <p className="mt-2 text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{formatCurrency(summary.debt)}</p>
               <p className="mt-1 text-sm font-semibold text-slate-500">{summary.unpaid} hóa đơn chưa thanh toán</p>
             </CardContent>
           </Card>
           <Card className="rounded-3xl border-slate-200/60 shadow-sm backdrop-blur-md dark:border-slate-800/60 dark:bg-slate-900/80">
-            <CardContent className="p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-violet-100 to-purple-100 text-purple-700 shadow-inner dark:from-violet-900/40 dark:to-purple-900/40 dark:text-purple-400">
-                <CreditCard className="h-6 w-6" />
+            <CardContent className="p-5 md:p-6">
+              <div className="mb-3 md:mb-4 flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-linear-to-br from-violet-100 to-purple-100 text-purple-700 shadow-inner dark:from-violet-900/40 dark:to-purple-900/40 dark:text-purple-400">
+                <CreditCard className="h-5 w-5 md:h-6 md:w-6" />
               </div>
               <p className="text-xs font-extrabold uppercase tracking-widest text-slate-500">Tổng hóa đơn</p>
-              <p className="mt-2 text-3xl font-black text-slate-900 dark:text-white">{invoices.length}</p>
+              <p className="mt-2 text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{invoices.length}</p>
               <p className="mt-1 text-sm font-semibold text-slate-500">Tự động tạo từ lịch hoàn thành</p>
             </CardContent>
           </Card>
@@ -148,10 +148,10 @@ export default function InvoicesPage() {
 
       <Reveal direction="up" delay={0.2}>
         <Card className="rounded-3xl border-slate-200/60 shadow-sm backdrop-blur-md dark:border-slate-800/60 dark:bg-slate-900/80">
-          <CardContent className="flex flex-col gap-4 p-5 md:flex-row md:items-center md:justify-between">
+          <CardContent className="flex flex-col gap-3 md:gap-4 p-4 md:p-5 md:flex-row md:items-center md:justify-between">
             <div className="relative flex-1 md:max-w-md">
               <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-              <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Tìm khách hàng, SĐT, mã hóa đơn..." className="h-12 rounded-xl bg-slate-50/50 pl-11 text-sm font-medium transition focus:scale-[1.01] focus:ring-2 focus:ring-violet-500 dark:bg-slate-950/50" />
+              <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Tìm khách hàng, SĐT, mã hóa đơn..." className="h-10 md:h-11 lg:h-12 rounded-xl bg-slate-50/50 pl-11 text-sm font-medium transition focus:scale-[1.01] focus:ring-2 focus:ring-violet-500 dark:bg-slate-950/50" />
             </div>
             <div className="flex flex-wrap gap-2">
               {[
@@ -186,7 +186,7 @@ export default function InvoicesPage() {
       <Stagger className="grid gap-4">
         {filtered.map((invoice) => (
           <StaggerItem key={invoice.id}>
-            <article className={`group relative overflow-hidden rounded-3xl border bg-white/80 p-5 shadow-sm backdrop-blur-md transition-all hover:shadow-xl dark:bg-slate-900/80 ${invoice.status === "PAID" ? "border-emerald-200/60 dark:border-emerald-800/50 hover:border-emerald-300 dark:hover:border-emerald-700" : "border-amber-200/60 dark:border-amber-800/50 hover:border-amber-300 dark:hover:border-amber-700"}`}>
+            <article className={`group relative overflow-hidden rounded-3xl border bg-white/80 p-4 md:p-5 shadow-sm backdrop-blur-md transition-all hover:shadow-xl dark:bg-slate-900/80 ${invoice.status === "PAID" ? "border-emerald-200/60 dark:border-emerald-800/50 hover:border-emerald-300 dark:hover:border-emerald-700" : "border-amber-200/60 dark:border-amber-800/50 hover:border-amber-300 dark:hover:border-amber-700"}`}>
               <div className={`absolute -right-10 -top-10 h-32 w-32 rounded-full blur-3xl opacity-30 group-hover:opacity-60 transition-opacity ${invoice.status === "PAID" ? "bg-emerald-100 dark:bg-emerald-900/40" : "bg-amber-100 dark:bg-amber-900/40"}`} />
               <div className="relative z-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex flex-col gap-3 min-w-0">
@@ -207,8 +207,8 @@ export default function InvoicesPage() {
                     ) : null}
                   </div>
                   <div>
-                    <h3 className="truncate text-xl font-black text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">{invoice.customer?.fullName ?? "Khách hàng"}</h3>
-                    <p className="mt-1.5 text-2xl font-black text-emerald-600 dark:text-emerald-400">{formatCurrency(invoice.totalAmount)}</p>
+                    <h3 className="truncate text-lg lg:text-xl font-black text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">{invoice.customer?.fullName ?? "Khách hàng"}</h3>
+                    <p className="mt-1.5 text-xl lg:text-2xl font-black text-emerald-600 dark:text-emerald-400">{formatCurrency(invoice.totalAmount)}</p>
                     <div className="mt-2 flex items-center gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400">
                       <span className="flex items-center gap-1.5">
                         <CreditCard className="h-3.5 w-3.5" />

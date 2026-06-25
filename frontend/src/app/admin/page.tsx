@@ -75,7 +75,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-6 pb-6">
-      <Reveal direction="scale" className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl bg-linear-to-r from-slate-900 to-slate-800 p-6 sm:p-8 shadow-xl shadow-slate-900/10 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
+      <Reveal direction="scale" className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl bg-linear-to-r from-slate-900 to-slate-800 p-5 md:p-6 lg:p-8 shadow-xl shadow-slate-900/10 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/pic/pattern.png')] opacity-10 mix-blend-overlay pointer-events-none" />
         <div className="absolute right-0 top-0 h-full w-1/3 bg-linear-to-l from-white/10 to-transparent pointer-events-none" />
         
@@ -84,11 +84,11 @@ export default function AdminDashboard() {
             <Activity className="h-3.5 w-3.5" />
             Live Dashboard
           </div>
-          <h1 className="text-3xl font-black tracking-tight text-white md:text-4xl">Tổng quan phòng khám</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-white">Tổng quan phòng khám</h1>
           <p className="mt-2 text-sm font-medium text-slate-300">Báo cáo hoạt động theo thời gian thực từ cơ sở dữ liệu SMILEE.</p>
         </div>
         <div className="relative z-10">
-          <Button onClick={handleRefresh} disabled={loading} variant="outline" className="h-12 rounded-xl bg-white/10 text-white hover:bg-white/20 border-white/20 backdrop-blur-sm transition-all shadow-sm font-bold">
+          <Button onClick={handleRefresh} disabled={loading} variant="outline" className="h-10 md:h-11 lg:h-12 rounded-xl bg-white/10 text-white hover:bg-white/20 border-white/20 backdrop-blur-sm transition-all shadow-sm font-bold px-4 md:px-5">
             <RefreshCw className={`mr-2 h-4 w-4 ${loading ? "animate-spin" : ""}`} />
             Làm mới dữ liệu
           </Button>
@@ -99,7 +99,7 @@ export default function AdminDashboard() {
         {stats.map((stat) => (
           <StaggerItem key={stat.title} whileHover={{ y: -6, scale: 1.02 }}>
             <Link href={stat.href} className="block h-full">
-              <div className="group h-full rounded-3xl border border-slate-200/60 bg-white/80 p-6 shadow-sm backdrop-blur-md transition-all hover:border-blue-300 hover:shadow-xl dark:border-slate-800/60 dark:bg-slate-900/60 dark:hover:border-cyan-800/50 relative overflow-hidden">
+              <div className="group h-full rounded-3xl border border-slate-200/60 bg-white/80 p-5 md:p-6 shadow-sm backdrop-blur-md transition-all hover:border-blue-300 hover:shadow-xl dark:border-slate-800/60 dark:bg-slate-900/60 dark:hover:border-cyan-800/50 relative overflow-hidden">
                 <div className={`absolute -right-6 -top-6 h-24 w-24 rounded-full ${stat.bg} blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
                 <div className="relative z-10 mb-4 flex items-center justify-between">
                   <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${stat.bg} shadow-inner`}>
@@ -120,13 +120,13 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
         <Reveal direction="up" className="xl:col-span-2 h-full">
           <div className="flex h-full flex-col rounded-3xl border border-slate-200/60 bg-white/80 shadow-sm backdrop-blur-md dark:border-slate-800/60 dark:bg-slate-900/60 overflow-hidden">
-            <div className="flex flex-row items-center justify-between border-b border-slate-100 bg-slate-50/50 px-6 py-5 dark:border-slate-800/50 dark:bg-slate-900/50">
+            <div className="flex flex-row items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4 md:px-6 md:py-5 dark:border-slate-800/50 dark:bg-slate-900/50">
               <h2 className="text-lg font-black text-slate-900 dark:text-white">Lịch khám sắp tới</h2>
               <Link href="/admin/appointments" className="flex items-center text-sm font-bold text-blue-600 hover:text-blue-700 dark:text-cyan-400 transition-colors">
                 Xem tất cả <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
-            <div className="p-6">
+            <div className="p-5 md:p-6">
               <div className="space-y-4">
                 {dashboard.upcoming.length ? (
                   dashboard.upcoming.map((apt) => {
@@ -136,7 +136,7 @@ export default function AdminDashboard() {
                     return (
                       <div key={apt.id} className="group flex items-center justify-between gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-blue-200 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-slate-700">
                         <div className="flex min-w-0 items-center gap-4">
-                          <div className={`flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl border shadow-sm transition-colors ${isConfirmed ? 'bg-blue-50 border-blue-100 dark:bg-blue-900/20 dark:border-blue-800/50' : 'bg-white border-slate-100 dark:bg-slate-800 dark:border-slate-700'}`}>
+                          <div className={`flex h-12 w-12 lg:h-14 lg:w-14 shrink-0 flex-col items-center justify-center rounded-xl border shadow-sm transition-colors ${isConfirmed ? 'bg-blue-50 border-blue-100 dark:bg-blue-900/20 dark:border-blue-800/50' : 'bg-white border-slate-100 dark:bg-slate-800 dark:border-slate-700'}`}>
                             <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Lịch</span>
                             <span className={`text-[10px] font-black uppercase text-center leading-tight mt-0.5 px-1 ${isConfirmed ? 'text-blue-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-300'}`}>
                               {statusLabel[apt.status] ?? apt.status}
@@ -179,10 +179,10 @@ export default function AdminDashboard() {
 
         <Reveal direction="up" delay={0.2} className="h-full">
           <div className="flex h-full flex-col rounded-3xl border border-slate-200/60 bg-linear-to-br from-white/80 to-slate-50/80 shadow-sm backdrop-blur-md dark:border-slate-800/60 dark:from-slate-900/80 dark:to-slate-950/80 overflow-hidden">
-            <div className="border-b border-slate-100 bg-slate-50/50 px-6 py-5 dark:border-slate-800/50 dark:bg-slate-900/50">
+            <div className="border-b border-slate-100 bg-slate-50/50 px-5 py-4 md:px-6 md:py-5 dark:border-slate-800/50 dark:bg-slate-900/50">
               <h2 className="text-lg font-black text-slate-900 dark:text-white">Trạng thái hệ thống</h2>
             </div>
-            <div className="p-6 flex-1">
+            <div className="p-5 md:p-6 flex-1">
               <div className="flex flex-col gap-4 h-full">
                 <div className="flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
                   <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
