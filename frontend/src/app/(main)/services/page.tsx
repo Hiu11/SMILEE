@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Stethoscope, Timer, Zap } from "lucide-react";
 import { apiGet, formatCurrency } from "@/lib/api";
 import { Button } from "@/components/ui/button";
@@ -44,36 +45,56 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <div className="bg-linear-to-b from-slate-50 to-white pt-28 dark:from-slate-950 dark:to-slate-950">
+    <div className="bg-linear-to-b from-slate-50 to-white pt-20 md:pt-24 lg:pt-28 dark:from-slate-950 dark:to-slate-950">
 
       {/* ── HERO ── */}
-      <section className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <section className="container mx-auto px-4 py-10 md:py-12 lg:py-16 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-3xl text-center">
           <span className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-blue-600 dark:bg-blue-900/30 dark:text-cyan-400">
             Dịch vụ nha khoa
           </span>
-          <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight text-slate-900 dark:text-white">
             Chăm sóc toàn diện cho{" "}
             <span className="gradient-text">từng nụ cười.</span>
           </h1>
-          <p className="mt-5 text-lg leading-8 text-slate-500 dark:text-slate-400">
+          <p className="mt-4 md:mt-5 text-base md:text-lg leading-relaxed md:leading-8 text-slate-500 dark:text-slate-400">
             Danh mục dịch vụ đa dạng — từ điều trị cơ bản đến thẩm mỹ nâng cao, mỗi ca điều trị đều được cá nhân hóa theo nhu cầu thực tế.
           </p>
         </Reveal>
 
+        {/* Hero Image */}
+        <Reveal delay={0.2} className="mt-10 md:mt-14 relative mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] shadow-2xl border border-white/20">
+          <div className="aspect-21/9 w-full relative">
+            <Image 
+              src="/pic/modern_clinic.png" 
+              alt="SMILEE Modern Dental Clinic" 
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-1000"
+              priority
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent flex items-end p-8 sm:p-12">
+              <div className="max-w-2xl">
+                <h2 className="text-2xl sm:text-3xl font-black text-white">Không gian chuẩn Quốc Tế</h2>
+                <p className="mt-2 text-slate-200 font-medium leading-relaxed">Trải nghiệm dịch vụ nha khoa trong không gian sang trọng, hiện đại và vô trùng tuyệt đối.</p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
         {/* ── SERVICE CARDS ── */}
-        <Stagger className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <Stagger className="mt-10 md:mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, i) => {
             const Icon = iconMap[i % iconMap.length];
             const color = colorMap[i % colorMap.length];
             return (
               <StaggerItem key={service.id} whileHover={{ y: -8 }}>
-                <article className="group relative h-full overflow-hidden rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-2xl hover:shadow-blue-500/10 dark:border-slate-800 dark:bg-slate-900">
+                <Link href={`/services/${service.id}`} className="block h-full">
+                  <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200/60 bg-white/60 p-5 md:p-6 shadow-sm backdrop-blur-md transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/15 dark:border-slate-800/60 dark:bg-slate-900/50">
                   {/* gradient hover bg */}
-                  <div className={`pointer-events-none absolute inset-0 bg-linear-to-br ${color} opacity-0 transition-opacity duration-500 group-hover:opacity-[0.04]`} />
+                  <div className={`pointer-events-none absolute inset-0 bg-linear-to-br ${color} opacity-0 transition-opacity duration-500 group-hover:opacity-10 dark:group-hover:opacity-20`} />
 
                   {/* Icon */}
-                  <div className={`relative mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${color} p-0.5 shadow-lg`}>
+                  <div className={`relative mb-5 inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-linear-to-br ${color} p-0.5 shadow-lg`}>
                     <div className="flex h-full w-full items-center justify-center rounded-2xl bg-white dark:bg-slate-900">
                       <Icon className="h-6 w-6 text-blue-600 dark:text-cyan-400" />
                     </div>
@@ -95,6 +116,7 @@ export default function ServicesPage() {
                     </div>
                   </div>
                 </article>
+                </Link>
               </StaggerItem>
             );
           })}
@@ -102,10 +124,11 @@ export default function ServicesPage() {
       </section>
 
       {/* ── WHY SMILEE ── */}
-      <section className="mt-8 bg-slate-950 py-20">
+      <section className="mt-8 bg-slate-950 py-12 md:py-16 lg:py-20">
         <Reveal direction="scale" className="container mx-auto grid gap-5 px-4 sm:px-6 md:grid-cols-3 lg:px-8">
           {whyItems.map(([Icon, title, desc]) => (
-            <div key={String(title)} className="group rounded-2xl border border-white/8 p-6 transition hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/4">
+            <div key={String(title)} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur-md transition-all hover:-translate-y-2 hover:border-cyan-400/40 hover:bg-white/10 hover:shadow-2xl hover:shadow-cyan-500/20">
+              <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-cyan-400/10 blur-2xl transition-all group-hover:bg-cyan-400/20" />
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-blue-500/20 bg-blue-500/10 text-cyan-300">
                 <Icon className="h-6 w-6" />
               </div>
@@ -117,9 +140,9 @@ export default function ServicesPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-16">
+      <section className="py-10 md:py-12 lg:py-16">
         <Reveal className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-slate-900 dark:text-white">Sẵn sàng bắt đầu?</h2>
+          <h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Sẵn sàng bắt đầu?</h2>
           <p className="mx-auto mt-3 max-w-xl text-slate-500 dark:text-slate-400">
             Đặt lịch tư vấn miễn phí — bác sĩ sẽ kiểm tra và đề xuất giải pháp phù hợp nhất.
           </p>

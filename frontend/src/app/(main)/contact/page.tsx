@@ -43,29 +43,29 @@ export default function ContactPage() {
       </div>
 
       <section className="container relative mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div className="grid gap-8 md:gap-10 lg:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <Reveal direction="left" className="space-y-6">
-            <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-slate-900 to-slate-800 p-8 text-white shadow-2xl shadow-blue-900/20 sm:p-10">
+            <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-slate-900 to-slate-800 p-6 md:p-8 lg:p-10 text-white shadow-2xl shadow-blue-900/20">
               <div className="pointer-events-none absolute inset-0 bg-[url('/pic/pattern.png')] opacity-10 mix-blend-overlay" />
               <div className="relative z-10">
                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-sm font-extrabold text-cyan-200 backdrop-blur-md">
                   <MessageCircle className="h-4 w-4" />
                   Liên hệ SMILEE
                 </div>
-                <h1 className="mt-6 text-4xl font-black tracking-tight md:text-5xl lg:text-5xl leading-tight">
+                <h1 className="mt-6 text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
                   Cần tư vấn? Gửi thông tin, SMILEE phản hồi ngay.
                 </h1>
                 <p className="mt-5 text-base leading-relaxed text-slate-300">
                   Tin nhắn của bạn sẽ được lưu vào hệ thống hỗ trợ trong admin để lễ tân theo dõi, phản hồi và chuyển đúng bộ phận phụ trách.
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                  <Button asChild className="h-14 rounded-2xl bg-linear-to-r from-blue-500 to-cyan-500 px-8 text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-1 hover:shadow-blue-500/50 text-base font-bold">
+                  <Button asChild className="h-12 lg:h-14 rounded-2xl bg-linear-to-r from-blue-500 to-cyan-500 px-8 text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-1 hover:shadow-blue-500/50 text-base font-bold">
                     <Link href="/booking">
                       <CalendarDays className="mr-2 h-5 w-5" />
                       Đặt lịch khám
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" className="h-14 rounded-2xl border-white/20 bg-white/5 px-8 text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white text-base font-bold">
+                  <Button asChild variant="outline" className="h-12 lg:h-14 rounded-2xl border-white/20 bg-white/5 px-8 text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white text-base font-bold">
                     <Link href="/services">
                       Xem dịch vụ
                       <ArrowRight className="ml-2 h-5 w-5" />
@@ -79,7 +79,7 @@ export default function ContactPage() {
               {contactItems.map(({ icon: Icon, label, value }) => (
                 <StaggerItem key={label} whileHover={{ x: 6 }}>
                   <div className="group flex items-start gap-5 rounded-2xl border border-slate-200/60 bg-white/60 p-5 shadow-sm backdrop-blur-md transition-all hover:border-blue-200 hover:shadow-md dark:border-slate-800/60 dark:bg-slate-900/60 dark:hover:border-slate-700">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-blue-700 transition-colors group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/40 dark:text-cyan-400 dark:group-hover:bg-cyan-500 dark:group-hover:text-slate-900">
+                    <div className="flex h-12 w-12 lg:h-14 lg:w-14 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-blue-700 transition-colors group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/40 dark:text-cyan-400 dark:group-hover:bg-cyan-500 dark:group-hover:text-slate-900">
                       <Icon className="h-6 w-6" />
                     </div>
                     <div className="pt-1">
@@ -93,32 +93,32 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal direction="right">
-            <form onSubmit={submit} className="rounded-3xl border border-slate-200/60 bg-white/80 p-6 shadow-2xl shadow-blue-950/5 backdrop-blur-xl dark:border-slate-800/60 dark:bg-slate-900/80 sm:p-10">
-              <div className="mb-8">
+            <form onSubmit={submit} className="rounded-3xl border border-slate-200/60 bg-white/80 p-5 md:p-8 lg:p-10 shadow-2xl shadow-blue-950/5 backdrop-blur-xl dark:border-slate-800/60 dark:bg-slate-900/80">
+              <div className="mb-6 md:mb-8">
                 <p className="text-sm font-extrabold uppercase tracking-widest text-blue-600 dark:text-cyan-400">Biểu mẫu tư vấn</p>
-                <h2 className="mt-2 text-3xl font-black tracking-tight text-slate-900 dark:text-white">Thông tin liên hệ</h2>
+                <h2 className="mt-2 text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-slate-900 dark:text-white">Thông tin liên hệ</h2>
               </div>
 
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="sm:col-span-2">
-                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500">Họ tên <span className="text-red-500">*</span></span>
-                  <Input name="fullName" required className="h-12 rounded-xl bg-slate-50/50 transition focus:scale-[1.01] dark:bg-slate-950/50" />
+                <label className="sm:col-span-2 group">
+                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500 group-focus-within:text-blue-500 transition-colors">Họ tên <span className="text-red-500">*</span></span>
+                  <Input name="fullName" required className="h-12 lg:h-14 rounded-2xl bg-white/50 border-slate-200/60 shadow-inner transition-all focus:scale-[1.01] focus:ring-2 focus:ring-blue-500/50 dark:bg-slate-950/50 dark:border-slate-800/60" />
                 </label>
-                <label>
-                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500">Email</span>
-                  <Input name="email" type="email" className="h-12 rounded-xl bg-slate-50/50 transition focus:scale-[1.01] dark:bg-slate-950/50" />
+                <label className="group">
+                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500 group-focus-within:text-blue-500 transition-colors">Email</span>
+                  <Input name="email" type="email" className="h-12 lg:h-14 rounded-2xl bg-white/50 border-slate-200/60 shadow-inner transition-all focus:scale-[1.01] focus:ring-2 focus:ring-blue-500/50 dark:bg-slate-950/50 dark:border-slate-800/60" />
                 </label>
-                <label>
-                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500">Điện thoại <span className="text-red-500">*</span></span>
-                  <Input name="phone" required className="h-12 rounded-xl bg-slate-50/50 transition focus:scale-[1.01] dark:bg-slate-950/50" />
+                <label className="group">
+                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500 group-focus-within:text-blue-500 transition-colors">Điện thoại <span className="text-red-500">*</span></span>
+                  <Input name="phone" required className="h-12 lg:h-14 rounded-2xl bg-white/50 border-slate-200/60 shadow-inner transition-all focus:scale-[1.01] focus:ring-2 focus:ring-blue-500/50 dark:bg-slate-950/50 dark:border-slate-800/60" />
                 </label>
-                <label className="sm:col-span-2">
-                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500">Chủ đề</span>
-                  <Input name="subject" placeholder="Tư vấn dịch vụ, lịch khám, chi phí..." className="h-12 rounded-xl bg-slate-50/50 transition focus:scale-[1.01] dark:bg-slate-950/50" />
+                <label className="sm:col-span-2 group">
+                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500 group-focus-within:text-blue-500 transition-colors">Chủ đề</span>
+                  <Input name="subject" placeholder="Tư vấn dịch vụ, lịch khám, chi phí..." className="h-12 lg:h-14 rounded-2xl bg-white/50 border-slate-200/60 shadow-inner transition-all focus:scale-[1.01] focus:ring-2 focus:ring-blue-500/50 dark:bg-slate-950/50 dark:border-slate-800/60" />
                 </label>
-                <label className="sm:col-span-2">
-                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500">Nội dung <span className="text-red-500">*</span></span>
-                  <textarea name="message" required className="min-h-36 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium outline-none transition focus:scale-[1.01] focus:ring-2 focus:ring-blue-500 dark:border-slate-800 dark:bg-slate-950/50" />
+                <label className="sm:col-span-2 group">
+                  <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-slate-500 group-focus-within:text-blue-500 transition-colors">Nội dung <span className="text-red-500">*</span></span>
+                  <textarea name="message" required className="min-h-36 w-full rounded-2xl border border-slate-200/60 bg-white/50 px-4 py-3 text-sm font-medium outline-none transition-all shadow-inner focus:scale-[1.01] focus:ring-2 focus:ring-blue-500/50 dark:border-slate-800/60 dark:bg-slate-950/50" />
                 </label>
               </div>
 
@@ -128,8 +128,12 @@ export default function ContactPage() {
                 </div>
               ) : null}
               
-              <Button disabled={isSubmitting} className="mt-8 h-14 w-full rounded-xl bg-linear-to-r from-blue-600 to-cyan-500 text-lg font-bold text-white shadow-xl shadow-blue-500/20 transition hover:-translate-y-1 hover:shadow-blue-500/40">
-                {isSubmitting ? "Đang gửi..." : "Gửi tin nhắn"}
+              <Button disabled={isSubmitting} className="mt-8 h-12 lg:h-14 w-full rounded-2xl bg-linear-to-r from-blue-600 to-cyan-500 text-base lg:text-lg font-bold text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all hover:-translate-y-1 group relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                <span className="relative flex items-center justify-center">
+                  {isSubmitting ? "Đang gửi..." : "Gửi tin nhắn"}
+                  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+                </span>
               </Button>
             </form>
           </Reveal>

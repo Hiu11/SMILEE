@@ -4,28 +4,28 @@ import { ArrowRight, BookOpen, CalendarCheck, Clock, ShieldCheck, Sparkles } fro
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/MotionPrimitives";
 
 const articles = [
-  { title: "5 dấu hiệu nên đi khám răng sớm", desc: "Ê buốt, chảy máu nướu hoặc hôi miệng kéo dài có thể là tín hiệu cần kiểm tra ngay.", image: "/pic/article1.png", tag: "Chăm sóc hằng ngày", readTime: "3 phút" },
-  { title: "Niềng răng cần chuẩn bị gì?", desc: "Các bước thăm khám, chụp phim, lên phác đồ và theo dõi định kỳ khi chỉnh nha.", image: "/pic/article2.png", tag: "Chỉnh nha", readTime: "5 phút" },
-  { title: "Vì sao nên lấy cao răng định kỳ?", desc: "Lấy cao răng đúng lịch giúp giảm viêm nướu và giữ hơi thở thơm tho, sạch hơn.", image: "/pic/article_about.png", tag: "Phòng ngừa", readTime: "4 phút" },
+  { title: "Công nghệ nha khoa hiện đại", desc: "Ứng dụng ánh sáng laser xanh và vật liệu tiên tiến giúp làm trắng răng an toàn tuyệt đối.", image: "/pic/dental_tech.png", tag: "Công nghệ", readTime: "4 phút" },
+  { title: "Đội ngũ chuyên gia tận tâm", desc: "Các bác sĩ luôn lắng nghe, tư vấn và lên phác đồ cá nhân hóa phù hợp nhất cho bạn.", image: "/pic/dentist_team.png", tag: "Đội ngũ", readTime: "3 phút" },
+  { title: "Vì sao nên lấy cao răng định kỳ?", desc: "Lấy cao răng đúng lịch giúp giảm viêm nướu và giữ hơi thở thơm tho, sạch hơn.", image: "/pic/modern_clinic.png", tag: "Phòng ngừa", readTime: "4 phút" },
 ];
 
 const tagColors: Record<string, string> = {
-  "Chăm sóc hằng ngày": "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-cyan-300",
-  "Chỉnh nha": "bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300",
+  "Công nghệ": "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-cyan-300",
+  "Đội ngũ": "bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300",
   "Phòng ngừa": "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-300",
 };
 
 export default function KnowledgePage() {
   return (
-    <div className="bg-linear-to-b from-slate-50 to-white pt-28 dark:from-slate-950 dark:to-slate-950">
+    <div className="bg-linear-to-b from-slate-50 to-white pt-20 md:pt-24 lg:pt-28 dark:from-slate-950 dark:to-slate-950">
 
       {/* ── HERO ── */}
-      <section className="container mx-auto px-4 pb-4 pt-14 sm:px-6 lg:px-8">
+      <section className="container mx-auto px-4 pb-4 pt-10 md:pt-14 lg:pt-16 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-3xl text-center">
           <span className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-blue-600 dark:bg-blue-900/30 dark:text-cyan-400">
             Kiến thức nha khoa
           </span>
-          <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
+          <h1 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
             Hiểu đúng để chăm sóc răng miệng{" "}
             <span className="gradient-text">dễ hơn.</span>
           </h1>
@@ -36,11 +36,11 @@ export default function KnowledgePage() {
       </section>
 
       {/* ── ARTICLES ── */}
-      <section className="container mx-auto px-4 py-14 sm:px-6 lg:px-8">
-        <Stagger className="grid gap-8 md:grid-cols-3">
+      <section className="container mx-auto px-4 py-10 md:py-14 sm:px-6 lg:px-8">
+        <Stagger className="grid gap-6 md:gap-8 md:grid-cols-3">
           {articles.map((article) => (
             <StaggerItem key={article.title} whileHover={{ y: -10 }}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-2xl hover:shadow-blue-500/10 dark:border-slate-800 dark:bg-slate-900">
+              <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200/60 bg-white/60 shadow-sm backdrop-blur-md transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/15 dark:border-slate-800/60 dark:bg-slate-900/50">
                 {/* Image */}
                 <div className="relative aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
                   <Image src={article.image} alt={article.title} fill className="object-cover transition duration-700 group-hover:scale-110" />
@@ -74,14 +74,15 @@ export default function KnowledgePage() {
       </section>
 
       {/* ── DARK BANNER ── */}
-      <section className="bg-slate-950 py-20">
-        <Reveal direction="scale" className="container mx-auto grid gap-5 px-4 sm:px-6 md:grid-cols-3 lg:px-8">
+      <section className="bg-slate-950 py-14 md:py-20">
+        <Reveal direction="scale" className="container mx-auto grid gap-4 md:gap-5 lg:gap-6 px-4 sm:px-6 md:grid-cols-3 lg:px-8">
           {[
             [ShieldCheck, "Phòng ngừa", "Khám định kỳ và vệ sinh đúng cách giúp giảm rủi ro điều trị phức tạp."],
             [Sparkles, "Thẩm mỹ", "Tẩy trắng, răng sứ và chỉnh nha cần được tư vấn theo tình trạng răng thật."],
             [CalendarCheck, "Tái khám", "Tuân thủ lịch hẹn giúp bác sĩ theo dõi tiến triển và điều chỉnh phác đồ."],
           ].map(([Icon, title, desc]) => (
-            <div key={String(title)} className="rounded-2xl border border-white/8 p-6 transition hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/4">
+            <div key={String(title)} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur-md transition-all hover:-translate-y-2 hover:border-cyan-400/40 hover:bg-white/10 hover:shadow-2xl hover:shadow-cyan-500/20">
+              <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-cyan-400/10 blur-2xl transition-all group-hover:bg-cyan-400/20" />
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-blue-500/20 bg-blue-500/10 text-cyan-300">
                 <Icon className="h-6 w-6" />
               </div>

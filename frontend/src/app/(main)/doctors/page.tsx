@@ -14,16 +14,16 @@ const doctors = [
 
 export default function DoctorsPage() {
   return (
-    <div className="bg-linear-to-b from-slate-50 to-white pt-28 dark:from-slate-950 dark:to-slate-950">
+    <div className="bg-linear-to-b from-slate-50 to-white pt-20 md:pt-24 lg:pt-28 dark:from-slate-950 dark:to-slate-950">
 
       {/* ── HEADER ── */}
-      <section className="container mx-auto px-4 pb-8 pt-12 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
+      <section className="container mx-auto px-4 pb-8 pt-10 md:pt-12 lg:pt-16 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:gap-12 lg:gap-16 lg:grid-cols-[1fr_1fr] lg:items-center">
           <Reveal direction="left">
             <span className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-blue-600 dark:bg-blue-900/30 dark:text-cyan-400">
               Đội ngũ nha sĩ
             </span>
-            <h1 className="mt-4 text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white md:text-5xl">
+            <h1 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">
               Chuyên môn vững —{" "}
               <span className="gradient-text">theo sát từng kế hoạch điều trị.</span>
             </h1>
@@ -31,13 +31,13 @@ export default function DoctorsPage() {
               Mỗi bác sĩ tại SMILEE phụ trách một nhóm chuyên môn rõ ràng, phối hợp cùng lễ tân và hồ sơ điện tử để lịch khám luôn nhất quán.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="h-12 rounded-full bg-linear-to-r from-blue-600 to-blue-500 px-8 text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-1">
+              <Button asChild className="h-12 md:h-13 lg:h-14 rounded-full bg-linear-to-r from-blue-600 to-blue-500 px-6 md:px-8 text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-1">
                 <Link href="/booking">
                   <CalendarDays className="mr-2 h-4 w-4" />
                   Đặt lịch với nha sĩ
                 </Link>
               </Button>
-              <Button asChild variant="outline" className="h-12 rounded-full px-8 transition hover:-translate-y-1">
+              <Button asChild variant="outline" className="h-12 md:h-13 lg:h-14 rounded-full px-6 md:px-8 transition hover:-translate-y-1">
                 <Link href="/services">Xem dịch vụ</Link>
               </Button>
             </div>
@@ -45,11 +45,11 @@ export default function DoctorsPage() {
 
           {/* Stats */}
           <Reveal direction="right">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-6">
               {[["50+", "Chuyên gia"], ["10k+", "Khách hàng"], ["15+", "Năm KN"], ["99%", "Hài lòng"]].map(([n, l]) => (
-                <div key={l} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                  <p className="text-4xl font-black gradient-text">{n}</p>
-                  <p className="mt-1 text-sm font-semibold text-slate-500 dark:text-slate-400">{l}</p>
+                <div key={l} className="rounded-2xl border border-slate-100 bg-white p-4 md:p-5 lg:p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+                  <p className="text-3xl md:text-4xl lg:text-5xl font-black gradient-text">{n}</p>
+                  <p className="mt-1 text-xs md:text-sm font-semibold text-slate-500 dark:text-slate-400">{l}</p>
                 </div>
               ))}
             </div>
@@ -58,13 +58,13 @@ export default function DoctorsPage() {
       </section>
 
       {/* ── DOCTOR CARDS ── */}
-      <section className="container mx-auto px-4 py-14 sm:px-6 lg:px-8">
-        <Stagger className="grid gap-8 md:grid-cols-3">
+      <section className="container mx-auto px-4 py-10 md:py-14 lg:py-20 sm:px-6 lg:px-8">
+        <Stagger className="grid gap-4 md:gap-6 lg:gap-8 md:grid-cols-3">
           {doctors.map((doctor, i) => (
             <StaggerItem key={doctor.email} whileHover={{ y: -10 }}>
               <article className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-shadow hover:shadow-2xl hover:shadow-blue-500/12 dark:border-slate-800 dark:bg-slate-900">
                 {/* Image bg gradient */}
-                <div className="relative h-52 overflow-hidden bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-950/40 dark:to-slate-900">
+                <div className="relative h-48 md:h-52 lg:h-64 overflow-hidden bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-950/40 dark:to-slate-900">
                   <div className="absolute inset-0 dot-grid opacity-30" />
                   <Float delay={i * 0.4} className="relative h-full w-full">
                     <Image
@@ -110,7 +110,7 @@ export default function DoctorsPage() {
                     </p>
                   </div>
 
-                  <Button asChild className="mt-5 w-full rounded-xl bg-linear-to-r from-blue-600 to-blue-500 text-white shadow-sm hover:opacity-90">
+                  <Button asChild className="mt-4 md:mt-5 w-full h-11 lg:h-12 rounded-xl bg-linear-to-r from-blue-600 to-blue-500 text-white shadow-sm hover:opacity-90">
                     <Link href="/booking">Đặt lịch khám</Link>
                   </Button>
                 </div>
@@ -121,11 +121,11 @@ export default function DoctorsPage() {
       </section>
 
       {/* ── CTA DARK ── */}
-      <section className="bg-slate-950 py-20">
+      <section className="bg-slate-950 py-12 md:py-16 lg:py-24">
         <Reveal className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-white">Chưa biết chọn bác sĩ nào?</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white">Chưa biết chọn bác sĩ nào?</h2>
           <p className="mx-auto mt-3 max-w-lg text-slate-400">Đặt lịch tư vấn tổng quát — lễ tân sẽ sắp xếp bác sĩ phù hợp với tình trạng của bạn.</p>
-          <Button asChild className="mt-8 h-12 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 px-10 text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-1">
+          <Button asChild className="mt-6 md:mt-8 h-12 lg:h-14 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 px-8 lg:px-10 text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-1">
             <Link href="/booking">
               <CalendarDays className="mr-2 h-4 w-4" />
               Đặt lịch ngay
