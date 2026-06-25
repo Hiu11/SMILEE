@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { apiPost } from "@/lib/api";
-import { saveSession } from "@/lib/auth";
+import { saveSession, AuthRole } from "@/lib/auth";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,12 +29,12 @@ export default function LoginPage() {
     const password = formData.get('password') as string;
 
     try {
-      const data = await apiPost<{ access_token: string, user: { role: string } }>('/auth/login', { email, password });
+      const data = await apiPost<{ access_token: string, user: { role: AuthRole, fullName?: string } }>('/auth/login', { email, password });
       
       saveSession({ token: data.access_token, user: data.user });
       
-      if (data.user?.role === 'ADMIN') {
-        setMessage('Đăng nhập thành công! Đang chuyển hướng vào Admin...');
+      if (['ADMIN', 'RECEPTIONIST', 'DOCTOR'].includes(data.user?.role)) {
+        setMessage('Đăng nhập thành công! Đang chuyển hướng vào hệ thống...');
         setTimeout(() => router.push('/admin'), 1000);
       } else {
         setMessage('Đăng nhập thành công! Đang chuyển hướng...');
@@ -49,8 +49,8 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="mb-10 text-center lg:text-left">
-        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2">
+      <div className="mb-8 md:mb-10 text-center lg:text-left">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white mb-2">
           Đăng nhập
         </h1>
         <p className="text-slate-500 font-medium">
@@ -66,14 +66,14 @@ export default function LoginPage() {
           <Label htmlFor="email" className="text-slate-700 dark:text-slate-300 font-bold">
             Email
           </Label>
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+          <div className="relative group">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
             <Input 
               id="email" 
               name="email"
               type="email" 
               placeholder="Nhập Email" 
-              className="pl-10 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-medium"
+              className="pl-10 h-12 lg:h-14 rounded-2xl border-slate-200/60 dark:border-slate-800/60 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:border-blue-500 font-medium transition-all shadow-inner"
               required 
             />
           </div>
@@ -88,20 +88,20 @@ export default function LoginPage() {
               Quên mật khẩu?
             </Link>
           </div>
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+          <div className="relative group">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
             <Input 
               id="password" 
               name="password"
               type={showPassword ? "text" : "password"} 
               placeholder="Nhập mật khẩu" 
-              className="pl-10 pr-10 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-medium"
+              className="pl-10 pr-12 h-12 lg:h-14 rounded-2xl border-slate-200/60 dark:border-slate-800/60 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:border-blue-500 font-medium transition-all shadow-inner"
               required 
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-blue-500 dark:hover:text-cyan-400 transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
             >
               {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
             </button>
@@ -124,10 +124,13 @@ export default function LoginPage() {
         <Button 
           type="submit" 
           disabled={loading}
-          className="w-full h-14 text-lg font-bold rounded-xl bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-1 group"
+          className="w-full h-12 lg:h-14 text-base lg:text-lg font-bold rounded-2xl bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all hover:-translate-y-1 group relative overflow-hidden"
         >
-          {loading ? "Đang xử lý..." : "Đăng nhập"}
-          {!loading && <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+          <span className="relative flex items-center justify-center">
+            {loading ? "Đang xử lý..." : "Đăng nhập"}
+            {!loading && <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+          </span>
         </Button>
       </form>
     </>

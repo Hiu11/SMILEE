@@ -86,7 +86,7 @@ export function Navbar() {
 
             {/* Desktop actions */}
             <div className="hidden items-center gap-3 md:flex">
-              {currentRole === "ADMIN" && (
+              {["ADMIN", "RECEPTIONIST", "DOCTOR"].includes(currentRole as string) && (
                 <Button variant="ghost" size="sm" className="rounded-full text-slate-600 hover:bg-blue-50 hover:text-blue-700 dark:text-slate-300" asChild>
                   <Link href="/admin">
                     <LayoutDashboard className="mr-1.5 h-4 w-4" />
@@ -189,7 +189,7 @@ export function Navbar() {
             </nav>
 
             <div className="mt-auto space-y-3 pt-6 border-t border-slate-100 dark:border-slate-800">
-              {currentRole === "ADMIN" && (
+              {["ADMIN", "RECEPTIONIST", "DOCTOR"].includes(currentRole as string) && (
                 <Button variant="outline" className="w-full rounded-xl" asChild>
                   <Link href="/admin" onClick={() => setMobileOpen(false)}>Quản trị</Link>
                 </Button>

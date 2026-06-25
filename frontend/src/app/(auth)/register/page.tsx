@@ -86,17 +86,17 @@ export default function RegisterPage() {
 
   if (showOtp) {
     return (
-      <div className="flex flex-col items-center justify-center space-y-6 max-w-md mx-auto mt-10 lg:mt-20">
+      <div className="flex flex-col items-center justify-center space-y-4 md:space-y-5 lg:space-y-6 max-w-md mx-auto mt-6 md:mt-10 lg:mt-20">
         <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mb-2">
           <ShieldCheck className="w-8 h-8 text-blue-600 dark:text-cyan-400" />
         </div>
-        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2 text-center">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white mb-2 text-center">
           Xác thực Email
         </h1>
         <p className="text-slate-500 font-medium text-center">
           Chúng tôi đã gửi một mã OTP gồm 6 số đến email <strong className="text-blue-600">{registeredEmail}</strong>. Vui lòng kiểm tra hộp thư (và mục Spam).
         </p>
-        <form className="w-full space-y-6" onSubmit={handleVerifyOtp}>
+        <form className="w-full space-y-4 md:space-y-5 lg:space-y-6" onSubmit={handleVerifyOtp}>
           <div className="space-y-2">
             <Label htmlFor="otp" className="text-slate-700 dark:text-slate-300 font-bold">Mã OTP</Label>
             <Input 
@@ -106,7 +106,7 @@ export default function RegisterPage() {
               inputMode="numeric"
               maxLength={6}
               placeholder="000000"
-              className="text-center text-2xl tracking-[0.35em] h-14 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-black"
+              className="text-center text-2xl md:text-3xl lg:text-4xl tracking-[0.35em] h-14 lg:h-16 rounded-2xl border-slate-200/60 dark:border-slate-800/60 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:border-blue-500 font-black shadow-inner"
               required
             />
           </div>
@@ -117,10 +117,13 @@ export default function RegisterPage() {
           <Button 
             type="submit" 
             disabled={loading}
-            className="w-full h-14 text-lg font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all"
+            className="w-full h-12 lg:h-14 text-base lg:text-lg font-bold rounded-2xl bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all hover:-translate-y-1 group relative overflow-hidden"
           >
-            {loading ? "Đang xác nhận..." : "Xác nhận"}
-            {!loading && <ArrowRight className="ml-2 w-5 h-5" />}
+            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            <span className="relative flex items-center justify-center">
+              {loading ? "Đang xác nhận..." : "Xác nhận"}
+              {!loading && <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+            </span>
           </Button>
 
           <Button
@@ -128,7 +131,7 @@ export default function RegisterPage() {
             variant="ghost"
             disabled={resending}
             onClick={handleResendOtp}
-            className="h-11 w-full rounded-xl"
+            className="h-10 md:h-11 w-full rounded-xl"
           >
             <RefreshCw className={`mr-2 h-4 w-4 ${resending ? "animate-spin" : ""}`} />
             {resending ? "Đang gửi lại..." : "Gửi lại mã"}
@@ -140,8 +143,8 @@ export default function RegisterPage() {
 
   return (
     <>
-      <div className="mb-10 text-center lg:text-left">
-        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2">
+      <div className="mb-8 md:mb-10 text-center lg:text-left">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white mb-2">
           Đăng ký tài khoản
         </h1>
         <p className="text-slate-500 font-medium">
@@ -152,19 +155,19 @@ export default function RegisterPage() {
         </p>
       </div>
 
-      <form className="space-y-6" onSubmit={handleRegister}>
+      <form className="space-y-4 md:space-y-5 lg:space-y-6" onSubmit={handleRegister}>
         <div className="space-y-2">
           <Label htmlFor="fullName" className="text-slate-700 dark:text-slate-300 font-bold">
             Họ và tên
           </Label>
-          <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+          <div className="relative group">
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
             <Input 
               id="fullName" 
               name="fullName"
               type="text" 
               placeholder="Nhập họ và tên của bạn" 
-              className="pl-10 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-medium"
+              className="pl-10 h-12 lg:h-14 rounded-2xl border-slate-200/60 dark:border-slate-800/60 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:border-blue-500 font-medium transition-all shadow-inner"
               required 
             />
           </div>
@@ -175,14 +178,14 @@ export default function RegisterPage() {
             <Label htmlFor="phone" className="text-slate-700 dark:text-slate-300 font-bold">
               Số điện thoại
             </Label>
-            <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <div className="relative group">
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
               <Input 
                 id="phone" 
                 name="phone"
                 type="tel" 
                 placeholder="09xx xxx xxx" 
-                className="pl-10 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-medium"
+                className="pl-10 h-12 lg:h-14 rounded-2xl border-slate-200/60 dark:border-slate-800/60 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:border-blue-500 font-medium transition-all shadow-inner"
                 required 
               />
             </div>
@@ -191,14 +194,14 @@ export default function RegisterPage() {
             <Label htmlFor="email" className="text-slate-700 dark:text-slate-300 font-bold">
               Email
             </Label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <div className="relative group">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
               <Input 
                 id="email" 
                 name="email"
                 type="email" 
                 placeholder="example@gmail.com" 
-                className="pl-10 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-medium"
+                className="pl-10 h-12 lg:h-14 rounded-2xl border-slate-200/60 dark:border-slate-800/60 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:border-blue-500 font-medium transition-all shadow-inner"
                 required 
               />
             </div>
@@ -209,20 +212,20 @@ export default function RegisterPage() {
           <Label htmlFor="password" className="text-slate-700 dark:text-slate-300 font-bold">
             Mật khẩu
           </Label>
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+          <div className="relative group">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
             <Input 
               id="password" 
               name="password"
               type={showPassword ? "text" : "password"} 
               placeholder="Tạo mật khẩu (ít nhất 6 ký tự)" 
-              className="pl-10 pr-10 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus-visible:ring-blue-500 font-medium"
+              className="pl-10 pr-12 h-12 lg:h-14 rounded-2xl border-slate-200/60 dark:border-slate-800/60 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:border-blue-500 font-medium transition-all shadow-inner"
               required 
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-blue-500 dark:hover:text-cyan-400 transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
             >
               {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
             </button>
@@ -234,10 +237,13 @@ export default function RegisterPage() {
         <Button 
           type="submit" 
           disabled={loading}
-          className="w-full h-14 text-lg font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all"
+          className="w-full h-12 lg:h-14 text-base lg:text-lg font-bold rounded-2xl bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all hover:-translate-y-1 group relative overflow-hidden"
         >
-          {loading ? "Đang xử lý..." : "Đăng ký"}
-          {!loading && <ArrowRight className="ml-2 w-5 h-5" />}
+          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+          <span className="relative flex items-center justify-center">
+            {loading ? "Đang xử lý..." : "Đăng ký"}
+            {!loading && <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+          </span>
         </Button>
       </form>
     </>

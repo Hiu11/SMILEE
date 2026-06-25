@@ -70,7 +70,7 @@ export default function ResetNewPage() {
   return (
     <>
       <div className="mb-10 text-center lg:text-left">
-        <h1 className="mb-2 text-3xl font-extrabold text-slate-900 dark:text-white">Tạo mật khẩu mới</h1>
+        <h1 className="mb-2 text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">Tạo mật khẩu mới</h1>
         <p className="font-medium text-slate-500">Chọn mật khẩu mới để hoàn tất khôi phục tài khoản.</p>
       </div>
       <form className="space-y-6" onSubmit={handleSubmit}>
@@ -91,7 +91,7 @@ export default function ResetNewPage() {
 
         {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600 dark:bg-red-950/40 dark:text-red-400">{error}</p>}
 
-        <Button disabled={loading} className="h-14 w-full rounded-xl bg-blue-600 text-lg font-bold text-white hover:bg-blue-700">
+        <Button disabled={loading} className="h-12 lg:h-14 w-full rounded-xl bg-blue-600 text-base lg:text-lg font-bold text-white hover:bg-blue-700">
           {loading ? "Đang cập nhật..." : "Cập nhật mật khẩu"}
         </Button>
       </form>

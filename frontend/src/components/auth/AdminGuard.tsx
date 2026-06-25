@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { ShieldAlert } from "lucide-react";
 import { API_BASE_URL } from "@/lib/api";
-import { AuthRole, getAccessToken, getSessionRole } from "@/lib/auth";
+import { AuthRole, getAccessToken, getSessionRole, clearSession } from "@/lib/auth";
 import { getSidebarLinks } from "@/components/layout/AdminSidebar";
 
 const defaultRouteByRole: Record<AuthRole, string> = {
@@ -53,6 +53,13 @@ export function AdminGuard({ children }: { children: React.ReactNode }) {
           cache: "no-store",
         });
 
+        if (response.status === 401) {
+          clearSession();
+          setAllowed(false);
+          router.replace("/login");
+          return;
+        }
+        
         if (!response.ok) {
           throw new Error("Forbidden");
         }

@@ -70,7 +70,7 @@ export default function ResetOtpPage() {
   return (
     <>
       <div className="mb-10 text-center lg:text-left">
-        <h1 className="mb-2 text-3xl font-extrabold text-slate-900 dark:text-white">Xác thực OTP</h1>
+        <h1 className="mb-2 text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white">Xác thực OTP</h1>
         <p className="font-medium text-slate-500">
           Nhập mã gồm 6 số đã được gửi tới{" "}
           <span className="font-bold text-blue-600">{email || "email của bạn"}</span>.
@@ -96,7 +96,7 @@ export default function ResetOtpPage() {
         {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600 dark:bg-red-950/40 dark:text-red-400">{error}</p>}
         {resendMsg && <p className="rounded-xl bg-green-50 px-4 py-3 text-sm font-bold text-green-700 dark:bg-green-950/40 dark:text-green-400">{resendMsg}</p>}
 
-        <Button disabled={loading} className="h-14 w-full rounded-xl bg-blue-600 text-lg font-bold text-white hover:bg-blue-700">
+        <Button disabled={loading} className="h-12 lg:h-14 w-full rounded-xl bg-blue-600 text-base lg:text-lg font-bold text-white hover:bg-blue-700">
           {loading ? "Đang xác nhận..." : "Xác nhận"}
         </Button>
 

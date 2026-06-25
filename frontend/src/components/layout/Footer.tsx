@@ -31,11 +31,11 @@ export function Footer() {
       <div className="pointer-events-none absolute -bottom-20 right-0 h-64 w-64 rounded-full bg-cyan-500/6 blur-3xl" />
       <div className="pointer-events-none absolute inset-0 dot-grid opacity-10" />
 
-      <div className="container relative mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_0.8fr_0.9fr_1.1fr]">
+      <div className="container relative mx-auto px-4 py-10 md:py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10 lg:grid-cols-[1.4fr_0.8fr_0.8fr_0.9fr_1.1fr]">
 
           {/* Brand */}
-          <div>
+          <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <Link href="/" className="relative block h-14 w-44">
               <Image src="/pic/logo_smilee.png" alt="SMILEE Logo" fill className="object-contain object-left" />
             </Link>
@@ -54,7 +54,7 @@ export function Footer() {
           {/* Nav links */}
           <div>
             <h3 className="text-xs font-extrabold uppercase tracking-widest text-cyan-400">Điều hướng</h3>
-            <div className="mt-5 grid gap-3 text-sm font-medium">
+            <div className="mt-4 md:mt-5 grid gap-2.5 md:gap-3 text-sm font-medium">
               {navLinks.map((link) => (
                 <Link key={link.href} href={link.href} className="transition hover:translate-x-1 hover:text-white">
                   {link.label}
@@ -66,7 +66,7 @@ export function Footer() {
           {/* Account links */}
           <div>
             <h3 className="text-xs font-extrabold uppercase tracking-widest text-cyan-400">Tài khoản</h3>
-            <div className="mt-5 grid gap-3 text-sm font-medium">
+            <div className="mt-4 md:mt-5 grid gap-2.5 md:gap-3 text-sm font-medium">
               {accountLinks.map((link) => (
                 <Link key={link.href} href={link.href} className="transition hover:translate-x-1 hover:text-white">
                   {link.label}
@@ -76,9 +76,9 @@ export function Footer() {
           </div>
 
           {/* Services links */}
-          <div>
+          <div className="col-span-2 sm:col-span-1 md:col-span-1">
             <h3 className="text-xs font-extrabold uppercase tracking-widest text-cyan-400">Dịch vụ</h3>
-            <div className="mt-5 grid gap-3 text-sm font-medium">
+            <div className="mt-4 md:mt-5 grid gap-2.5 md:gap-3 text-sm font-medium">
               {actionLinks.map((link) => (
                 <Link key={link.href} href={link.href} className="transition hover:translate-x-1 hover:text-white">
                   {link.label}
@@ -88,9 +88,9 @@ export function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="col-span-2 md:col-span-1 lg:col-span-1">
             <h3 className="text-xs font-extrabold uppercase tracking-widest text-cyan-400">Liên hệ</h3>
-            <div className="mt-5 space-y-4 text-sm font-medium leading-6 text-slate-400">
+            <div className="mt-4 md:mt-5 space-y-3 md:space-y-4 text-sm font-medium leading-6 text-slate-400">
               <p className="flex gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
                 123 Đường Công Nghệ, TP. Hồ Chí Minh
@@ -117,7 +117,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/8 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 md:mt-14 flex flex-col gap-3 border-t border-white/8 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 SMILEE Dental Clinic. Designed & developed by Đỗ Trọng Hiếu.</p>
           <p className="gradient-text font-bold">Nâng niu nụ cười Việt 🦷</p>
         </div>

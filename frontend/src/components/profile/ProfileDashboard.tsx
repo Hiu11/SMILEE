@@ -39,7 +39,7 @@ export function ProfileDashboard() {
   }, [name]);
 
   return (
-    <div className="relative min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-cyan-50/20 pt-28 dark:from-slate-950 dark:via-blue-950/20 dark:to-slate-950">
+    <div className="relative min-h-screen bg-linear-to-br from-slate-50 via-blue-50/30 to-cyan-50/20 pt-20 md:pt-24 lg:pt-28 dark:from-slate-950 dark:via-blue-950/20 dark:to-slate-950">
       {/* Background elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-[10%] top-[10%] h-96 w-96 rounded-full bg-blue-400/10 blur-3xl dark:bg-blue-600/10 animate-float" />
@@ -47,17 +47,17 @@ export function ProfileDashboard() {
         <div className="absolute inset-0 dot-grid opacity-30 dark:opacity-20" />
       </div>
 
-      <section className="container relative mx-auto px-4 py-10 sm:px-6 lg:px-8">
+      <section className="container relative mx-auto px-4 py-8 md:py-10 lg:py-12 sm:px-6 lg:px-8">
         <Reveal>
           <div className="overflow-hidden rounded-3xl border border-slate-200/60 bg-white/60 shadow-xl backdrop-blur-xl dark:border-slate-800/60 dark:bg-slate-900/60">
             {/* Header / Banner */}
-            <div className="relative grid gap-6 overflow-hidden bg-linear-to-r from-blue-600 to-cyan-500 p-6 text-white sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="relative grid gap-6 overflow-hidden bg-linear-to-r from-blue-600 to-cyan-500 p-5 md:p-8 lg:p-10 text-white lg:grid-cols-[1fr_auto] lg:items-center">
               <div className="pointer-events-none absolute inset-0 bg-[url('/pic/pattern.png')] opacity-10 mix-blend-overlay" />
               <div className="absolute right-0 top-0 h-full w-1/2 bg-linear-to-l from-white/10 to-transparent" />
               
               <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center">
                 <Float>
-                  <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-3xl bg-white/20 text-4xl font-black shadow-inner backdrop-blur-md ring-1 ring-white/30">
+                  <div className="flex h-20 w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 shrink-0 items-center justify-center rounded-3xl bg-white/20 text-3xl md:text-4xl font-black shadow-inner backdrop-blur-md ring-1 ring-white/30">
                     {initials}
                   </div>
                 </Float>
@@ -66,14 +66,14 @@ export function ProfileDashboard() {
                     <Sparkles className="h-4 w-4 text-cyan-200" />
                     <span className="text-cyan-50">Hồ sơ cá nhân</span>
                   </div>
-                  <h1 className="text-3xl font-black md:text-4xl lg:text-5xl">{name}</h1>
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black">{name}</h1>
                   <p className="mt-2 max-w-2xl text-base font-medium leading-relaxed text-blue-50/90">
                     Theo dõi lịch hẹn, hồ sơ điều trị và thông tin liên hệ trong một trải nghiệm duy nhất.
                   </p>
                 </div>
               </div>
               <div className="relative z-10">
-                <Button asChild className="h-14 rounded-2xl bg-white px-8 text-lg font-bold text-blue-700 shadow-xl shadow-black/10 transition-all hover:-translate-y-1 hover:bg-blue-50">
+                <Button asChild className="h-12 lg:h-14 rounded-2xl bg-white px-8 text-base lg:text-lg font-bold text-blue-700 shadow-xl shadow-black/10 transition-all hover:-translate-y-1 hover:bg-blue-50">
                   <Link href="/booking">
                     <CalendarDays className="mr-2 h-5 w-5" />
                     Đặt lịch mới
@@ -82,10 +82,10 @@ export function ProfileDashboard() {
               </div>
             </div>
 
-            <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[320px_1fr]">
+            <div className="grid gap-6 md:gap-8 p-5 md:p-8 lg:p-10 lg:grid-cols-[300px_1fr] xl:grid-cols-[320px_1fr]">
               {/* Sidebar Info */}
               <aside className="space-y-6">
-                <section className="group rounded-3xl border border-slate-200/80 bg-white/80 p-6 shadow-sm transition hover:shadow-lg dark:border-slate-800/80 dark:bg-slate-950/80">
+                <section className="group rounded-3xl border border-slate-200/80 bg-white/80 p-5 md:p-6 shadow-sm transition hover:shadow-lg dark:border-slate-800/80 dark:bg-slate-950/80">
                   <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 dark:text-white">
                     <UserCircle2 className="h-6 w-6 text-blue-600 dark:text-cyan-400" />
                     Thông tin liên hệ
@@ -112,7 +112,7 @@ export function ProfileDashboard() {
                   </div>
                 </section>
 
-                <section className="relative overflow-hidden rounded-3xl border border-green-200/60 bg-linear-to-br from-green-50 to-emerald-50 p-6 text-green-900 shadow-sm dark:border-green-900/40 dark:from-green-950/40 dark:to-emerald-950/20 dark:text-green-100">
+                <section className="relative overflow-hidden rounded-3xl border border-green-200/60 bg-linear-to-br from-green-50 to-emerald-50 p-5 md:p-6 text-green-900 shadow-sm dark:border-green-900/40 dark:from-green-950/40 dark:to-emerald-950/20 dark:text-green-100">
                   <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-green-500/10 blur-xl" />
                   <h2 className="relative z-10 flex items-center gap-2 text-lg font-black">
                     <ShieldCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
@@ -134,7 +134,7 @@ export function ProfileDashboard() {
                     [CheckCircle2, "1", "Hoàn thành", "from-emerald-50 to-emerald-100/50", "text-emerald-600"],
                   ].map(([Icon, value, label, bg, color]) => (
                     <StaggerItem key={String(label)} whileHover={{ y: -6 }}>
-                      <section className={`relative overflow-hidden rounded-3xl border border-slate-200/60 bg-linear-to-br ${bg} p-6 shadow-sm dark:border-slate-800/60 dark:bg-slate-900/50`}>
+                      <section className={`relative overflow-hidden rounded-3xl border border-slate-200/60 bg-linear-to-br ${bg} p-5 md:p-6 shadow-sm dark:border-slate-800/60 dark:bg-slate-900/50`}>
                         <Icon className={`h-8 w-8 ${color} dark:brightness-150`} />
                         <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">{String(value)}</p>
                         <p className="mt-1 text-sm font-extrabold uppercase tracking-wide text-slate-500 dark:text-slate-400">{String(label)}</p>
@@ -144,7 +144,7 @@ export function ProfileDashboard() {
                 </Stagger>
 
                 {/* Appointments */}
-                <section className="rounded-3xl border border-slate-200/80 bg-white/80 p-6 shadow-sm dark:border-slate-800/80 dark:bg-slate-950/80 sm:p-8">
+                <section className="rounded-3xl border border-slate-200/80 bg-white/80 p-5 md:p-6 lg:p-8 shadow-sm dark:border-slate-800/80 dark:bg-slate-950/80">
                   <div className="mb-6 flex items-center justify-between">
                     <h2 className="text-xl font-black text-slate-900 dark:text-white">Lịch hẹn gần đây</h2>
                     <Button variant="ghost" className="hidden text-sm font-bold text-blue-600 hover:text-blue-700 dark:text-cyan-400 sm:flex">
@@ -171,7 +171,7 @@ export function ProfileDashboard() {
                 </section>
 
                 {/* Treatment Records */}
-                <section className="rounded-3xl border border-slate-200/80 bg-white/80 p-6 shadow-sm dark:border-slate-800/80 dark:bg-slate-950/80 sm:p-8">
+                <section className="rounded-3xl border border-slate-200/80 bg-white/80 p-5 md:p-6 lg:p-8 shadow-sm dark:border-slate-800/80 dark:bg-slate-950/80">
                   <h2 className="text-xl font-black text-slate-900 dark:text-white mb-6">Hồ sơ điều trị</h2>
                   <div className="grid gap-5 md:grid-cols-2">
                     {treatmentRecords.map((item) => (

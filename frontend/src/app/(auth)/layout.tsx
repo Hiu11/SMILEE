@@ -12,18 +12,25 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 py-20 sm:p-6 lg:p-8 relative">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 py-20 sm:p-6 lg:p-8 relative overflow-hidden">
       
+      {/* Animated Background Blobs */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-400/20 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob" />
+        <div className="absolute top-[20%] right-[-10%] w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000" />
+        <div className="absolute bottom-[-20%] left-[20%] w-120 h-120 bg-violet-400/20 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000" />
+      </div>
+
       {/* Back to Home Button */}
-      <Link href="/" className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors font-semibold group z-20">
+      <Link href="/" className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors font-semibold group z-20 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-sm">
         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         Về trang chủ
       </Link>
 
-      <div className="w-full max-w-5xl bg-white dark:bg-slate-900 rounded-3xl lg:rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+      <div className="w-full max-w-5xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl rounded-3xl lg:rounded-[2.5rem] shadow-2xl shadow-blue-900/10 dark:shadow-black/50 border border-white/40 dark:border-white/10 overflow-hidden flex flex-col lg:flex-row relative z-10">
         
         {/* Left Side: Information & Branding */}
-        <div className="relative hidden lg:flex flex-col justify-center items-center w-1/2 p-12 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800">
+        <div className="relative hidden lg:flex flex-col justify-center items-center w-1/2 p-12 bg-white/50 dark:bg-slate-900/50 border-r border-slate-200/50 dark:border-slate-800/50">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
