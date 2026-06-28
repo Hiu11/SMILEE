@@ -38,12 +38,12 @@ export default function AuthLayout({
             className="relative z-10 max-w-sm text-center flex flex-col items-center"
           >
             <div className="mb-10">
-              <Link href="/" className="relative flex items-center justify-center h-24 w-72 transition-transform hover:scale-105">
+              <Link href="/" className="relative flex items-center justify-center h-28 w-80 transition-transform hover:scale-105">
                 <Image 
-                  src="/pic/logo_smilee.png" 
+                  src="/pic/logo_smilee_ai_transparent.png" 
                   alt="SMILEE Logo" 
                   fill 
-                  className="object-contain dark:invert" 
+                  className="object-contain" 
                   priority 
                 />
               </Link>
@@ -68,12 +68,12 @@ export default function AuthLayout({
           <div className="w-full max-w-md">
             {/* Mobile Logo (Visible only on small screens) */}
             <div className="lg:hidden mb-10 flex justify-center">
-              <Link href="/" className="relative flex items-center justify-center h-20 w-64 transition-transform hover:scale-105">
+              <Link href="/" className="relative flex items-center justify-center h-24 w-72 transition-transform hover:scale-105">
                 <Image 
-                  src="/pic/logo_smilee.png" 
+                  src="/pic/logo_smilee_ai_transparent.png" 
                   alt="SMILEE Logo" 
                   fill 
-                  className="object-contain dark:invert" 
+                  className="object-contain" 
                   priority 
                 />
               </Link>

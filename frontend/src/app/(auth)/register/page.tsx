@@ -86,17 +86,19 @@ export default function RegisterPage() {
 
   if (showOtp) {
     return (
-      <div className="flex flex-col items-center justify-center space-y-4 md:space-y-5 lg:space-y-6 max-w-md mx-auto mt-6 md:mt-10 lg:mt-20">
-        <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mb-2">
-          <ShieldCheck className="w-8 h-8 text-blue-600 dark:text-cyan-400" />
+      <div className="w-full">
+        <div className="mb-4 flex justify-center lg:justify-start">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-cyan-400">
+            <ShieldCheck className="h-6 w-6" />
+          </div>
         </div>
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white mb-2 text-center">
+        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-2 text-center lg:text-left">
           Xác thực Email
         </h1>
-        <p className="text-slate-500 font-medium text-center">
+        <p className="text-slate-500 font-medium leading-7 text-center lg:text-left">
           Chúng tôi đã gửi một mã OTP gồm 6 số đến email <strong className="text-blue-600">{registeredEmail}</strong>. Vui lòng kiểm tra hộp thư (và mục Spam).
         </p>
-        <form className="w-full space-y-4 md:space-y-5 lg:space-y-6" onSubmit={handleVerifyOtp}>
+        <form className="mt-8 space-y-6" onSubmit={handleVerifyOtp}>
           <div className="space-y-2">
             <Label htmlFor="otp" className="text-slate-700 dark:text-slate-300 font-bold">Mã OTP</Label>
             <Input 
@@ -106,7 +108,7 @@ export default function RegisterPage() {
               inputMode="numeric"
               maxLength={6}
               placeholder="000000"
-              className="text-center text-2xl md:text-3xl lg:text-4xl tracking-[0.35em] h-14 lg:h-16 rounded-2xl border-slate-200/60 dark:border-slate-800/60 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:border-blue-500 font-black shadow-inner"
+              className="h-12 lg:h-14 rounded-2xl border-slate-200/60 bg-white/50 text-center text-lg font-black tracking-[0.35em] shadow-inner backdrop-blur-sm transition-all focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/50 dark:border-slate-800/60 dark:bg-slate-950/50"
               required
             />
           </div>

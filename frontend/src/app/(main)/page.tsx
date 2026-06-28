@@ -76,7 +76,7 @@ export default function Home() {
               SMILEE Dental Clinic — Chuẩn Quốc Tế
             </motion.div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight text-slate-900 dark:text-white xl:text-7xl">
+            <h1 className="max-w-xl text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black leading-[1.12] tracking-tight text-slate-900 dark:text-white xl:text-6xl">
               Nụ cười{" "}
               <span className="gradient-text">hoàn hảo</span>
               <br />bắt đầu từ đây.
