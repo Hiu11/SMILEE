@@ -36,8 +36,8 @@ export function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <Link href="/" className="relative block h-14 w-44">
-              <Image src="/pic/logo_smilee.png" alt="SMILEE Logo" fill className="object-contain object-left" />
+            <Link href="/" className="relative block h-20 w-64">
+              <Image src="/pic/logo_smilee_ai_transparent.png" alt="SMILEE Logo" fill className="object-contain object-left" />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-slate-400">
               Hệ thống quản lý phòng khám nha khoa — kết nối đặt lịch, hồ sơ điều trị, hóa đơn và vận hành nội bộ trong một trải nghiệm thống nhất.

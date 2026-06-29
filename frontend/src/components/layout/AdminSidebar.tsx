@@ -58,7 +58,7 @@ export function AdminSidebar() {
       <div className="flex h-20 items-center border-b border-slate-200 px-4 dark:border-slate-800">
         <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="relative h-16 w-56 overflow-hidden">
           <Link href="/" className="block h-full w-full">
-            <Image src="/pic/logo_smilee.png" alt="SMILEE" fill className="object-contain mix-blend-multiply dark:mix-blend-normal dark:brightness-200 scale-[1.3] origin-left" priority />
+            <Image src="/pic/logo_smilee_ai_transparent.png" alt="SMILEE" fill className="object-contain object-left" priority />
           </Link>
         </motion.div>
       </div>

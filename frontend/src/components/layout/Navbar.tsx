@@ -5,10 +5,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
-import { CalendarDays, ChevronRight, LayoutDashboard, LogOut, Menu, UserCircle2, X } from "lucide-react";
+import { CalendarDays, ChevronRight, LayoutDashboard, LogOut, Menu, Settings, UserCircle2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AUTH_KEYS, clearSession } from "@/lib/auth";
 import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
+import { LanguageToggle } from "@/lib/i18n";
 
 const navLinks = [
   { name: "Giới thiệu", href: "/about" },
@@ -53,7 +54,7 @@ export function Navbar() {
             {/* Logo */}
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
               <Link href="/" className="relative block h-16 w-44">
-                <Image src="/pic/logo_smilee.png" alt="SMILEE Logo" fill className="object-contain object-left mix-blend-multiply dark:mix-blend-normal dark:brightness-200" priority />
+                <Image src="/pic/logo_smilee_ai_transparent.png" alt="SMILEE Logo" fill className="object-contain object-left" priority />
               </Link>
             </motion.div>
 
@@ -86,6 +87,7 @@ export function Navbar() {
 
             {/* Desktop actions */}
             <div className="hidden items-center gap-3 md:flex">
+              <LanguageToggle compact />
               {["ADMIN", "RECEPTIONIST", "DOCTOR"].includes(currentRole as string) && (
                 <Button variant="ghost" size="sm" className="rounded-full text-slate-600 hover:bg-blue-50 hover:text-blue-700 dark:text-slate-300" asChild>
                   <Link href="/admin">
@@ -100,6 +102,12 @@ export function Navbar() {
                     <Link href="/pro5">
                       <UserCircle2 className="mr-1.5 h-4 w-4" />
                       {currentUser.split(" ").pop()}
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="rounded-full text-slate-600 hover:bg-blue-50 hover:text-blue-700 dark:text-slate-300" asChild>
+                    <Link href="/settings">
+                      <Settings className="mr-1.5 h-4 w-4" />
+                      Cài đặt
                     </Link>
                   </Button>
                   <Button
@@ -169,6 +177,9 @@ export function Navbar() {
             </div>
 
             <nav className="flex flex-col gap-1">
+              <div className="mb-3 px-4">
+                <LanguageToggle />
+              </div>
               {navLinks.map((link) => {
                 const active = pathname === link.href;
                 return (
@@ -198,6 +209,9 @@ export function Navbar() {
                 <>
                   <Button variant="outline" className="w-full rounded-xl" asChild>
                     <Link href="/pro5" onClick={() => setMobileOpen(false)}>Hồ sơ cá nhân</Link>
+                  </Button>
+                  <Button variant="outline" className="w-full rounded-xl" asChild>
+                    <Link href="/settings" onClick={() => setMobileOpen(false)}>Cài đặt</Link>
                   </Button>
                   <Button
                     variant="outline"
