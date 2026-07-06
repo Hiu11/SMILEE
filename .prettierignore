@@ -1,0 +1,15 @@
+# Build folders
+node_modules/
+.next/
+dist/
+build/
+
+# Config files that shouldn't be formatted
+.env
+.env.example
+package-lock.json
+
+# Markdown and public files
+public/
+coverage/
+*.md
