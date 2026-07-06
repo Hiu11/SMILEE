@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "SMILEE",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/pic/banner_home.png",
         width: 1200,
         height: 630,
         alt: "SMILEE - Hệ thống nha khoa toàn diện",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SMILEE | Hệ Thống Nha Khoa Chuẩn Quốc Tế",
     description: "Giải pháp quản lý phòng khám và đặt lịch khám nha khoa hiện đại.",
-    images: ["/og-image.jpg"],
+    images: ["/pic/banner_home.png"],
   },
   icons: {
     icon: "/favicon.ico",
