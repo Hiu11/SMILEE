@@ -21,13 +21,13 @@ import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
 import { Float, Reveal, Stagger, StaggerItem } from "@/components/motion/MotionPrimitives";
 
 const appointments = [
-  { service: "Khám tổng quát", date: "22/06/2026", time: "09:00", doctor: "BS. Tuấn", status: "Đã xác nhận" },
-  { service: "Tẩy trắng răng", date: "28/06/2026", time: "14:30", doctor: "BS. Trang", status: "Chờ xác nhận" },
+  { id: "apt-1", service: "Khám tổng quát", date: "22/06/2026", time: "09:00", doctor: "BS. Tuấn", status: "Đã xác nhận" },
+  { id: "apt-2", service: "Tẩy trắng răng", date: "28/06/2026", time: "14:30", doctor: "BS. Trang", status: "Chờ xác nhận" },
 ];
 
 const treatmentRecords = [
-  { title: "Cạo vôi răng định kỳ", date: "12/06/2026", note: "Nướu ổn định, hẹn tái khám sau 6 tháng." },
-  { title: "Tư vấn niềng răng", date: "04/05/2026", note: "Đã chụp phim và lên kế hoạch điều trị sơ bộ." },
+  { id: "tr-1", title: "Cạo vôi răng định kỳ", date: "12/06/2026", note: "Nướu ổn định, hẹn tái khám sau 6 tháng." },
+  { id: "tr-2", title: "Tư vấn niềng răng", date: "04/05/2026", note: "Đã chụp phim và lên kế hoạch điều trị sơ bộ." },
 ];
 
 export function ProfileDashboard() {
@@ -153,7 +153,7 @@ export function ProfileDashboard() {
                   </div>
                   <div className="space-y-4">
                     {appointments.map((item) => (
-                      <article key={`${item.service}-${item.date}`} className="group flex flex-col gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-5 transition hover:border-blue-100 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-slate-700 sm:flex-row sm:items-center sm:justify-between">
+                      <article key={item.id} className="group flex flex-col gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-5 transition hover:border-blue-100 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-slate-700 sm:flex-row sm:items-center sm:justify-between">
                         <div>
                           <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors">{item.service}</h3>
                           <p className="mt-1.5 flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400">
@@ -175,7 +175,7 @@ export function ProfileDashboard() {
                   <h2 className="text-xl font-black text-slate-900 dark:text-white mb-6">Hồ sơ điều trị</h2>
                   <div className="grid gap-5 md:grid-cols-2">
                     {treatmentRecords.map((item) => (
-                      <article key={item.title} className="group rounded-2xl border border-slate-100 bg-slate-50 p-6 transition hover:border-blue-100 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-slate-700">
+                      <article key={item.id} className="group rounded-2xl border border-slate-100 bg-slate-50 p-6 transition hover:border-blue-100 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-slate-700">
                         <div className="inline-flex items-center gap-2 rounded-lg bg-blue-100/50 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-blue-700 dark:bg-blue-900/30 dark:text-cyan-400">
                           <CalendarDays className="h-3.5 w-3.5" />
                           {item.date}
