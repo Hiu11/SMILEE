@@ -207,7 +207,7 @@ function SettingsForm({ initialLocale, initialSettings }: { initialLocale: Local
             <span className="sr-only">{t.languageLabel as string}</span>
             {languageOptions.map((option) => (
               <button
-                aria-pressed={locale === option.value}
+                data-active={locale === option.value ? "true" : "false"}
                 className={`h-9 rounded-lg px-3 text-xs font-black transition ${locale === option.value ? "bg-white text-slate-950 shadow-sm" : "text-slate-200 hover:bg-white/10 hover:text-white"}`}
                 key={option.value}
                 onClick={() => changeLocale(option.value)}
