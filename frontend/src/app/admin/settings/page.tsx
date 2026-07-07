@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useLocalStorageValue } from "@/hooks/useLocalStorageValue";
 import { LOCALE_STORAGE_KEY, useLanguage } from "@/lib/i18n";
+import { API_BASE_URL } from "@/lib/api";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/MotionPrimitives";
 
 type Settings = {
@@ -140,7 +141,7 @@ const notificationOptions: Array<keyof Pick<Settings, "autoConfirm" | "emailNoti
   "maintenanceMode",
 ];
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const apiUrl = API_BASE_URL;
 
 export default function SettingsPage() {
   const savedSettings = useLocalStorageValue(storageKey);
