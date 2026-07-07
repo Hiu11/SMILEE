@@ -3,6 +3,7 @@ import {
   ConflictException,
   Injectable,
   UnauthorizedException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
@@ -84,40 +85,54 @@ export class AuthService {
     otpExpires.setMinutes(otpExpires.getMinutes() + 10); // Expires in 10 mins
 
     let user;
-    if (existingUser) {
-      user = await this.usersService.update(existingUser.id, {
-        fullName,
-        phone: data.phone?.trim() || null,
-        password: hashedPassword,
-        otp,
-        otpExpires,
-      });
-    } else {
-      user = await this.usersService.create({
-        email,
-        fullName,
-        phone: data.phone?.trim() || null,
-        password: hashedPassword,
-        role: Role.CUSTOMER,
-        otp,
-        otpExpires,
-        isVerified: false,
-      });
+    try {
+      if (existingUser) {
+        user = await this.usersService.update(existingUser.id, {
+          fullName,
+          phone: data.phone?.trim() || null,
+          password: hashedPassword,
+          otp,
+          otpExpires,
+        });
+      } else {
+        user = await this.usersService.create({
+          email,
+          fullName,
+          phone: data.phone?.trim() || null,
+          password: hashedPassword,
+          role: Role.CUSTOMER,
+          otp,
+          otpExpires,
+          isVerified: false,
+        });
+      }
+    } catch (dbError) {
+      console.error('Database error during user registration:', dbError);
+      throw new InternalServerErrorException(
+        'Không thể lưu thông tin vào database. Vui lòng kiểm tra lại kết nối hoặc schema.',
+      );
     }
 
     // Send OTP via Email
-    await this.mailerService.sendMail({
-      to: user.email,
-      subject: 'Xác thực tài khoản Smilee Dental',
-      html: `
-        <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
-          <h2>Chào mừng bạn đến với Smilee Dental</h2>
-          <p>Mã xác thực (OTP) của bạn là:</p>
-          <h1 style="color: #0284c7; letter-spacing: 4px; font-size: 36px;">${otp}</h1>
-          <p>Mã này sẽ hết hạn trong vòng 10 phút. Vui lòng không chia sẻ mã này cho bất kỳ ai.</p>
-        </div>
-      `,
-    });
+    try {
+      await this.mailerService.sendMail({
+        to: user.email,
+        subject: 'Xác thực tài khoản Smilee Dental',
+        html: `
+          <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+            <h2>Chào mừng bạn đến với Smilee Dental</h2>
+            <p>Mã xác thực (OTP) của bạn là:</p>
+            <h1 style="color: #0284c7; letter-spacing: 4px; font-size: 36px;">${otp}</h1>
+            <p>Mã này sẽ hết hạn trong vòng 10 phút. Vui lòng không chia sẻ mã này cho bất kỳ ai.</p>
+          </div>
+        `,
+      });
+    } catch (mailError) {
+      console.error('Failed to send OTP email:', mailError);
+      throw new InternalServerErrorException(
+        'Không thể gửi email OTP. Vui lòng kiểm tra cấu hình Nodemailer (Email/Mật khẩu).',
+      );
+    }
 
     return {
       message: 'Đăng ký thành công. Vui lòng kiểm tra email để nhận mã OTP.',

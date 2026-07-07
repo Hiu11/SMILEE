@@ -24,7 +24,16 @@ export async function apiPost<T>(path: string, data: unknown): Promise<T> {
   });
 
   if (!response.ok) {
-    throw new Error("Không thể lưu dữ liệu. Vui lòng kiểm tra backend hoặc database.");
+    let errorMessage = "Không thể lưu dữ liệu. Vui lòng kiểm tra backend hoặc database.";
+    try {
+      const errorData = await response.json();
+      if (errorData && errorData.message) {
+        errorMessage = Array.isArray(errorData.message) ? errorData.message[0] : errorData.message;
+      }
+    } catch (e) {
+      // JSON parse error, fallback to default message
+    }
+    throw new Error(errorMessage);
   }
 
   return (await response.json()) as T;
@@ -38,7 +47,16 @@ export async function apiPatch<T>(path: string, data: unknown): Promise<T> {
   });
 
   if (!response.ok) {
-    throw new Error("Không thể cập nhật dữ liệu. Vui lòng kiểm tra backend hoặc database.");
+    let errorMessage = "Không thể cập nhật dữ liệu. Vui lòng kiểm tra backend hoặc database.";
+    try {
+      const errorData = await response.json();
+      if (errorData && errorData.message) {
+        errorMessage = Array.isArray(errorData.message) ? errorData.message[0] : errorData.message;
+      }
+    } catch (e) {
+      // JSON parse error, fallback to default message
+    }
+    throw new Error(errorMessage);
   }
 
   return (await response.json()) as T;
@@ -48,7 +66,16 @@ export async function apiDelete(path: string): Promise<void> {
   const response = await fetch(`${API_BASE_URL}${path}`, { method: "DELETE", headers: authHeaders() });
 
   if (!response.ok) {
-    throw new Error("Không thể xóa dữ liệu. Dữ liệu này có thể đang liên kết với lịch hẹn, hóa đơn hoặc hồ sơ.");
+    let errorMessage = "Không thể xóa dữ liệu. Dữ liệu này có thể đang liên kết với lịch hẹn, hóa đơn hoặc hồ sơ.";
+    try {
+      const errorData = await response.json();
+      if (errorData && errorData.message) {
+        errorMessage = Array.isArray(errorData.message) ? errorData.message[0] : errorData.message;
+      }
+    } catch (e) {
+      // JSON parse error, fallback to default message
+    }
+    throw new Error(errorMessage);
   }
 }
 
