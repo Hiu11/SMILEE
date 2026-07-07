@@ -16,7 +16,11 @@ export class AuthController {
   async login(@Body() body: LoginDto) {
     const user = await this.authService.validateUser(body.email, body.password);
     if (!user) {
-      throw new UnauthorizedException('Email hoặc mật khẩu không đúng');
+      throw new UnauthorizedException({
+        statusCode: 401,
+        message: 'Email hoặc mật khẩu không chính xác',
+        error: 'Unauthorized',
+      });
     }
     return this.authService.login(user);
   }
