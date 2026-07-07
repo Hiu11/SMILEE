@@ -1,6 +1,10 @@
 {
   "name": "smilee-workspace",
   "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "dev": "concurrently --kill-others --names BE,FE --prefix-colors yellow,cyan \"npm --prefix backend run start:dev\" \"npm --prefix frontend run dev\"",
     "dev:open": "concurrently --kill-others-on-fail --names APP,BROWSER --prefix-colors cyan,magenta \"npm run dev\" \"wait-on http://localhost:3000 && open-cli http://localhost:3000\"",
