@@ -67,7 +67,14 @@ NEXT_PUBLIC_API_URL="http://localhost:4000"
 ```bash
 cd backend
 npx prisma db push
-# (Tuỳ chọn) Chạy seed data nếu có: npm run seed
+```
+
+**Đổ dữ liệu mẫu (Seeding):**
+Để dễ dàng test các chức năng mà không cần nhập liệu thủ công, bạn nên chạy lệnh seed. Script này sẽ tự động tạo các tài khoản Admin mặc định, danh sách dịch vụ nha khoa, bác sĩ và một vài dữ liệu mẫu khác:
+
+```bash
+cd backend
+npx prisma db seed
 ```
 
 ### 4. Chạy dự án (Development Mode)
